@@ -1,0 +1,1003 @@
+﻿1
+00:00:00,000 --> 00:00:01,984
+Hello, world! It's Siraj.
+
+2
+00:00:01,980 --> 00:00:03,980
+What's the most efficient way
+
+3
+00:00:03,980 --> 00:00:05,980
+to interact with the database?
+
+4
+00:00:05,980 --> 00:00:10,280
+Anytime we want to create, read,
+update, or delete data
+
+5
+00:00:10,280 --> 00:00:11,240
+in a database.
+
+6
+00:00:11,240 --> 00:00:12,620
+We'll usually do so
+
+7
+00:00:12,620 --> 00:00:15,060
+in the form of SQL queries.
+
+8
+00:00:15,060 --> 00:00:17,840
+SQL stands for structured query language.
+
+9
+00:00:17,840 --> 00:00:19,600
+It's the standard language used
+
+10
+00:00:19,600 --> 00:00:23,380
+to communicate with relational databases.
+
+11
+00:00:23,380 --> 00:00:25,080
+What about Haskell DB?
+
+12
+00:00:27,460 --> 00:00:30,800
+Each query takes a certain amount of
+time to compute.
+
+13
+00:00:30,800 --> 00:00:33,720
+Ideally, we can order our queries
+
+14
+00:00:33,720 --> 00:00:37,160
+in the most computationally
+efficient way.
+
+15
+00:00:37,160 --> 00:00:39,580
+There are several techniques
+to do this.
+
+16
+00:00:39,580 --> 00:00:42,420
+And, usually, reinforcement learning
+
+17
+00:00:42,420 --> 00:00:44,420
+isn't considered one of them.
+
+18
+00:00:44,420 --> 00:00:46,920
+But, a recent paper showed
+
+19
+00:00:46,920 --> 00:00:49,500
+that using a deep Q network,
+
+20
+00:00:49,500 --> 00:00:52,000
+researchers were able to
+perform queries
+
+21
+00:00:52,000 --> 00:00:55,140
+twice as fast as using
+standard techniques.
+
+22
+00:00:55,140 --> 00:00:57,680
+We'll learn how they did it
+in this video.
+
+23
+00:00:57,680 --> 00:01:00,400
+But first, we'll need to
+understand why
+
+24
+00:01:00,400 --> 00:01:02,620
+they used reinforcement learning
+
+25
+00:01:02,620 --> 00:01:05,880
+as opposed to other more
+common techniques.
+
+26
+00:01:05,880 --> 00:01:10,220
+We know that reinforcement learning
+works great for video games.
+
+27
+00:01:10,220 --> 00:01:15,000
+Games are the perfect testbed
+for implementing RL algorithms,
+
+28
+00:01:15,000 --> 00:01:17,680
+since they're constrained environments
+
+29
+00:01:17,680 --> 00:01:19,680
+where time is an element
+
+30
+00:01:19,680 --> 00:01:22,420
+that allows for rapid experimentation.
+
+31
+00:01:22,420 --> 00:01:24,720
+The Markov decision process
+
+32
+00:01:24,720 --> 00:01:27,760
+is the mathematical framework of choice
+
+33
+00:01:27,760 --> 00:01:29,760
+for framing this decision problem
+
+34
+00:01:29,760 --> 00:01:32,400
+that our AI or agent is facing.
+
+35
+00:01:32,400 --> 00:01:34,520
+It consists of a few variables
+
+36
+00:01:34,520 --> 00:01:36,600
+that define our environment,
+
+37
+00:01:36,600 --> 00:01:37,620
+our agent,
+
+38
+00:01:37,620 --> 00:01:41,660
+and how our agent interacts
+with this environment.
+
+39
+00:01:41,660 --> 00:01:43,660
+In reinforcement learning,
+
+40
+00:01:43,660 --> 00:01:47,460
+an agent tries to come up with
+the best action to take
+
+41
+00:01:47,460 --> 00:01:49,000
+given a state.
+
+42
+00:01:49,000 --> 00:01:51,100
+In the video game Pac-Man,
+
+43
+00:01:51,100 --> 00:01:54,280
+the state would be
+the 2d game world were in,
+
+44
+00:01:54,280 --> 00:01:56,620
+that includes the surrounding items
+
+45
+00:01:56,620 --> 00:01:59,760
+like enemies walls and packed dots.
+
+46
+00:01:59,760 --> 00:02:03,400
+The action would be
+moving through this 2d space,
+
+47
+00:02:03,400 --> 00:02:07,300
+which would be going either
+up, down, left, or right.
+
+48
+00:02:07,300 --> 00:02:09,780
+So, given the state of our game world,
+
+49
+00:02:09,780 --> 00:02:12,940
+our agent will need to pick
+the best action to take
+
+50
+00:02:12,940 --> 00:02:15,680
+in order to maximize rewards.
+
+51
+00:02:15,680 --> 00:02:19,540
+We know that eating packed dots
+gives us positive rewards,
+
+52
+00:02:19,540 --> 00:02:23,680
+and getting eaten by a ghost
+gives us a negative reward,
+
+53
+00:02:23,680 --> 00:02:27,140
+and a possible temper tantrum
+which we want to avoid.
+
+54
+00:02:27,140 --> 00:02:28,740
+Through trial and error,
+
+55
+00:02:28,740 --> 00:02:32,480
+our agent will accumulate knowledge
+of the environment
+
+56
+00:02:32,480 --> 00:02:34,900
+through state action pairs.
+
+57
+00:02:34,900 --> 00:02:40,020
+Meaning it can tell if there would be
+a positive or negative reward
+
+58
+00:02:40,020 --> 00:02:42,200
+given a state action pair.
+
+59
+00:02:42,200 --> 00:02:45,100
+We can represent this using
+the Q function,
+
+60
+00:02:45,100 --> 00:02:47,480
+where Q stands for quality,
+
+61
+00:02:47,480 --> 00:02:51,380
+as in it assesses the quality of
+a given state action pair.
+
+62
+00:02:51,380 --> 00:02:52,780
+We can actually learn what
+
+63
+00:02:52,780 --> 00:02:56,640
+the optimal Q value
+will be at any given point.
+
+64
+00:02:56,640 --> 00:02:58,640
+This is called Q learning.
+
+65
+00:02:58,640 --> 00:03:01,200
+By using what's called the Bellman equation,
+
+66
+00:03:01,200 --> 00:03:05,680
+we can write out an equation
+that relates the value of one state
+
+67
+00:03:05,680 --> 00:03:09,420
+to the value of another state
+in our environment.
+
+68
+00:03:09,420 --> 00:03:11,880
+Because we are able to relate states
+
+69
+00:03:11,880 --> 00:03:15,120
+across time to each other
+mathematically
+
+70
+00:03:15,120 --> 00:03:17,240
+using the bellman equation.
+
+71
+00:03:17,240 --> 00:03:19,080
+We can use any number of methods
+
+72
+00:03:19,080 --> 00:03:22,340
+to iteratively approximate
+our Q function.
+
+73
+00:03:22,340 --> 00:03:24,980
+But, in the case of
+our Pac-Man environment
+
+74
+00:03:24,980 --> 00:03:28,240
+the state action space
+can get really big.
+
+75
+00:03:28,240 --> 00:03:31,960
+In fact, at some point,
+it will no longer be feasible
+
+76
+00:03:31,960 --> 00:03:34,960
+to store all the state action pairs.
+
+77
+00:03:34,960 --> 00:03:37,940
+Of course we could
+still perform Q learning,
+
+78
+00:03:37,940 --> 00:03:42,040
+but it'll get harder to approximate
+the Q function over time.
+
+79
+00:03:42,040 --> 00:03:47,620
+Luckily for us, there exists
+a universal function approximator
+
+80
+00:03:47,620 --> 00:03:49,220
+called a neural network.
+
+81
+00:03:49,220 --> 00:03:51,300
+If we give it enough input data,
+
+82
+00:03:51,300 --> 00:03:53,360
+it can learn any function.
+
+83
+00:03:53,360 --> 00:03:56,500
+If we use a neural network as an agent
+
+84
+00:03:56,500 --> 00:04:01,300
+that predicts the Q value based on
+the input state action pair,
+
+85
+00:04:01,300 --> 00:04:04,460
+then we have a much more
+tractable solution
+
+86
+00:04:04,460 --> 00:04:08,820
+than storing every possible value
+like we did previously.
+
+87
+00:04:08,820 --> 00:04:11,760
+To capture all the intricate details
+
+88
+00:04:11,760 --> 00:04:14,920
+of this knowledge present
+in our Q table,
+
+89
+00:04:14,920 --> 00:04:19,020
+we'll likely need to add
+a few hidden layers to our network.
+
+90
+00:04:19,020 --> 00:04:21,820
+Making it a deep neural network.
+
+91
+00:04:21,820 --> 00:04:23,780
+The extra hidden layers allow
+
+92
+00:04:23,780 --> 00:04:26,920
+the network to internally
+come up with features
+
+93
+00:04:26,920 --> 00:04:29,520
+that can help it learn complex functions
+
+94
+00:04:29,520 --> 00:04:33,080
+that would have been impossible
+using a more shallow network.
+
+95
+00:04:33,080 --> 00:04:37,200
+We can call this whole process
+deep reinforcement learning,
+
+96
+00:04:37,200 --> 00:04:40,020
+and more specifically deep Q learning.
+
+97
+00:04:40,020 --> 00:04:42,980
+Now, let's bring this theory
+back to reality.
+
+98
+00:04:42,980 --> 00:04:46,200
+You and I have neural networks
+in our head.
+
+99
+00:04:46,200 --> 00:04:50,860
+Networks of neurons are firing
+in endlessly different combinations
+
+100
+00:04:50,860 --> 00:04:56,220
+to approximate functions that help us
+perform a wide variety of tasks
+
+101
+00:04:56,220 --> 00:04:57,920
+as we go about our lives.
+
+102
+00:04:57,920 --> 00:05:00,280
+We can consider our reality
+
+103
+00:05:00,280 --> 00:05:02,180
+a Markov decision process.
+
+104
+00:05:02,180 --> 00:05:05,280
+As neural network agents given a state,
+
+105
+00:05:05,280 --> 00:05:08,080
+we take actions to maximize reward
+
+106
+00:05:08,080 --> 00:05:10,140
+for whatever task we are achieving
+
+107
+00:05:10,140 --> 00:05:14,660
+using our function approximation
+capabilities to make predictions.
+
+108
+00:05:14,660 --> 00:05:16,640
+In that way, we can consider
+
+109
+00:05:16,640 --> 00:05:19,620
+our reality
+deep reinforcement learning.
+
+110
+00:05:19,620 --> 00:05:21,720
+Anytime we use a neural network to
+
+111
+00:05:21,720 --> 00:05:24,880
+approximate some
+reinforcement learning function
+
+112
+00:05:24,880 --> 00:05:29,720
+(?) a value function, a policy,
+even the model itself.
+
+113
+00:05:29,720 --> 00:05:32,720
+We can call that
+deep reinforcement learning.
+
+114
+00:05:32,720 --> 00:05:37,180
+So, how does this apply to
+the problem of query optimization?
+
+115
+00:05:37,180 --> 00:05:39,300
+Well, we know that SQL statements
+
+116
+00:05:39,300 --> 00:05:42,840
+are used to perform
+a wide variety of tasks
+
+117
+00:05:42,840 --> 00:05:44,840
+related to the database.
+
+118
+00:05:44,840 --> 00:05:49,620
+They can update data, retrieve data,
+merge data, delete data.
+
+119
+00:05:49,620 --> 00:05:52,340
+Each SQL query has its own function.
+
+120
+00:05:52,340 --> 00:05:55,880
+Assume we have a database
+consisting of three tables:
+
+121
+00:05:55,880 --> 00:05:58,920
+employees, salaries, and taxes.
+
+122
+00:05:58,920 --> 00:06:01,600
+Let's say we want to
+calculate the total tax
+
+123
+00:06:01,600 --> 00:06:04,980
+owed by all employees
+under manager one.
+
+124
+00:06:04,980 --> 00:06:07,960
+We can write out a SQL query
+that does that.
+
+125
+00:06:07,960 --> 00:06:11,300
+We'll compute the tax owed
+by each employee
+
+126
+00:06:11,300 --> 00:06:13,980
+by selecting their specific attributes,
+
+127
+00:06:13,980 --> 00:06:15,760
+and summing them all up.
+
+128
+00:06:15,760 --> 00:06:19,580
+This query is going to perform
+a three relation join.
+
+129
+00:06:19,580 --> 00:06:24,960
+We can use J to help denote
+the cost of accessing a base relation.
+
+130
+00:06:24,960 --> 00:06:29,660
+The cost of each query is
+the percentage of the total batch cost.
+
+131
+00:06:29,660 --> 00:06:32,820
+It's the time needed to execute a query.
+
+132
+00:06:32,820 --> 00:06:34,520
+It's computed different ways,
+
+133
+00:06:34,520 --> 00:06:38,700
+but almost always takes into account
+several computation factors,
+
+134
+00:06:38,700 --> 00:06:42,580
+such as input, output, CPU,
+and communication.
+
+135
+00:06:42,580 --> 00:06:44,560
+We want to minimize this cost,
+
+136
+00:06:44,560 --> 00:06:47,940
+so that we perform our queries
+as fast as possible.
+
+137
+00:06:47,940 --> 00:06:52,340
+Using dynamic programming,
+we can iteratively calculate the cost
+
+138
+00:06:52,340 --> 00:06:55,680
+of optimally accessing
+the three-base relations.
+
+139
+00:06:55,680 --> 00:06:59,520
+After the first iteration,
+we can build off of this information
+
+140
+00:06:59,520 --> 00:07:04,280
+that we previously computed and
+enumerate all two relations.
+
+141
+00:07:04,280 --> 00:07:08,380
+When we compute the best cost to
+join two relations,
+
+142
+00:07:08,380 --> 00:07:11,960
+we'll look up the relevant
+previously computed results.
+
+143
+00:07:11,960 --> 00:07:13,800
+In the third iteration,
+
+144
+00:07:13,800 --> 00:07:16,640
+we'll proceed through
+the other two relation sets.
+
+145
+00:07:16,640 --> 00:07:18,660
+Eventually, finding the final
+
+146
+00:07:18,660 --> 00:07:21,400
+best costs for
+joining all three tables.
+
+147
+00:07:21,400 --> 00:07:23,000
+Once complete, we'll see that
+
+148
+00:07:23,000 --> 00:07:26,980
+this algorithm has a
+space and time complexity
+
+149
+00:07:26,980 --> 00:07:29,600
+exponential in the number of relations.
+
+150
+00:07:29,600 --> 00:07:32,220
+Which is why it's usually only used for
+
+151
+00:07:32,220 --> 00:07:35,340
+queries between 10 and 20 relations.
+
+152
+00:07:35,340 --> 00:07:38,060
+When we have more relations than that,
+
+153
+00:07:38,060 --> 00:07:41,640
+we'll need to use a different
+query optimization technique.
+
+154
+00:07:41,640 --> 00:07:42,880
+Instead of solving this
+
+155
+00:07:42,880 --> 00:07:46,660
+join ordering problem
+using dynamic programming,
+
+156
+00:07:46,660 --> 00:07:51,320
+what if we formulated this problem
+as a Markov decision process,
+
+157
+00:07:51,320 --> 00:07:54,080
+and solved it using
+reinforcement learning.
+
+158
+00:07:54,080 --> 00:07:56,560
+If we do that, the states can be
+
+159
+00:07:56,560 --> 00:07:59,220
+considered the remaining relations
+to be joined.
+
+160
+00:07:59,220 --> 00:08:03,280
+The actions would be the valid joins
+out of the remaining relations.
+
+161
+00:08:03,280 --> 00:08:06,400
+The next states would be
+the old remaining relations
+
+162
+00:08:06,400 --> 00:08:08,520
+set with two relations removed,
+
+163
+00:08:08,520 --> 00:08:10,560
+and the resultant join added.
+
+164
+00:08:10,560 --> 00:08:14,620
+Lastly, the reward would be
+the estimated cost of the new join.
+
+165
+00:08:14,620 --> 00:08:17,940
+Because, we defined these
+Markovian variables,
+
+166
+00:08:17,940 --> 00:08:21,760
+we can define a Q function
+using the bellman equation
+
+167
+00:08:21,760 --> 00:08:25,040
+to describe the long-term cost of
+each join.
+
+168
+00:08:25,040 --> 00:08:27,520
+Since we've defined a Q function,
+
+169
+00:08:27,520 --> 00:08:29,880
+we can order joins in a greedy way.
+
+170
+00:08:29,880 --> 00:08:32,220
+We start with the initial query graph,
+
+171
+00:08:32,220 --> 00:08:34,620
+find the join with the lowest Q value,
+
+172
+00:08:34,620 --> 00:08:37,800
+then update the query graph and
+repeat the process.
+
+173
+00:08:37,800 --> 00:08:42,580
+This Q learning algorithm has
+a computational complexity of n cubed.
+
+174
+00:08:42,580 --> 00:08:43,780
+Although that's high,
+
+175
+00:08:43,780 --> 00:08:45,000
+that's still much lower than
+
+176
+00:08:45,000 --> 00:08:49,040
+the exponential run time complexity
+of dynamic programming.
+
+177
+00:08:49,040 --> 00:08:53,040
+In reality, though, we don't have
+access to the optimal Q function.
+
+178
+00:08:53,040 --> 00:08:55,640
+So, we need to approximate it.
+
+179
+00:08:55,640 --> 00:08:58,020
+To do that, we can use
+a neural network,
+
+180
+00:08:58,020 --> 00:09:00,580
+which would make this deep Q learning.
+
+181
+00:09:00,580 --> 00:09:05,140
+To learn the Q function, we need to
+observe past execution data.
+
+182
+00:09:05,140 --> 00:09:08,800
+We can use it as training data
+for our neural network.
+
+183
+00:09:08,800 --> 00:09:13,540
+Since we're using a neural network
+to represent our Q function,
+
+184
+00:09:13,540 --> 00:09:17,520
+we need to feed the state and
+actions into the network
+
+185
+00:09:17,520 --> 00:09:20,280
+as fixed-length feature vectors.
+
+186
+00:09:20,280 --> 00:09:24,580
+This helps our network perform
+matrix multiplications gracefully,
+
+187
+00:09:24,580 --> 00:09:27,040
+as it accepts this kind of format.
+
+188
+00:09:27,040 --> 00:09:31,320
+We'll use one hot vectors
+to encode the set of all attributes
+
+189
+00:09:31,320 --> 00:09:33,320
+present in the query graph,
+
+190
+00:09:33,320 --> 00:09:35,320
+and the participating attributes
+
+191
+00:09:35,320 --> 00:09:38,580
+from both the left and right side
+of the join.
+
+192
+00:09:38,580 --> 00:09:42,440
+We'll use a simple two layer
+fully connected network as our agent,
+
+193
+00:09:42,440 --> 00:09:47,280
+and train it using the standard
+gradient descent optimization algorithm.
+
+194
+00:09:47,280 --> 00:09:51,400
+Once trained, it will accept
+a SQL query in plaintext,
+
+195
+00:09:51,400 --> 00:09:54,920
+parse it into
+an abstract syntax tree form,
+
+196
+00:09:54,920 --> 00:09:56,080
+feature the tree,
+
+197
+00:09:56,080 --> 00:09:59,700
+and use a neural network whenever
+a candidate join is scored.
+
+198
+00:09:59,700 --> 00:10:02,300
+And because, databases are real-time
+
+199
+00:10:02,300 --> 00:10:07,240
+used in production environments
+constantly being updated and changed,
+
+200
+00:10:07,240 --> 00:10:09,880
+we can periodically retune our network
+
+201
+00:10:09,880 --> 00:10:12,680
+using the feedback from live execution.
+
+202
+00:10:12,680 --> 00:10:16,760
+Across all cost models,
+deep Q is competitive
+
+203
+00:10:16,760 --> 00:10:20,400
+with the optimal solution
+without a priori knowledge
+
+204
+00:10:20,400 --> 00:10:22,360
+of the index structure.
+
+205
+00:10:22,360 --> 00:10:25,320
+We can safely say
+that learning-based optimizers
+
+206
+00:10:25,320 --> 00:10:28,800
+are more robust than
+hand designed algorithms.
+
+207
+00:10:28,800 --> 00:10:31,080
+Because, they can adapt to changes
+
+208
+00:10:31,080 --> 00:10:34,160
+in data, workload, or cost models.
+
+209
+00:10:34,160 --> 00:10:38,080
+For the largest joins, deep Q
+wins by up to 10,000x
+
+210
+00:10:38,080 --> 00:10:40,740
+compared to exhaustive enumeration.
+
+211
+00:10:40,740 --> 00:10:43,180
+Three points to remember
+from this video.
+
+212
+00:10:43,180 --> 00:10:47,240
+Deep reinforcement learning involves
+using a neural network
+
+213
+00:10:47,240 --> 00:10:50,500
+to approximate
+reinforcement learning functions
+
+214
+00:10:50,500 --> 00:10:52,020
+like the Q function.
+
+215
+00:10:52,020 --> 00:10:57,120
+We can assess the quality or
+Q of state action pairs
+
+216
+00:10:57,120 --> 00:10:59,120
+by computing a Q table.
+
+217
+00:10:59,120 --> 00:11:02,600
+Q learning involves approximating
+the relationship
+
+218
+00:11:02,600 --> 00:11:05,580
+between state action pairs and Q values
+
+219
+00:11:05,580 --> 00:11:08,020
+in this table using neural networks.
+
+220
+00:11:08,020 --> 00:11:10,300
+Please subscribe
+for more programming videos.
+
+221
+00:11:10,300 --> 00:11:12,380
+For now, I've got to take a meeting.
+
+222
+00:11:12,380 --> 00:11:14,380
+Thanks for watching.
+

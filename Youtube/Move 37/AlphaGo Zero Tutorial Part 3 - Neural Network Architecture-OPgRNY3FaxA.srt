@@ -1,0 +1,791 @@
+﻿1
+00:00:01,250 --> 00:00:05,440
+Hello, and welcome back to part three
+of this AlphaZero tutorial series,
+
+2
+00:00:05,440 --> 00:00:07,220
+where we're going to take an
+in-depth look
+
+3
+00:00:07,220 --> 00:00:08,700
+at the neural network architecture
+
+4
+00:00:08,700 --> 00:00:12,220
+that DeepMind used to create
+the most powerful intelligence in the world
+
+5
+00:00:12,220 --> 00:00:15,340
+for playing Go, Chess, and Shogi.
+
+6
+00:00:15,340 --> 00:00:16,420
+Before we dive in though,
+
+7
+00:00:16,420 --> 00:00:18,820
+I want to cover a couple of
+important concepts
+
+8
+00:00:18,820 --> 00:00:20,680
+you may not be familiar with.
+
+9
+00:00:20,680 --> 00:00:23,120
+But, there are tools that can
+possibly improve the results
+
+10
+00:00:23,120 --> 00:00:25,120
+of all your deep learning projects.
+
+11
+00:00:26,220 --> 00:00:29,180
+The first is batch normalization.
+
+12
+00:00:29,180 --> 00:00:31,040
+Normalization refers to the process of
+
+13
+00:00:31,040 --> 00:00:33,220
+squishing widely different values
+
+14
+00:00:33,220 --> 00:00:36,680
+into the same range usually
+between 0 and 1.
+
+15
+00:00:37,120 --> 00:00:39,620
+Normalizing input data speeds up training,
+
+16
+00:00:39,620 --> 00:00:42,540
+smooth gradients, and makes
+a training more stable.
+
+17
+00:00:42,540 --> 00:00:45,720
+Meaning you are less likely to
+get stuck in a local optimum,
+
+18
+00:00:45,720 --> 00:00:48,200
+and the loss is more likely to
+continuously drop
+
+19
+00:00:48,200 --> 00:00:50,200
+rather than spike all over the place.
+
+20
+00:00:51,240 --> 00:00:53,320
+If the input layer is
+benefiting from it,
+
+21
+00:00:53,320 --> 00:00:56,080
+why not do the same thing for
+all the hidden layers.
+
+22
+00:00:56,080 --> 00:00:58,840
+It turns out
+the benefits are synergistic.
+
+23
+00:00:58,840 --> 00:01:02,540
+Batch normalization allows each layer
+of a network to learn by itself
+
+24
+00:01:02,540 --> 00:01:05,540
+a little more independently
+of the other layers.
+
+25
+00:01:05,540 --> 00:01:07,640
+It also helps reduce overfitting,
+
+26
+00:01:07,640 --> 00:01:09,720
+and allows higher learning rates.
+
+27
+00:01:09,720 --> 00:01:12,360
+The details of how it works are
+beyond the scope of this video,
+
+28
+00:01:12,360 --> 00:01:15,100
+but it involves creating
+trainable parameters
+
+29
+00:01:15,100 --> 00:01:16,780
+for the mean and standard deviation
+
+30
+00:01:16,780 --> 00:01:19,660
+of the values output
+by the normalization layer.
+
+31
+00:01:19,660 --> 00:01:21,100
+I'll leave a link in the description,
+
+32
+00:01:21,100 --> 00:01:23,500
+if you want to learn more.
+
+33
+00:01:23,500 --> 00:01:26,980
+The second concept is residual blocks.
+
+34
+00:01:26,980 --> 00:01:29,360
+As neural network depth increases,
+
+35
+00:01:29,360 --> 00:01:32,640
+accuracy gets saturated
+and then degrades rapidly.
+
+36
+00:01:32,640 --> 00:01:35,120
+Too many layers leads to
+higher training error,
+
+37
+00:01:35,120 --> 00:01:38,200
+since gradients get
+too small to be meaningful.
+
+38
+00:01:38,200 --> 00:01:40,040
+The solution is a skip connection,
+
+39
+00:01:40,040 --> 00:01:42,380
+which allows the input
+to skip the entire layer
+
+40
+00:01:42,380 --> 00:01:44,600
+and get added to the output.
+
+41
+00:01:44,600 --> 00:01:47,440
+This allows gradients to propagate
+through a very deep network,
+
+42
+00:01:47,440 --> 00:01:50,620
+and unlocks the full benefits
+of deep learning.
+
+43
+00:01:50,620 --> 00:01:53,040
+This works much like a dry/wet knob
+
+44
+00:01:53,040 --> 00:01:54,440
+and effects processing.
+
+45
+00:01:54,440 --> 00:01:58,120
+It mixes the original signal back
+into the effect.
+
+46
+00:01:58,120 --> 00:02:01,220
+Here's a visualization
+of a Photoshop effect being applied,
+
+47
+00:02:01,220 --> 00:02:04,660
+and then added back
+to the original image.
+
+48
+00:02:04,660 --> 00:02:06,680
+Again, if you want to learn more,
+
+49
+00:02:06,680 --> 00:02:09,440
+I'll leave a link in the description.
+
+50
+00:02:09,440 --> 00:02:12,340
+Here's the big picture of
+the AlphaZero neural network.
+
+51
+00:02:12,340 --> 00:02:13,540
+It's made of building blocks,
+
+52
+00:02:13,540 --> 00:02:15,320
+so look at the overall design,
+
+53
+00:02:15,320 --> 00:02:18,920
+and we'll take a microscope
+to each type of block.
+
+54
+00:02:18,920 --> 00:02:23,260
+At the top, the raw game data goes
+into a simple convolutional layer.
+
+55
+00:02:23,260 --> 00:02:27,560
+Below that, we've got a tower of
+40 residual convolutional layers.
+
+56
+00:02:27,560 --> 00:02:29,680
+The tower then feeds into a value head,
+
+57
+00:02:29,680 --> 00:02:31,900
+which outputs the expected value
+of the state,
+
+58
+00:02:31,900 --> 00:02:32,980
+and a policy head which
+
+59
+00:02:32,980 --> 00:02:35,780
+outputs probabilities for
+each possible action.
+
+60
+00:02:35,780 --> 00:02:38,080
+In other words, it's exactly
+the same output
+
+61
+00:02:38,080 --> 00:02:40,940
+as vanilla actor critic architecture.
+
+62
+00:02:40,940 --> 00:02:44,600
+Now, let's take a look
+one by one in each part.
+
+63
+00:02:44,600 --> 00:02:47,300
+First, let's see what the encoded
+game state looks like
+
+64
+00:02:47,300 --> 00:02:49,380
+that's being passed in
+there first layer,
+
+65
+00:02:49,380 --> 00:02:51,460
+specifically for the game of Go.
+
+66
+00:02:51,460 --> 00:02:53,020
+Chess and Shogi are
+slightly different,
+
+67
+00:02:53,020 --> 00:02:55,420
+but the concepts are exactly the same.
+
+68
+00:02:55,420 --> 00:02:59,560
+The Go board is 19 by 19,
+and so is input.
+
+69
+00:02:59,560 --> 00:03:04,200
+The current position of all of
+black's pieces are encoded in the grid,
+
+70
+00:03:04,200 --> 00:03:05,780
+followed by identical grids
+
+71
+00:03:05,780 --> 00:03:08,420
+for the previous 7 time periods.
+
+72
+00:03:08,420 --> 00:03:10,120
+Then, we have white's current position
+
+73
+00:03:10,120 --> 00:03:13,440
+followed by the previous 7 time period
+for white.
+
+74
+00:03:13,440 --> 00:03:14,860
+Finally, we've got the current
+
+75
+00:03:14,860 --> 00:03:18,420
+player's turn encoded on
+a 19 by 19 grid.
+
+76
+00:03:18,420 --> 00:03:20,580
+All 1 if black is to play,
+
+77
+00:03:20,580 --> 00:03:23,140
+and all 0 if white is to play.
+
+78
+00:03:23,140 --> 00:03:26,400
+The result is a 19 by 19 by 17 stack,
+
+79
+00:03:26,400 --> 00:03:29,420
+which goes into the neural network.
+
+80
+00:03:29,420 --> 00:03:31,540
+Now, let's look at
+the very first layer we hit,
+
+81
+00:03:31,540 --> 00:03:33,580
+the convolutional layer.
+
+82
+00:03:33,580 --> 00:03:35,480
+The input we just described passes
+
+83
+00:03:35,480 --> 00:03:38,760
+straight into a convolution
+with 256 filters
+
+84
+00:03:38,760 --> 00:03:40,660
+and a 3x3 kernel.
+
+85
+00:03:40,660 --> 00:03:42,720
+If you don't fully understand
+convolutions,
+
+86
+00:03:42,720 --> 00:03:46,780
+I'll link an excellent video
+by Siraj in the description.
+
+87
+00:03:48,860 --> 00:03:51,200
+Next, we perform batch normalization
+as described previously.
+
+88
+00:03:51,200 --> 00:03:53,840
+And, it passes through
+a ReLu activation,
+
+89
+00:03:53,840 --> 00:03:58,540
+which effectively clips all
+negative values to zero.
+
+90
+00:03:58,540 --> 00:04:01,480
+Now, we've got 40 stack
+residual layers.
+
+91
+00:04:01,480 --> 00:04:03,840
+Inside each one is
+the exact same thing,
+
+92
+00:04:03,840 --> 00:04:06,340
+so let's take a peek.
+
+93
+00:04:06,340 --> 00:04:09,800
+First up, we have
+256 convolutional filters
+
+94
+00:04:09,800 --> 00:04:12,560
+with a 3x3 kernel as before.
+
+95
+00:04:12,560 --> 00:04:14,640
+Then, batch normalization,
+
+96
+00:04:14,640 --> 00:04:16,720
+ReLu activation,
+
+97
+00:04:16,720 --> 00:04:18,520
+another convolution,
+
+98
+00:04:18,520 --> 00:04:20,760
+more batch normalization,
+
+99
+00:04:20,760 --> 00:04:22,540
+and, finally, we have
+the skip connection,
+
+100
+00:04:22,540 --> 00:04:26,120
+where the original input is added back
+into the convolved output.
+
+101
+00:04:26,120 --> 00:04:30,120
+And, one more ReLu just for good luck.
+
+102
+00:04:30,120 --> 00:04:32,360
+Now, let's take a look at
+the value head.
+
+103
+00:04:32,360 --> 00:04:35,120
+Input passes straight to one filter.
+
+104
+00:04:35,120 --> 00:04:37,800
+A one by one kernel convolution.
+
+105
+00:04:37,800 --> 00:04:39,800
+We do batch normalization.
+
+106
+00:04:39,800 --> 00:04:42,300
+It goes through a ReLu activation.
+
+107
+00:04:42,300 --> 00:04:46,240
+We have a fully connected layer
+with 256 hidden neurons.
+
+108
+00:04:46,240 --> 00:04:48,060
+Another ReLu.
+
+109
+00:04:48,060 --> 00:04:50,520
+And a final, fully connected layer
+
+110
+00:04:50,520 --> 00:04:52,580
+with tanh activation
+
+111
+00:04:52,580 --> 00:04:56,020
+which outputs a value between -1 and 1
+
+112
+00:04:56,020 --> 00:04:58,520
+for the state being queried.
+
+113
+00:04:58,520 --> 00:05:00,380
+And, finally, we have the policy head
+
+114
+00:05:00,380 --> 00:05:03,980
+which outputs logit probabilities
+for each possible move.
+
+115
+00:05:03,980 --> 00:05:06,820
+Input passes to 2 convolutional filters
+
+116
+00:05:06,820 --> 00:05:09,100
+with a one by one kernel.
+
+117
+00:05:09,100 --> 00:05:11,420
+Then, we do batch normalization.
+
+118
+00:05:11,420 --> 00:05:13,420
+Pass it through a ReLu
+
+119
+00:05:13,420 --> 00:05:15,580
+And, finally, through
+a fully connected layer,
+
+120
+00:05:15,580 --> 00:05:19,560
+which outputs probabilities
+for each square in the 19 by 19 grid
+
+121
+00:05:19,560 --> 00:05:23,480
+plus one additional option
+for passing the turn.
+
+122
+00:05:23,480 --> 00:05:25,980
+And last, let's have a look at the loss function,
+
+123
+00:05:25,980 --> 00:05:28,020
+and the gradient descent method.
+
+124
+00:05:28,020 --> 00:05:31,320
+This is very similar to
+how we trained our actor critic.
+
+125
+00:05:31,320 --> 00:05:33,840
+The loss function has
+three elements,
+
+126
+00:05:33,840 --> 00:05:39,040
+the value loss, the policy loss,
+and regularization.
+
+127
+00:05:39,040 --> 00:05:41,360
+Value loss is the mean squared error
+
+128
+00:05:41,360 --> 00:05:43,400
+between the value predicted
+by the network
+
+129
+00:05:43,400 --> 00:05:47,540
+and the actual value calculated
+through the Monte Carlo tree search.
+
+130
+00:05:47,540 --> 00:05:49,480
+Policy losses across entropy
+
+131
+00:05:49,480 --> 00:05:51,800
+between the probability is predicted
+by the network
+
+132
+00:05:51,800 --> 00:05:55,000
+and those calculated through
+Monte Carlo tree search.
+
+133
+00:05:55,000 --> 00:05:56,120
+If you're confused about this,
+
+134
+00:05:56,120 --> 00:05:59,260
+go back and study my policy gradients
+math primer.
+
+135
+00:05:59,260 --> 00:06:00,500
+There's a link in the description
+
+136
+00:06:00,500 --> 00:06:02,940
+of my policy gradient methods video.
+
+137
+00:06:02,940 --> 00:06:05,940
+Last regularization helps
+prevent overfitting
+
+138
+00:06:05,940 --> 00:06:09,200
+by adding a penalty as
+a weights get bigger.
+
+139
+00:06:09,200 --> 00:06:12,720
+The equation for
+L2 weight regularization loss
+
+140
+00:06:12,720 --> 00:06:16,940
+is c times a normal of theta squared.
+
+141
+00:06:16,940 --> 00:06:19,060
+In other words, this is the sum of
+
+142
+00:06:19,060 --> 00:06:21,980
+the squares of all the weights
+in the network.
+
+143
+00:06:21,980 --> 00:06:25,500
+c is a parameter for controlling
+the strength of the weight penalty.
+
+144
+00:06:25,500 --> 00:06:29,400
+Set to 10^-4 for
+the AlphaZero paper.
+
+145
+00:06:29,400 --> 00:06:32,180
+And this is the final loss function.
+
+146
+00:06:32,180 --> 00:06:36,380
+z is the value of the state calculated
+by Monte Carlo tree search.
+
+147
+00:06:36,380 --> 00:06:38,900
+v is the value predicted
+by the network.
+
+148
+00:06:38,900 --> 00:06:41,460
+pi is a policy predict
+by the network.
+
+149
+00:06:41,460 --> 00:06:44,480
+and p are the actual probabilities
+
+150
+00:06:44,480 --> 00:06:46,920
+calculated by Monte Carlo tree search.
+
+151
+00:06:46,920 --> 00:06:49,340
+The momentum optimizer was used
+
+152
+00:06:49,340 --> 00:06:52,880
+with the momentum variable
+being set to 0.9.
+
+153
+00:06:52,880 --> 00:06:56,700
+The learning rate
+started out as 10^-2
+
+154
+00:06:56,700 --> 00:06:58,820
+and was annealed to 10^-4
+
+155
+00:06:58,820 --> 00:07:01,600
+after 600,000 iterations.
+
+156
+00:07:01,600 --> 00:07:02,840
+All right.
+
+157
+00:07:02,840 --> 00:07:05,280
+Now, that you've been firehose
+with tons of theory,
+
+158
+00:07:05,280 --> 00:07:07,660
+it's time to take a look at some code.
+
+159
+00:07:07,660 --> 00:07:09,260
+You probably have enough information
+
+160
+00:07:09,260 --> 00:07:11,460
+to replicate AlphaZeroes results,
+
+161
+00:07:11,460 --> 00:07:13,240
+if you had thousands of dollars
+
+162
+00:07:13,240 --> 00:07:15,580
+in cloud computing credits
+on your hands.
+
+163
+00:07:15,580 --> 00:07:17,260
+Well, it's scale it back a little bit,
+
+164
+00:07:17,260 --> 00:07:19,300
+and do something
+you can get good results
+
+165
+00:07:19,300 --> 00:07:21,200
+training on your desktop GPU
+
+166
+00:07:21,200 --> 00:07:23,440
+over just a few days.
+
+167
+00:07:23,440 --> 00:07:26,240
+Let's use the AlphaZero algorithm
+to build an AI
+
+168
+00:07:26,240 --> 00:07:30,340
+that can master the classic game
+of Connect Four.
+
+169
+00:07:30,340 --> 00:07:31,660
+This is Colin Skow.
+
+170
+00:07:31,660 --> 00:07:33,700
+Stay tuned, because in the next video,
+
+171
+00:07:33,700 --> 00:07:35,100
+we're going to get our hands dirty.
+
+172
+00:07:35,100 --> 00:07:37,860
+And jump into some real-world code.
+
+173
+00:07:37,860 --> 00:07:39,920
+The Move 37 course is coming to an end,
+
+174
+00:07:39,920 --> 00:07:41,480
+so if you want to stay in touch,
+
+175
+00:07:41,480 --> 00:07:43,100
+Subscribe to my youtube channel,
+
+176
+00:07:43,100 --> 00:07:44,780
+Skowster the Geek.
+
+177
+00:07:44,780 --> 00:07:48,360
+See you again very soon.
+

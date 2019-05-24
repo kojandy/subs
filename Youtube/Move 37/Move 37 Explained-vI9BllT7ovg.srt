@@ -1,0 +1,994 @@
+﻿1
+00:00:00,300 --> 00:00:02,880
+Move 37; it's finally here.
+
+2
+00:00:03,540 --> 00:00:05,117
+Hello world! It's Siraj.
+
+3
+00:00:05,117 --> 00:00:09,760
+I've been teaching a course called
+"Move 37" for the past ten weeks
+
+4
+00:00:10,260 --> 00:00:12,084
+I wanted to culminate it all
+
+5
+00:00:12,084 --> 00:00:14,751
+every RL technique we've talked about
+
+6
+00:00:14,751 --> 00:00:16,540
+with this one video.
+
+7
+00:00:16,840 --> 00:00:19,284
+I'm gonna explain what Move 37 is,
+
+8
+00:00:19,284 --> 00:00:23,000
+and three reasons why it's so significant for our future,
+
+9
+00:00:23,380 --> 00:00:26,480
+in terms of human jobs, health, and lifestyle.
+
+10
+00:00:26,720 --> 00:00:30,284
+The Go board game is very popular
+in large parts of Asia;
+
+11
+00:00:30,284 --> 00:00:34,880
+it's very old and some players have
+dedicated their entire lives to mastering it.
+
+12
+00:00:35,200 --> 00:00:37,950
+When polled, most AI researchers believed
+
+13
+00:00:37,950 --> 00:00:40,183
+it would take several decades for
+
+14
+00:00:40,183 --> 00:00:43,260
+computers to reach the standard
+of a human expert player.
+
+15
+00:00:43,760 --> 00:00:45,851
+It's a very challenging game,
+
+16
+00:00:45,851 --> 00:00:47,984
+more potential board positions
+
+17
+00:00:47,984 --> 00:00:50,080
+than there are atoms in the universe.
+
+18
+00:00:50,560 --> 00:00:52,817
+A player has to learn how to recognize
+
+19
+00:00:52,817 --> 00:00:57,200
+abstract patterns in hundreds of pieces
+placed across the board,
+
+20
+00:00:57,200 --> 00:00:59,951
+and even experts have a hard time explaining
+
+21
+00:00:59,951 --> 00:01:04,080
+why a particular move is
+either benificial, or problematic.
+
+22
+00:01:04,239 --> 00:01:06,384
+So when DeepMind's AI program,
+
+23
+00:01:06,384 --> 00:01:07,950
+called AlphaGo Zero,
+
+24
+00:01:07,950 --> 00:01:11,983
+beat the world champion at Go
+much earlier than expected,
+
+25
+00:01:11,983 --> 00:01:13,200
+history was made.
+
+26
+00:01:13,200 --> 00:01:15,817
+Starting with the training set
+of recorded games
+
+27
+00:01:15,817 --> 00:01:20,000
+that contained over 30 million moves
+made by expert Go players,
+
+28
+00:01:20,240 --> 00:01:22,817
+the AlphaGo Zero algorithm used a model
+
+29
+00:01:22,817 --> 00:01:24,750
+proven to be able to learn
+
+30
+00:01:24,750 --> 00:01:26,350
+from image data directly
+
+31
+00:01:26,350 --> 00:01:28,800
+called a Convolutional Neural Network.
+
+32
+00:01:28,800 --> 00:01:31,117
+It was fed a series of game states as input
+
+33
+00:01:31,117 --> 00:01:32,960
+meaning the positions on the board.
+
+34
+00:01:33,200 --> 00:01:35,784
+The network learned how to
+predict the next move,
+
+35
+00:01:35,784 --> 00:01:40,240
+and learned to predict the outcome from
+different arrangements on the board.
+
+36
+00:01:40,640 --> 00:01:43,217
+Since Go has so many potential moves,
+
+37
+00:01:43,217 --> 00:01:46,320
+a brute force search would take way too long;
+
+38
+00:01:46,320 --> 00:01:48,651
+even longer than it'll take Apple to release
+
+39
+00:01:48,651 --> 00:01:50,560
+an augmented reality device.
+
+40
+00:01:50,960 --> 00:01:54,517
+So instead, the convolutional network
+was deployed
+
+41
+00:01:54,517 --> 00:01:57,184
+in the context of a search algorithm
+
+42
+00:01:57,184 --> 00:01:59,440
+called a Monte Carlo Tree Search.
+
+43
+00:01:59,680 --> 00:02:02,717
+This tree search was used to initially explore
+
+44
+00:02:02,717 --> 00:02:04,960
+many possible moves on the board,
+
+45
+00:02:04,960 --> 00:02:07,884
+then focus that exploration over time
+
+46
+00:02:07,884 --> 00:02:11,751
+as certain moves were found to be
+more likely to lead to wins
+
+47
+00:02:11,751 --> 00:02:12,640
+than others.
+
+48
+00:02:12,880 --> 00:02:15,051
+AlphaGo used the neural network
+
+49
+00:02:15,051 --> 00:02:17,484
+to both predict moves to help guide
+
+50
+00:02:17,484 --> 00:02:20,240
+which branches of the game tree to search,
+
+51
+00:02:20,480 --> 00:02:23,251
+and it used it to evaluate the positions
+
+52
+00:02:23,251 --> 00:02:25,840
+it encountered during its search.
+
+53
+00:02:25,840 --> 00:02:29,350
+This allowed it to intelligently
+search upcoming moves,
+
+54
+00:02:29,350 --> 00:02:32,800
+and ultimately beat
+the world champion at the game.
+
+55
+00:02:33,040 --> 00:02:35,483
+But even more important than AlphaGo's win
+
+56
+00:02:35,483 --> 00:02:38,084
+was one moment during the game;
+
+57
+00:02:38,084 --> 00:02:41,600
+the moment that caused
+Lee Sedol to leave the room.
+
+58
+00:02:42,000 --> 00:02:43,684
+AlphaGo played this move,
+
+59
+00:02:43,684 --> 00:02:46,284
+which I wanna hear more about in a second, but,
+
+60
+00:02:46,284 --> 00:02:49,183
+Uh... Lee has left the room.
+
+61
+00:02:49,183 --> 00:02:51,440
+He left the room after that move.
+
+62
+00:02:51,760 --> 00:02:55,784
+It was a move that seemed terrible
+to everyone who saw it.
+
+63
+00:02:55,784 --> 00:03:00,400
+But it turned out that Move 37
+was an incredible move to play,
+
+64
+00:03:00,400 --> 00:03:04,160
+and it was instrumental
+in helping AlphaGo win the game.
+
+65
+00:03:04,160 --> 00:03:09,040
+Somehow, a computer program knew something
+about the game that we didn't.
+
+66
+00:03:09,280 --> 00:03:14,960
+Somehow, it's intuition was both different
+ and better, than human intuition.
+
+67
+00:03:15,120 --> 00:03:17,360
+One of the players, Fan Hui, said:
+
+68
+00:03:22,880 --> 00:03:25,360
+AI thinks you're beautiful too, Fan. *winks*
+
+69
+00:03:25,360 --> 00:03:29,651
+Move 37 offered us a glimpse at
+what an intelligence looks like
+
+70
+00:03:29,651 --> 00:03:31,440
+ that thinks differently than we do,
+
+71
+00:03:31,440 --> 00:03:35,360
+but is still very much capable of
+accomplishing tasks.
+
+72
+00:03:35,360 --> 00:03:39,750
+Interestingly, Lee played his own move
+in a later game with AlphaGo,
+
+73
+00:03:39,750 --> 00:03:42,000
+since they were playing through a series of them,
+
+74
+00:03:42,000 --> 00:03:44,480
+which helped him win one of the games.
+
+75
+00:03:44,480 --> 00:03:47,117
+Move 78, called the Divine Move,
+
+76
+00:03:47,117 --> 00:03:48,960
+Brillaint Tesuji by some.
+
+77
+00:03:48,960 --> 00:03:53,200
+The designers of AlphaGo called it
+a "one in ten-thousands move", because
+
+78
+00:03:53,200 --> 00:03:57,817
+AlphaGo calculated that there was
+a probability of 1 out of 10,000
+
+79
+00:03:57,817 --> 00:03:59,440
+that a human would play that move.
+
+80
+00:03:59,440 --> 00:04:02,617
+Lee's Move 78 caused AlphaGo to make
+
+81
+00:04:02,617 --> 00:04:05,600
+sub-optimal decisions in the next round.
+
+82
+00:04:05,600 --> 00:04:08,084
+Lee learned that AlphaGo was superior
+
+83
+00:04:08,084 --> 00:04:11,600
+at playing the right moves
+to optimize for small gains,
+
+84
+00:04:11,600 --> 00:04:14,384
+but it could fail in extreme situations
+
+85
+00:04:14,384 --> 00:04:18,160
+where the gain of points in one move
+would be more important.
+
+86
+00:04:18,240 --> 00:04:21,680
+This was an example of
+intelligence augmentation:
+
+87
+00:04:22,000 --> 00:04:25,183
+Better designed algorithms
+lead to better performances,
+
+88
+00:04:25,183 --> 00:04:29,120
+and better performances help humans
+make better decisions.
+
+89
+00:04:29,200 --> 00:04:31,451
+Humans who make better decisions
+
+90
+00:04:31,451 --> 00:04:36,160
+can create environments where
+algorithms fail; i.e. "divine moves",
+
+91
+00:04:36,160 --> 00:04:38,117
+and learning about these failures
+
+92
+00:04:38,117 --> 00:04:40,480
+helps us design better algorithms.
+
+93
+00:04:40,560 --> 00:04:42,850
+The AlphaGo algorithm influence
+
+94
+00:04:42,850 --> 00:04:45,040
+Lee's gameplay, and vice versa.
+
+95
+00:04:45,040 --> 00:04:46,651
+We can work together
+
+96
+00:04:46,651 --> 00:04:48,217
+with this machine intelligence
+
+97
+00:04:48,217 --> 00:04:49,760
+in many different ways,
+
+98
+00:04:49,920 --> 00:04:52,050
+to further extend our capabilities
+
+99
+00:04:52,050 --> 00:04:54,160
+across every industry.
+
+100
+00:04:54,160 --> 00:04:55,750
+This kind of technology can help us
+
+101
+00:04:55,750 --> 00:04:58,450
+achieve goals that we could not do alone,
+
+102
+00:04:58,450 --> 00:05:00,880
+and I'll outline the three biggest ones.
+
+103
+00:05:00,960 --> 00:05:02,884
+The first is healthcare;
+
+104
+00:05:02,884 --> 00:05:07,600
+cancer, Alzheimer's, and a host of other
+major diseases plague humanity,
+
+105
+00:05:07,920 --> 00:05:09,550
+many die every year because
+
+106
+00:05:09,550 --> 00:05:13,280
+our best scientists
+haven't been able to find a cure.
+
+107
+00:05:13,600 --> 00:05:16,017
+In the USA, the path to develop a new medicine
+
+108
+00:05:16,017 --> 00:05:18,480
+takes at least ten years on average,
+
+109
+00:05:18,560 --> 00:05:22,000
+and costs an average of $2.6 billion US dollars.
+
+110
+00:05:22,000 --> 00:05:24,817
+And less than 12% of the candidate medicines
+
+111
+00:05:24,817 --> 00:05:29,360
+that make it into phase 1 clinical trials
+are approved by the FDA.
+
+112
+00:05:29,360 --> 00:05:32,417
+There are billions of possible lead molecules
+
+113
+00:05:32,417 --> 00:05:34,960
+that could be used as potential cures,
+
+114
+00:05:35,280 --> 00:05:37,951
+so a scientist has to use their intuition
+
+115
+00:05:37,951 --> 00:05:41,484
+to pick one that would most likely
+have the desired properties
+
+116
+00:05:41,484 --> 00:05:43,760
+for curing the disease in question.
+
+117
+00:05:43,840 --> 00:05:48,717
+The process of synthesizing and
+testing a single new molecule in a lab
+
+118
+00:05:48,717 --> 00:05:52,080
+could cost thousands or
+tens of thousands of dollars,
+
+119
+00:05:52,080 --> 00:05:55,760
+so the early stage guessing process
+is really important.
+
+120
+00:05:56,360 --> 00:06:00,284
+We can use AI to help generate
+a potential molecular structure,
+
+121
+00:06:00,284 --> 00:06:03,360
+say using a model like
+Generative Adversarial Networks,
+
+122
+00:06:03,360 --> 00:06:07,360
+which have shown a lot of promise
+generating different types of useful data.
+
+123
+00:06:07,360 --> 00:06:08,984
+In these dueling networks,
+
+124
+00:06:08,984 --> 00:06:12,320
+where one progressively
+becomes a better generator
+
+125
+00:06:12,320 --> 00:06:14,517
+by trying to fool the other into thinking
+
+126
+00:06:14,517 --> 00:06:17,600
+what it's generated is real
+through a feedback loop,
+
+127
+00:06:17,600 --> 00:06:19,750
+feeding in vast quantities of molecular data
+
+128
+00:06:19,750 --> 00:06:22,117
+that no human could process all at once
+
+129
+00:06:22,117 --> 00:06:24,480
+could result in some incredible advances.
+
+130
+00:06:24,480 --> 00:06:26,017
+And human scientists could test
+
+131
+00:06:26,017 --> 00:06:28,400
+what they've generated to see if it's a valid cure.
+
+132
+00:06:28,400 --> 00:06:32,384
+Along the way, they'd come up with
+more clues in the right direction,
+
+133
+00:06:32,384 --> 00:06:34,480
+tweaking their algorithm as they go along.
+
+134
+00:06:34,480 --> 00:06:39,120
+This is an example of the intelligence
+augmentation process realized.
+
+135
+00:06:39,120 --> 00:06:44,800
+AI could also help offer a second diagnosi
+ for a doctor to help aid in their diagnosis,
+
+136
+00:06:44,800 --> 00:06:48,960
+giving them yet another perspective to
+consider to best help their patient.
+
+137
+00:06:49,200 --> 00:06:52,683
+The human body is itself
+an extremely complicated system,
+
+138
+00:06:52,683 --> 00:06:54,720
+absolutely rich with data.
+
+139
+00:06:54,720 --> 00:06:58,584
+AI can help us ask questions
+that we never even thought to ask,
+
+140
+00:06:58,584 --> 00:07:02,720
+and help individual humans by learning
+about their specific health needs,
+
+141
+00:07:02,880 --> 00:07:07,440
+delivering personalized medicine
+or treatments when they need it.
+
+142
+00:07:07,920 --> 00:07:10,320
+The second is software design.
+
+143
+00:07:10,400 --> 00:07:13,840
+We humans are not the best at writing software.
+
+144
+00:07:13,840 --> 00:07:16,750
+And when a software project becomes big enough,
+
+145
+00:07:16,750 --> 00:07:19,280
+like say the Google Chrome browser,
+
+146
+00:07:19,360 --> 00:07:22,683
+it's hard for a single human, besides Jeff Dean,
+
+147
+00:07:22,683 --> 00:07:25,600
+to understand the entire code base.
+
+148
+00:07:25,600 --> 00:07:27,351
+Imagine; a form of programming,
+
+149
+00:07:27,351 --> 00:07:30,480
+where we give high level input to our machine,
+
+150
+00:07:30,640 --> 00:07:34,400
+and it decides on the
+implementation details by itself.
+
+151
+00:07:34,400 --> 00:07:36,284
+Take consensus algorithms,
+
+152
+00:07:36,284 --> 00:07:41,040
+for example; the hype around cryptocurrencies
+has been around for almost a decade now,
+
+153
+00:07:41,040 --> 00:07:43,217
+and we still haven't figured out a wa
+
+154
+00:07:43,217 --> 00:07:46,960
+ to create a scale-able blockchain
+consensus algorithm,
+
+155
+00:07:47,280 --> 00:07:50,480
+that doesn't demand so much electricity to run.
+
+156
+00:07:50,480 --> 00:07:53,117
+Proof-of-work is a human designed algorithm
+
+157
+00:07:53,117 --> 00:07:56,800
+and so are the different blockchain
+consensus mechanisms.
+
+158
+00:07:57,320 --> 00:08:00,717
+There's so much theory
+that goes into designing these,
+
+159
+00:08:00,717 --> 00:08:04,320
+from economics to cryptography
+to distributed systems,
+
+160
+00:08:04,320 --> 00:08:05,920
+to sometimes even physics.
+
+161
+00:08:05,920 --> 00:08:07,717
+It's a hard problem that will require
+
+162
+00:08:07,717 --> 00:08:11,120
+a radically different way of thinking
+to come up with the solution;
+
+163
+00:08:11,600 --> 00:08:12,800
+perfect for an AI.
+
+164
+00:08:12,880 --> 00:08:17,200
+Google's AutoML is one example of
+AI automated software design.
+
+165
+00:08:17,200 --> 00:08:20,960
+It learns how to tune hyper-parameters
+for specific models,
+
+166
+00:08:20,960 --> 00:08:25,760
+and companies can use this all-in-one solution
+to fit their business needs.
+
+167
+00:08:26,000 --> 00:08:28,350
+Just give it a data set, and an objective,
+
+168
+00:08:28,350 --> 00:08:32,400
+and in the ideal scenario,
+it learns which model to use,
+
+169
+00:08:32,400 --> 00:08:34,817
+what its hyper-parameters should be,
+
+170
+00:08:34,817 --> 00:08:37,600
+and how it should clean and regularize the data.
+
+171
+00:08:37,600 --> 00:08:40,350
+And this principle of AI assisted design
+
+172
+00:08:40,350 --> 00:08:42,083
+doesn't just have to apply to software;
+
+173
+00:08:42,083 --> 00:08:44,400
+it can be any creative endeavor.
+
+174
+00:08:44,400 --> 00:08:47,517
+Brandmark uses AI to generate a whole host of
+
+175
+00:08:47,517 --> 00:08:50,320
+potential logos and themes for a new startup.
+
+176
+00:08:50,320 --> 00:08:53,117
+Just give it some initial parameters
+of what you want,
+
+177
+00:08:53,117 --> 00:08:56,000
+and watch as it gives you many options.
+
+178
+00:08:56,240 --> 00:09:01,017
+And Google's Magenta project has resulted in
+some very cool web demos
+
+179
+00:09:01,017 --> 00:09:04,400
+that let humans play music alongside AI.
+
+180
+00:09:04,560 --> 00:09:09,200
+The AI can learn your style of playing,
+and adapt, and you can do the same.
+
+181
+00:09:09,200 --> 00:09:12,960
+In this way, the duet becomes
+greater than the sum of its parts.
+
+182
+00:09:13,360 --> 00:09:15,717
+In fact, for any idea that we have,
+
+183
+00:09:15,717 --> 00:09:18,084
+we can use AI to visualize it,
+
+184
+00:09:18,084 --> 00:09:20,080
+assess the different possibilities,
+
+185
+00:09:20,080 --> 00:09:21,117
+and pick the best one,
+
+186
+00:09:21,117 --> 00:09:24,240
+be it a scientific or creative endeavor.
+
+187
+00:09:24,400 --> 00:09:27,120
+And the third is a personal assistant.
+
+188
+00:09:27,360 --> 00:09:30,884
+The amount of data in the world doubles every two years.
+
+189
+00:09:30,884 --> 00:09:34,400
+We are constantly getting flooded
+with a whole host of options,
+
+190
+00:09:34,400 --> 00:09:37,817
+of content, of choices, from the Internet,
+
+191
+00:09:37,817 --> 00:09:41,280
+and different algorithms
+across the applications that we use
+
+192
+00:09:41,280 --> 00:09:44,317
+are constantly manipulating our behavior,
+
+193
+00:09:44,317 --> 00:09:48,160
+tweaking our opinions and
+attention through subtle design tricks,
+
+194
+00:09:48,160 --> 00:09:52,400
+engineering the reward signals
+that are native to human psychology,
+
+195
+00:09:52,400 --> 00:09:54,417
+to get us to do something;
+
+196
+00:09:54,417 --> 00:09:59,040
+whether that's clicking on an ad
+or buying a specific product,
+
+197
+00:09:59,040 --> 00:10:02,617
+we have to parse through
+all this noise for ourselves,
+
+198
+00:10:02,617 --> 00:10:05,280
+to see what is the most meaningful to us.
+
+199
+00:10:05,440 --> 00:10:07,440
+This is a very, very hard task.
+
+200
+00:10:07,440 --> 00:10:10,250
+A personal AI assistant, stored locally,
+
+201
+00:10:10,250 --> 00:10:13,360
+trained on our data, with a transparent backend,
+
+202
+00:10:13,360 --> 00:10:16,517
+could help us navigate the complexity of life
+
+203
+00:10:16,517 --> 00:10:18,640
+in ways we did not think possible.
+
+204
+00:10:18,640 --> 00:10:20,950
+It could know us better than any human could,
+
+205
+00:10:20,950 --> 00:10:23,360
+concatenating data points about us,
+
+206
+00:10:23,360 --> 00:10:26,717
+from our web browsing history, to our heart rate;
+
+207
+00:10:26,717 --> 00:10:29,360
+it could tell us how to best achieve our goals,
+
+208
+00:10:29,600 --> 00:10:34,400
+whether that's in fitness or
+in school, in a career or in a relationship.
+
+209
+00:10:34,400 --> 00:10:38,160
+We can use this feedback
+to help guide our own decisions.
+
+210
+00:10:38,320 --> 00:10:41,950
+Move 37 also catalyzed
+the current AI renaissance
+
+211
+00:10:41,950 --> 00:10:44,160
+that China is currently undergoing.
+
+212
+00:10:44,400 --> 00:10:46,717
+In the West, Go isn't as common a game,
+
+213
+00:10:46,717 --> 00:10:49,760
+but in China, it's a highly respected game,
+
+214
+00:10:49,760 --> 00:10:52,584
+many even believing that it's a sacred game,
+
+215
+00:10:52,584 --> 00:10:55,600
+connecting humans
+to the universe in its complexity.
+
+216
+00:10:55,720 --> 00:11:01,350
+AlphaGo defeating the world champion at a game
+thought to be so sacred in China was huge;
+
+217
+00:11:01,350 --> 00:11:02,720
+bigger than in the West,
+
+218
+00:11:03,200 --> 00:11:06,284
+because the general population
+is more familiar
+
+219
+00:11:06,284 --> 00:11:08,720
+with just how complex the game is.
+
+220
+00:11:08,720 --> 00:11:13,317
+The Chinese government promptly created
+an AI development plan
+
+221
+00:11:13,317 --> 00:11:16,383
+to become the world leader in AI by 2030
+
+222
+00:11:16,383 --> 00:11:18,960
+and it's definitely executing on it.
+
+223
+00:11:18,960 --> 00:11:23,840
+Ultimately, automation technology will help
+free humans from labor based jobs,
+
+224
+00:11:24,080 --> 00:11:28,080
+and create new classes of jobs
+that we actually enjoy doing.
+
+225
+00:11:28,080 --> 00:11:28,984
+I hope you liked the video!
+
+226
+00:11:28,984 --> 00:11:30,850
+Please subscribe for more, and for now,
+
+227
+00:11:30,850 --> 00:11:33,360
+I've gotta try to play Go... somehow.
+
+228
+00:11:33,360 --> 00:11:34,960
+So... thanks for watching!
+

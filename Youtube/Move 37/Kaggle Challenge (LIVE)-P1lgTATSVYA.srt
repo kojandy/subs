@@ -1,0 +1,5627 @@
+﻿1
+00:00:00,000 --> 00:00:00,850
+Streaming
+
+2
+00:00:00,850 --> 00:00:02,210
+In three,
+
+3
+00:00:02,210 --> 00:00:03,310
+two,
+
+4
+00:00:03,310 --> 00:00:04,450
+one,
+
+5
+00:00:04,450 --> 00:00:05,250
+go!
+
+6
+00:00:05,250 --> 00:00:06,380
+Event is started.
+
+7
+00:00:06,380 --> 00:00:07,910
+Stream has begun.
+
+8
+00:00:07,910 --> 00:00:11,350
+The world is here, and
+ready for reinforcement learning.
+
+9
+00:00:11,350 --> 00:00:12,450
+I think we're live, great!
+
+10
+00:00:12,450 --> 00:00:13,880
+Hello, world! It's Siraj,
+
+11
+00:00:13,880 --> 00:00:16,050
+and welcome to my live stream.
+
+12
+00:00:16,050 --> 00:00:17,580
+In this live stream,
+
+13
+00:00:17,580 --> 00:00:20,510
+I'm going to attempt this Kaggle challenge,
+
+14
+00:00:20,510 --> 00:00:23,910
+called the "Two Sigma
+Financial Modeling Challenge".
+
+15
+00:00:23,910 --> 00:00:26,250
+It's a hundred thousand dollars
+worth of prize money.
+
+16
+00:00:26,250 --> 00:00:29,680
+I'm going to create an algorithm that's going to
+
+17
+00:00:29,680 --> 00:00:32,180
+hopefully get into the top fifty leaderboards.
+
+18
+00:00:32,180 --> 00:00:34,510
+We'll see how well it does,
+
+19
+00:00:34,510 --> 00:00:36,480
+but I want to just start off by saying
+
+20
+00:00:36,480 --> 00:00:39,150
+that the point of this video is first of all
+
+21
+00:00:39,180 --> 00:00:42,310
+to talk about some time
+forecasting techniques.
+
+22
+00:00:42,310 --> 00:00:43,550
+For some reason,
+
+23
+00:00:43,550 --> 00:00:45,450
+in all the videos that I've made,
+
+24
+00:00:45,450 --> 00:00:49,250
+I haven't talked about time series forecasting
+
+25
+00:00:49,250 --> 00:00:52,050
+outside of the context of
+deep neural networks,
+
+26
+00:00:52,050 --> 00:00:53,410
+but I will, in this video.
+
+27
+00:00:53,420 --> 00:00:56,950
+The other part of this video is for me to
+
+28
+00:00:56,950 --> 00:00:59,110
+show that reinforcement learning
+
+29
+00:00:59,110 --> 00:01:02,580
+can be used in the real world
+
+30
+00:01:02,580 --> 00:01:04,410
+in an applicable setting, and
+
+31
+00:01:04,410 --> 00:01:06,010
+This is part of Move 37,
+
+32
+00:01:06,010 --> 00:01:09,350
+so that's why I'm doing this.
+
+33
+00:01:09,350 --> 00:01:12,150
+How this video is going to be structured is
+
+34
+00:01:12,150 --> 00:01:13,380
+it's going to be an intro Q&A,
+
+35
+00:01:13,380 --> 00:01:16,380
+so I'm going to answer two questions,
+so go ahead and start asking them now.
+
+36
+00:01:16,380 --> 00:01:18,750
+I'm going to go over a time series lecture,
+
+37
+00:01:18,750 --> 00:01:19,780
+brief Q&A,
+
+38
+00:01:19,780 --> 00:01:22,980
+exploratory data analysis
+or EDA for our dataset,
+
+39
+00:01:22,980 --> 00:01:23,980
+brief Q&A,
+
+40
+00:01:23,980 --> 00:01:25,710
+and then reinforcement learning.
+
+41
+00:01:25,710 --> 00:01:28,610
+The point of this is to predict
+
+42
+00:01:28,610 --> 00:01:29,950
+a value.
+
+43
+00:01:29,950 --> 00:01:32,580
+Obviously, all machine learning is
+about predicting a value, but
+
+44
+00:01:32,580 --> 00:01:35,350
+we're trying to predict a specific target value,
+
+45
+00:01:35,350 --> 00:01:37,180
+and I'll talk about that when we get to it.
+
+46
+00:01:37,180 --> 00:01:39,850
+Let me just start off by
+answering two questions,
+
+47
+00:01:39,850 --> 00:01:41,880
+and then we'll get into the code.
+
+48
+00:01:41,880 --> 00:01:42,680
+Okay.
+
+49
+00:01:42,680 --> 00:01:44,350
+The first question is
+
+50
+00:01:44,350 --> 00:01:45,280
+Hi, everybody.
+
+51
+00:01:45,280 --> 00:01:46,550
+Thank you for being here.
+
+52
+00:01:46,550 --> 00:01:49,080
+The first question is
+
+53
+00:01:49,080 --> 00:01:52,280
+"can you suggest some
+gesture recognition algorithms?".
+
+54
+00:01:52,280 --> 00:01:52,880
+Sure.
+
+55
+00:01:52,880 --> 00:01:57,680
+Right now, pose estimation
+is the state of the art.
+
+56
+00:01:57,680 --> 00:02:00,010
+Go to use Tensorflow.js.
+
+57
+00:02:00,010 --> 00:02:02,410
+Probably, the easiest to use implementation
+
+58
+00:02:02,410 --> 00:02:05,550
+for pose estimation in the browser,
+anybody can do it,
+
+59
+00:02:05,550 --> 00:02:07,050
+so that's the one to use.
+
+60
+00:02:07,050 --> 00:02:08,010
+So, that's the first one.
+
+61
+00:02:08,010 --> 00:02:11,180
+The next question out of two is
+
+62
+00:02:11,180 --> 00:02:14,510
+"what does it require to
+create a bot like a human?".
+
+63
+00:02:14,510 --> 00:02:16,410
+Great, advanced question.
+
+64
+00:02:16,410 --> 00:02:18,410
+Now, I'm going to minimize this.
+
+65
+00:02:18,410 --> 00:02:19,480
+Hello, everybody.
+
+66
+00:02:19,480 --> 00:02:21,580
+So, that question.
+
+67
+00:02:21,580 --> 00:02:22,910
+A bot like a human.
+
+68
+00:02:22,910 --> 00:02:26,310
+That is AGI,
+artificial general intelligence.
+
+69
+00:02:26,310 --> 00:02:29,780
+You know, the Turing test,
+which hasn't really been passed yet.
+
+70
+00:02:29,780 --> 00:02:33,710
+That would be an open domain chatbot.
+
+71
+00:02:33,710 --> 00:02:37,410
+It would be trained on data
+that is not a closed loop, but
+
+72
+00:02:37,410 --> 00:02:39,450
+just, you know, the entire Internet,
+
+73
+00:02:39,450 --> 00:02:40,950
+and this hasn't been solved,
+
+74
+00:02:40,950 --> 00:02:45,380
+but the best way forward
+with that would be
+
+75
+00:02:45,380 --> 00:02:47,680
+I would say
+
+76
+00:02:47,680 --> 00:02:51,510
+using deep reinforcement learning
+in the context of
+
+77
+00:02:51,510 --> 00:02:54,580
+of text data, and the web.
+
+78
+00:02:54,580 --> 00:02:56,580
+Having an open domain where
+
+79
+00:02:56,580 --> 00:03:00,110
+there's a cycle where
+you're using reinforcement learning
+
+80
+00:03:00,110 --> 00:03:01,710
+where you're using a reward signal
+
+81
+00:03:01,710 --> 00:03:03,550
+to train a deep neural network
+
+82
+00:03:03,550 --> 00:03:06,150
+where it's searching the internet itself.
+
+83
+00:03:06,150 --> 00:03:07,480
+It's querying the Internet,
+
+84
+00:03:07,480 --> 00:03:09,680
+and it's building off of these queries.
+
+85
+00:03:09,680 --> 00:03:12,680
+It's using natural language processing
+hence the deep neural network
+
+86
+00:03:12,680 --> 00:03:15,310
+to create abstractions
+from the text data,
+
+87
+00:03:15,310 --> 00:03:16,880
+and then based on those abstractions
+
+88
+00:03:16,880 --> 00:03:18,750
+it's learning to maximize a reward
+
+89
+00:03:18,750 --> 00:03:20,280
+which would be to say
+
+90
+00:03:20,280 --> 00:03:23,080
+you know, you could frame it,
+so that a human would say
+
+91
+00:03:23,080 --> 00:03:26,850
+yes/no binary, that this is
+a good response or not.
+
+92
+00:03:26,850 --> 00:03:30,110
+Yeah, so that's kind of a research direction
+that I'm thinking of
+
+93
+00:03:30,110 --> 00:03:32,710
+what hasn't been done,
+but what would be cool for
+
+94
+00:03:32,710 --> 00:03:33,710
+human level chat bots
+
+95
+00:03:33,710 --> 00:03:35,410
+That's it for the Q&A.
+
+96
+00:03:35,410 --> 00:03:38,950
+Let's start talking about
+time series analysis, because
+
+97
+00:03:38,950 --> 00:03:40,410
+In this dataset,
+
+98
+00:03:40,410 --> 00:03:43,310
+they're asking us to predict a target variable
+
+99
+00:03:43,310 --> 00:03:44,680
+based on the past
+
+100
+00:03:44,680 --> 00:03:46,850
+Okay? So...
+
+101
+00:03:46,850 --> 00:03:49,450
+Let's just talk about
+time series analysis in general.
+
+102
+00:03:49,450 --> 00:03:51,250
+where we have two variables.
+
+103
+00:03:51,250 --> 00:03:54,080
+Let's start off with univariate,
+a single variable,
+
+104
+00:03:54,080 --> 00:03:55,810
+time series analysis.
+
+105
+00:03:55,810 --> 00:03:57,310
+We have some price data.
+
+106
+00:03:57,310 --> 00:03:58,780
+Let's say this is for Bitcoin.
+
+107
+00:03:58,780 --> 00:04:01,580
+This is a Bitcoin price over a period of days.
+
+108
+00:04:01,580 --> 00:04:04,450
+Now, if we want to forecast
+the price for the next day,
+
+109
+00:04:04,450 --> 00:04:05,510
+how do we do that?
+
+110
+00:04:05,510 --> 00:04:07,750
+This is a time series where
+
+111
+00:04:07,750 --> 00:04:10,880
+the variables depend on the time.
+
+112
+00:04:10,880 --> 00:04:11,980
+What the values are
+
+113
+00:04:11,980 --> 00:04:13,380
+what their target variables are
+
+114
+00:04:13,380 --> 00:04:17,410
+are completely dependent
+
+115
+00:04:17,410 --> 00:04:18,550
+on that time step.
+
+116
+00:04:18,550 --> 00:04:21,910
+That's what makes it different
+from a regular dataset.
+
+117
+00:04:21,910 --> 00:04:25,050
+A time series dataset depends on the time.
+
+118
+00:04:25,050 --> 00:04:26,750
+What we would do here is
+
+119
+00:04:26,750 --> 00:04:27,750
+the naive approch.
+
+120
+00:04:27,750 --> 00:04:29,250
+Let's just start off with a naive approch.
+
+121
+00:04:29,250 --> 00:04:30,080
+Where we say,
+
+122
+00:04:30,080 --> 00:04:33,510
+What this next datapoint
+is going to be in this graph?
+
+123
+00:04:33,510 --> 00:04:34,710
+Is going to be
+
+124
+00:04:34,710 --> 00:04:36,380
+the target variable?
+
+125
+00:04:36,380 --> 00:04:37,210
+That's it.
+
+126
+00:04:37,210 --> 00:04:38,580
+So we are just going to say that
+
+127
+00:04:38,580 --> 00:04:41,250
+the predicted variable, and here is the equation,
+
+128
+00:04:41,250 --> 00:04:44,680
+is going to be the variable
+from the previous time step.
+
+129
+00:04:44,680 --> 00:04:45,450
+That's it.
+
+130
+00:04:45,450 --> 00:04:47,180
+Right? That's the equation right there.
+
+131
+00:04:47,180 --> 00:04:49,450
+We would call this the naive approch.
+
+132
+00:04:49,450 --> 00:04:51,210
+So what happens is
+
+133
+00:04:51,210 --> 00:04:53,280
+when we have a dataset like this
+
+134
+00:04:53,280 --> 00:04:56,180
+where just imagine
+the entire thing is one dataset
+
+135
+00:04:56,180 --> 00:04:59,310
+and we have split it into
+training and testing data
+
+136
+00:04:59,310 --> 00:05:02,410
+where we say, okay,
+this is the entire training dataset.
+
+137
+00:05:02,410 --> 00:05:04,680
+Now, based on this last datapoint,
+
+138
+00:05:04,680 --> 00:05:06,050
+predict the next point.
+
+139
+00:05:06,050 --> 00:05:06,850
+What it's going to say
+
+140
+00:05:06,850 --> 00:05:08,180
+Well, based on this one,
+
+141
+00:05:08,180 --> 00:05:09,150
+let me just do that again,
+
+142
+00:05:09,150 --> 00:05:10,910
+because that's our variable.
+
+143
+00:05:10,910 --> 00:05:12,850
+That's our equation,
+
+144
+00:05:12,850 --> 00:05:14,280
+or forecast model.
+
+145
+00:05:14,280 --> 00:05:16,110
+It'll do that
+again and again and again.
+
+146
+00:05:16,110 --> 00:05:18,210
+What happens is,
+it's just a straight line.
+
+147
+00:05:18,210 --> 00:05:19,910
+So this is a very bad approach.
+
+148
+00:05:19,910 --> 00:05:21,250
+This is the naive approach.
+
+149
+00:05:21,250 --> 00:05:23,480
+Let's see how
+we can improve on this.
+
+150
+00:05:23,480 --> 00:05:24,880
+How would we improve?
+
+151
+00:05:24,880 --> 00:05:25,710
+Well,
+
+152
+00:05:25,710 --> 00:05:26,850
+check out this graph.
+
+153
+00:05:26,850 --> 00:05:28,110
+It's got volatility.
+
+154
+00:05:28,110 --> 00:05:29,750
+it's going up, it's going down.
+
+155
+00:05:29,750 --> 00:05:32,780
+But notice that there is an average line.
+
+156
+00:05:32,780 --> 00:05:36,080
+You can imagine that
+there is this average line.
+
+157
+00:05:36,080 --> 00:05:38,650
+The line of best fit, you could call,
+
+158
+00:05:38,650 --> 00:05:41,250
+where it is the average between
+the ups and the downs.
+
+159
+00:05:41,250 --> 00:05:44,380
+We could draw it mentally
+through this model.
+
+160
+00:05:44,380 --> 00:05:45,810
+And so if we do that,
+
+161
+00:05:45,810 --> 00:05:47,680
+if we do that,
+
+162
+00:05:47,680 --> 00:05:49,580
+then we can make the assumption
+
+163
+00:05:49,580 --> 00:05:52,550
+that the next price is going to be
+
+164
+00:05:52,550 --> 00:05:55,410
+the average of all the prices
+that came before it.
+
+165
+00:05:55,410 --> 00:05:57,910
+So if we have that
+
+166
+00:05:57,910 --> 00:06:01,150
+sequence of values of
+all of those y values,
+
+167
+00:06:01,150 --> 00:06:05,810
+The y values are right here on this axis.
+
+168
+00:06:05,880 --> 00:06:08,150
+The x values are here, the days.
+
+169
+00:06:08,150 --> 00:06:09,850
+Then, we could use this equation.
+
+170
+00:06:09,850 --> 00:06:11,680
+Now, don't be afraid about
+
+171
+00:06:11,680 --> 00:06:14,380
+the fact that we are using
+a little bit of math here
+
+172
+00:06:14,380 --> 00:06:17,150
+what this says is the target variable,
+
+173
+00:06:17,150 --> 00:06:18,780
+which we can call y hat,
+
+174
+00:06:18,780 --> 00:06:20,050
+the one we want to predict,
+
+175
+00:06:20,050 --> 00:06:22,050
+is going to be equal to
+
+176
+00:06:22,050 --> 00:06:22,810
+the sum.
+
+177
+00:06:22,810 --> 00:06:23,950
+This is sigma notation.
+
+178
+00:06:23,950 --> 00:06:26,250
+This greek E looking letter.
+
+179
+00:06:26,250 --> 00:06:29,380
+The sum of all of those variables
+that came before it
+
+180
+00:06:29,380 --> 00:06:30,550
+divided by
+
+181
+00:06:30,550 --> 00:06:32,710
+the total number of them, x.
+
+182
+00:06:32,710 --> 00:06:35,380
+From i to x, where x is
+the number of variables
+
+183
+00:06:35,380 --> 00:06:36,310
+add them all up.
+
+184
+00:06:36,310 --> 00:06:37,950
+That's what sigma notation means,
+
+185
+00:06:37,950 --> 00:06:39,550
+and then divide by the number of them.
+
+186
+00:06:39,550 --> 00:06:41,950
+That's the average, and that's our prediction.
+
+187
+00:06:41,950 --> 00:06:44,180
+So if we do that,
+
+188
+00:06:44,180 --> 00:06:46,180
+this is what our line
+is going to look like.
+
+189
+00:06:46,250 --> 00:06:46,850
+Okay?
+
+190
+00:06:46,850 --> 00:06:49,950
+So it's saying,
+based on this last datapoint right here
+
+191
+00:06:49,950 --> 00:06:50,880
+What's going to be the next one?
+
+192
+00:06:50,880 --> 00:06:52,150
+Well, it's not going to be up here.
+
+193
+00:06:52,150 --> 00:06:53,310
+It's going to be down here.
+
+194
+00:06:53,310 --> 00:06:54,510
+Because we're taking into account
+
+195
+00:06:54,510 --> 00:06:57,140
+all of those datapoints from
+the very very beginning
+
+196
+00:06:57,210 --> 00:06:58,050
+to the very end.
+
+197
+00:06:59,510 --> 00:07:02,110
+But notice that this is not ideal, either.
+
+198
+00:07:02,110 --> 00:07:04,450
+We need something that's
+going to be better than that.
+
+199
+00:07:04,450 --> 00:07:06,380
+So how do we improve on that?
+
+200
+00:07:06,380 --> 00:07:08,310
+Well, we would use a different technique,
+
+201
+00:07:08,310 --> 00:07:10,110
+called the "moving average".
+
+202
+00:07:10,110 --> 00:07:12,650
+What the moving average does is, it says
+
+203
+00:07:12,650 --> 00:07:15,180
+The points at the very beginning,
+
+204
+00:07:15,180 --> 00:07:16,850
+and the points near the end,
+
+205
+00:07:16,850 --> 00:07:19,380
+these are completely different directions.
+
+206
+00:07:19,380 --> 00:07:22,350
+So let's only consider the points
+
+207
+00:07:22,350 --> 00:07:24,680
+immediately before our forecasts,
+
+208
+00:07:24,680 --> 00:07:27,050
+our target variable, that we want to predict.
+
+209
+00:07:27,050 --> 00:07:28,810
+So we'll have a window,
+
+210
+00:07:28,810 --> 00:07:30,280
+and we'll just average those.
+
+211
+00:07:30,280 --> 00:07:32,810
+We'll leave out the beginning,
+
+212
+00:07:32,810 --> 00:07:35,750
+What that equation looks like is this,
+
+213
+00:07:35,750 --> 00:07:38,080
+where y hat, the predictor variable,
+
+214
+00:07:38,080 --> 00:07:41,910
+is going to be
+the sum of all of those,
+
+215
+00:07:41,910 --> 00:07:46,510
+that all of those values that
+came before our target variable,
+
+216
+00:07:46,510 --> 00:07:49,680
+up to a certain threshold,
+which we define as p,
+
+217
+00:07:49,680 --> 00:07:53,350
+Say, the previous five,
+or the previous six variables.
+
+218
+00:07:53,350 --> 00:07:55,580
+divided by the total number of them.
+
+219
+00:07:55,580 --> 00:07:56,710
+That's the average.
+
+220
+00:07:56,710 --> 00:07:58,450
+If we do that,
+
+221
+00:07:58,450 --> 00:08:00,510
+Now, notice, there's a little bit.
+
+222
+00:08:00,510 --> 00:08:02,150
+It's getting better, our prediction.
+
+223
+00:08:02,150 --> 00:08:03,980
+Right? It looks like this.
+
+224
+00:08:03,980 --> 00:08:06,080
+Now, how can we improve on this?
+
+225
+00:08:06,080 --> 00:08:09,110
+Notice I'm going through
+a lot of techniques very fast.
+
+226
+00:08:09,110 --> 00:08:12,610
+So slow me down,
+if you feel like it's too fast.
+
+227
+00:08:14,010 --> 00:08:15,250
+Well,
+
+228
+00:08:15,250 --> 00:08:16,680
+one way we can improve that
+
+229
+00:08:16,680 --> 00:08:20,510
+is by using a technique,
+called "simple exponential smoothing".
+
+230
+00:08:20,510 --> 00:08:22,880
+What that means is,
+
+231
+00:08:22,880 --> 00:08:24,180
+you know,
+
+232
+00:08:24,180 --> 00:08:26,950
+let's take into account
+all of those variables.
+
+233
+00:08:26,950 --> 00:08:28,850
+Because, clearly, all of them matter.
+
+234
+00:08:28,850 --> 00:08:31,350
+But let's weight them differently.
+
+235
+00:08:31,350 --> 00:08:33,510
+Let's weight them differently,
+where we say
+
+236
+00:08:33,510 --> 00:08:36,050
+the variables that came
+immediately preceding
+
+237
+00:08:36,050 --> 00:08:39,480
+for our predictor, our target variable,
+
+238
+00:08:39,480 --> 00:08:42,850
+will weigh them more than the variables
+that came at the very beginning.
+
+239
+00:08:42,850 --> 00:08:44,280
+Because these matter more.
+
+240
+00:08:44,280 --> 00:08:46,610
+So, how do we do that mathematically?
+
+241
+00:08:46,610 --> 00:08:47,750
+Here's how.
+
+242
+00:08:47,750 --> 00:08:49,950
+We take this constant value,
+
+243
+00:08:49,950 --> 00:08:51,750
+which we're going to call alpha.
+
+244
+00:08:51,750 --> 00:08:52,950
+And we do the same thing,
+
+245
+00:08:52,950 --> 00:08:56,310
+where we're adding them all up.
+
+246
+00:08:56,310 --> 00:09:01,280
+But we're multiplying it
+by this constant value.
+
+247
+00:09:01,280 --> 00:09:03,510
+And squared, cubed,
+
+248
+00:09:03,510 --> 00:09:04,710
+to the fourth, to the fifth.
+
+249
+00:09:04,710 --> 00:09:10,410
+Notice this trend here of
+exponentially increasing.
+
+250
+00:09:10,410 --> 00:09:12,750
+So this is called
+"simple exponential smoothing".
+
+251
+00:09:12,750 --> 00:09:13,750
+Okay.
+
+252
+00:09:13,750 --> 00:09:16,550
+What this means is that
+
+253
+00:09:16,550 --> 00:09:18,950
+these variables
+
+254
+00:09:18,950 --> 00:09:20,280
+are going to be weighted differently.
+
+255
+00:09:20,280 --> 00:09:21,780
+Now, here's a question for you.
+
+256
+00:09:21,780 --> 00:09:22,950
+I'm very excited.
+
+257
+00:09:22,950 --> 00:09:24,180
+I'll be very impressed,
+
+258
+00:09:24,180 --> 00:09:26,280
+if someone can answer this question.
+
+259
+00:09:26,350 --> 00:09:29,510
+What does this formula look like
+
+260
+00:09:29,510 --> 00:09:31,550
+that we already know about
+
+261
+00:09:31,550 --> 00:09:33,650
+from reinforcement learning literature.
+
+262
+00:09:33,650 --> 00:09:35,250
+Such rich literature,
+
+263
+00:09:35,250 --> 00:09:36,710
+what does this formula look like?
+
+264
+00:09:36,710 --> 00:09:38,610
+If anybody can answer that,
+I'm going to be very impressed
+
+265
+00:09:38,610 --> 00:09:39,950
+Let me keep going though.
+
+266
+00:09:39,950 --> 00:09:42,080
+Okay?
+
+267
+00:09:42,080 --> 00:09:43,050
+Ready?
+
+268
+00:09:43,050 --> 00:09:43,950
+Okay,
+
+269
+00:09:43,950 --> 00:09:46,210
+it looks very similar
+
+270
+00:09:46,210 --> 00:09:48,880
+to the discount factor
+from reinforcement learning.
+
+271
+00:09:48,880 --> 00:09:51,180
+So, in the reinforcement learning context,
+
+272
+00:09:51,180 --> 00:09:52,080
+We have an agent.
+
+273
+00:09:52,080 --> 00:09:53,680
+It acts in an environment.
+
+274
+00:09:53,680 --> 00:09:55,350
+It's making an action,
+
+275
+00:09:55,350 --> 00:09:58,250
+and it receives an observation
+of the next state.
+
+276
+00:09:58,250 --> 00:10:00,450
+In order to maximize reward,
+
+277
+00:10:00,450 --> 00:10:01,780
+how do we maximize reward?
+
+278
+00:10:01,780 --> 00:10:03,680
+Well, here's how we calculate reward
+
+279
+00:10:03,680 --> 00:10:05,880
+at every time step we can predict
+
+280
+00:10:05,880 --> 00:10:08,350
+what the reward will be
+for being in a specific state
+
+281
+00:10:08,350 --> 00:10:10,880
+up to our end state, the terminal state.
+
+282
+00:10:10,880 --> 00:10:12,810
+We'll add up all those rewards,
+
+283
+00:10:12,810 --> 00:10:15,910
+multiplied by a constant factor,
+
+284
+00:10:15,910 --> 00:10:17,850
+called the discount factor.
+
+285
+00:10:17,850 --> 00:10:20,080
+We are weighting those rewards
+
+286
+00:10:20,080 --> 00:10:21,750
+in order of
+
+287
+00:10:21,750 --> 00:10:24,510
+the rewards that came
+immediately previously.
+
+288
+00:10:24,510 --> 00:10:25,650
+We're weighing them more.
+
+289
+00:10:25,650 --> 00:10:27,450
+We're saying that they're more important,
+
+290
+00:10:27,450 --> 00:10:30,280
+than the rewards that came
+at the very very beginning.
+
+291
+00:10:30,280 --> 00:10:32,280
+That's the discount factor.
+
+292
+00:10:33,750 --> 00:10:35,550
+Yeah. Wow, actually people got that.
+
+293
+00:10:35,550 --> 00:10:38,010
+I'm very impressed.
+
+294
+00:10:38,010 --> 00:10:39,650
+Good job, guys.
+
+295
+00:10:39,650 --> 00:10:40,450
+Very good.
+
+296
+00:10:40,450 --> 00:10:42,880
+So, let's keep improving here.
+
+297
+00:10:42,880 --> 00:10:46,710
+By the way, the reason
+I wanted to say that is because
+
+298
+00:10:46,710 --> 00:10:49,350
+is to just give you some intuition
+behind reinforcement learning.
+
+299
+00:10:49,350 --> 00:10:53,210
+It's a framework for viewing the world,
+
+300
+00:10:53,210 --> 00:10:57,410
+and how intelligent agents
+interact in the world.
+
+301
+00:10:57,410 --> 00:11:03,110
+It's not the actual mathematics of
+intelligence of pattern recognition,
+
+302
+00:11:03,110 --> 00:11:06,080
+but it's more about framing
+these pattern recognition networks
+
+303
+00:11:06,080 --> 00:11:08,580
+in the context of a dynamic world
+
+304
+00:11:08,580 --> 00:11:11,250
+that adapts to that intelligent agent.
+
+305
+00:11:11,250 --> 00:11:12,750
+More on that at the end.
+
+306
+00:11:12,750 --> 00:11:16,050
+Holt was a mathematician in 1964,
+
+307
+00:11:16,050 --> 00:11:17,350
+I think was the year.
+
+308
+00:11:17,350 --> 00:11:19,280
+who invented a linear trend model.
+
+309
+00:11:19,280 --> 00:11:20,180
+Where he said,
+
+310
+00:11:20,180 --> 00:11:20,910
+You know what?
+
+311
+00:11:20,910 --> 00:11:24,050
+This idea of single exponential smoothing,
+
+312
+00:11:24,050 --> 00:11:25,350
+it works, it's fine.
+
+313
+00:11:25,350 --> 00:11:27,410
+However,
+
+314
+00:11:27,410 --> 00:11:30,010
+let's improve on that,
+because it doesn't take into account
+
+315
+00:11:30,010 --> 00:11:31,710
+the idea of a trend.
+
+316
+00:11:31,710 --> 00:11:34,380
+A trend is a general direction,
+
+317
+00:11:34,380 --> 00:11:36,910
+that we see that
+a graph is moving in.
+
+318
+00:11:36,910 --> 00:11:40,310
+The way to mathematically
+define a trend,
+
+319
+00:11:40,310 --> 00:11:44,250
+as holt suggested in his
+linear trend model,
+
+320
+00:11:44,250 --> 00:11:46,910
+would be to create
+a forecast equation,
+
+321
+00:11:46,910 --> 00:11:49,880
+that consists of
+two other equations.
+
+322
+00:11:49,880 --> 00:11:51,780
+So, we have a level equation,
+
+323
+00:11:51,780 --> 00:11:53,850
+and then we have
+a trend equation.
+
+324
+00:11:53,850 --> 00:11:56,110
+We use both of those equations
+
+325
+00:11:56,110 --> 00:11:58,780
+to compute the final,
+forecast equation.
+
+326
+00:11:58,780 --> 00:12:00,750
+So, it's l + hb,
+
+327
+00:12:00,750 --> 00:12:02,650
+where l is the level equation,
+
+328
+00:12:02,650 --> 00:12:04,580
+and b is a trend location.
+
+329
+00:12:04,580 --> 00:12:06,710
+We have two constant factors.
+
+330
+00:12:06,710 --> 00:12:08,910
+We have alpha, and we have beta.
+
+331
+00:12:08,910 --> 00:12:09,910
+They're both different, and
+
+332
+00:12:09,910 --> 00:12:11,650
+we can tune them accordingly.
+
+333
+00:12:11,650 --> 00:12:16,180
+The level equation is the same idea
+of exponential smoothing,
+
+334
+00:12:16,180 --> 00:12:18,880
+but applied to both the level,
+
+335
+00:12:18,880 --> 00:12:22,480
+the average value in
+the series, and the trend
+
+336
+00:12:22,480 --> 00:12:24,080
+If we do that,
+
+337
+00:12:24,080 --> 00:12:29,110
+then notice our graph's forecast
+is getting much better.
+
+338
+00:12:29,110 --> 00:12:31,650
+Now, there's one more technique
+I want to talk about.
+
+339
+00:12:31,650 --> 00:12:33,150
+This is an improvement,
+
+340
+00:12:33,150 --> 00:12:34,580
+that Holt made
+
+341
+00:12:34,580 --> 00:12:37,810
+to that linear trend model.
+
+342
+00:12:37,810 --> 00:12:39,310
+We'll start coding in a second.
+
+343
+00:12:39,310 --> 00:12:43,650
+It's called his winter seasonal method.
+
+344
+00:12:43,650 --> 00:12:48,850
+There's another
+concept in forecasting,
+
+345
+00:12:48,850 --> 00:12:50,250
+called seasonality,
+
+346
+00:12:50,250 --> 00:12:52,910
+where in a set of data
+
+347
+00:12:52,910 --> 00:12:54,650
+there's going to be seasons.
+
+348
+00:12:54,650 --> 00:12:56,880
+In any kind of time series data,
+
+349
+00:12:56,880 --> 00:12:58,310
+there's going to be
+some kind of seasonal,
+
+350
+00:12:58,310 --> 00:13:00,350
+not any, but most of them, real-world.
+
+351
+00:13:00,350 --> 00:13:02,050
+There's going to be some
+seasonality, where
+
+352
+00:13:02,050 --> 00:13:04,280
+There's going be some kind of
+predictable up,
+
+353
+00:13:04,280 --> 00:13:05,810
+and some predictable downs.
+
+354
+00:13:05,810 --> 00:13:09,610
+Let's say, for retail stores,
+
+355
+00:13:09,610 --> 00:13:12,210
+there's going to be more people
+buying toys in December,
+
+356
+00:13:12,210 --> 00:13:15,210
+because of Christmas
+in a lot of Western countries,
+
+357
+00:13:15,210 --> 00:13:16,410
+or you know wherever.
+
+358
+00:13:16,410 --> 00:13:18,480
+Or, there's going to be
+
+359
+00:13:18,480 --> 00:13:21,150
+some kind of trend
+in the seasonal direction,
+
+360
+00:13:21,150 --> 00:13:23,380
+for stock markets as well.
+
+361
+00:13:23,380 --> 00:13:24,780
+Based on this,
+
+362
+00:13:24,780 --> 00:13:25,780
+this is what's happening,
+
+363
+00:13:25,780 --> 00:13:27,350
+here's how the markets going to go.
+
+364
+00:13:27,350 --> 00:13:30,850
+So, in order to mathematically
+define seasonality,
+
+365
+00:13:30,850 --> 00:13:32,650
+we have now three equations.
+
+366
+00:13:32,650 --> 00:13:34,580
+We're adding on to what we had before.
+
+367
+00:13:34,580 --> 00:13:36,180
+Again, we're using our level.
+
+368
+00:13:36,180 --> 00:13:37,510
+We're using our trend.
+
+369
+00:13:37,510 --> 00:13:39,150
+And now, we add a third equation,
+
+370
+00:13:39,160 --> 00:13:42,580
+which is the seasonal equation,
+
+371
+00:13:42,580 --> 00:13:45,350
+where the level equation shows
+the weighted average
+
+372
+00:13:45,350 --> 00:13:47,880
+between the seasonally
+adjusted observation,
+
+373
+00:13:47,880 --> 00:13:50,450
+and the non-seasonal
+forecast for time, T.
+
+374
+00:13:50,450 --> 00:13:53,180
+The trend equation is
+the same as Holt's linear method,
+
+375
+00:13:53,180 --> 00:13:55,750
+and the seasonal equation shows
+the weighted average,
+
+376
+00:13:55,750 --> 00:13:58,180
+between the current seasonal index
+
+377
+00:13:58,180 --> 00:14:01,050
+and the seasonal index
+of the same season last year.
+
+378
+00:14:01,050 --> 00:14:06,550
+Each of these equations is
+interdependent on each other.
+
+379
+00:14:06,550 --> 00:14:08,680
+What happens when we do that is,
+
+380
+00:14:08,680 --> 00:14:10,810
+Now, we are getting somewhere.
+
+381
+00:14:10,810 --> 00:14:12,050
+Check out this this graph.
+
+382
+00:14:12,050 --> 00:14:14,750
+It's a much better graph, right?
+
+383
+00:14:14,750 --> 00:14:19,280
+That's the idea of seasonality.
+
+384
+00:14:19,280 --> 00:14:22,580
+That's for the case of
+univariate time series.
+
+385
+00:14:22,580 --> 00:14:25,180
+If we have multivariate time series,
+
+386
+00:14:25,180 --> 00:14:27,610
+that's multiple input data for
+whatever the
+
+387
+00:14:27,610 --> 00:14:29,510
+multiple predictor variables
+
+388
+00:14:29,510 --> 00:14:32,050
+for whatever our target variable
+is going to be,
+
+389
+00:14:32,050 --> 00:14:36,450
+which is the case for our
+two sigma financial modelling contest.
+
+390
+00:14:36,450 --> 00:14:42,010
+Then, we're going to use a model
+that is very similar to
+
+391
+00:14:42,010 --> 00:14:43,280
+Holt's winter seasonal method.
+
+392
+00:14:43,280 --> 00:14:44,510
+That's taking into account.
+
+393
+00:14:44,510 --> 00:14:47,050
+The level, the trend, the seasonality,
+
+394
+00:14:47,050 --> 00:14:48,650
+right to make the forecast.
+
+395
+00:14:48,650 --> 00:14:51,180
+But, it's also finding
+linear interdependencies
+
+396
+00:14:51,180 --> 00:14:53,710
+between these
+predictor variables.
+
+397
+00:14:53,710 --> 00:14:55,510
+It's the same idea of
+
+398
+00:14:55,510 --> 00:14:57,410
+multiple equations,
+
+399
+00:14:57,410 --> 00:14:59,650
+that are relating to each other,
+
+400
+00:14:59,650 --> 00:15:00,450
+in a way that
+
+401
+00:15:00,450 --> 00:15:02,310
+once they relate to each other,
+
+402
+00:15:02,310 --> 00:15:03,510
+we can create a graph.
+
+403
+00:15:03,510 --> 00:15:05,180
+Some popular models for that are
+
+404
+00:15:05,180 --> 00:15:08,550
+ARIMA, ARIMAX, etc.
+
+405
+00:15:08,550 --> 00:15:11,980
+I'll make a dedicated video
+on those, because
+
+406
+00:15:11,980 --> 00:15:15,610
+you really need to make
+a dedicated video on those, and
+
+407
+00:15:15,610 --> 00:15:19,380
+Or, we could treat this
+as a supervised problem, as
+
+408
+00:15:19,380 --> 00:15:20,280
+many people had done,
+
+409
+00:15:20,280 --> 00:15:23,210
+where we use the power of
+LSTM networks.
+
+410
+00:15:23,210 --> 00:15:26,010
+To then, treat it as
+a supervised problem, where we say
+
+411
+00:15:26,010 --> 00:15:28,580
+the predictor variable,
+let's say, pollution.
+
+412
+00:15:28,580 --> 00:15:29,710
+That's the...
+
+413
+00:15:29,710 --> 00:15:32,110
+Sorry, the target.
+
+414
+00:15:32,110 --> 00:15:34,450
+The target variable is going to be
+
+415
+00:15:34,450 --> 00:15:36,980
+the result of the predictor variables,
+
+416
+00:15:36,980 --> 00:15:37,980
+the temperature,
+
+417
+00:15:37,980 --> 00:15:42,250
+the human waste use amount, etc.
+
+418
+00:15:42,250 --> 00:15:44,380
+So, there's a mapping
+between those two.
+
+419
+00:15:44,380 --> 00:15:46,810
+The reason we use LSTM networks,
+
+420
+00:15:46,810 --> 00:15:49,010
+long short-term memory
+neural networks,
+
+421
+00:15:49,010 --> 00:15:50,510
+is because they take into account
+
+422
+00:15:50,510 --> 00:15:52,080
+long term sequence data,
+
+423
+00:15:52,080 --> 00:15:55,880
+and they store memory
+in a way that is
+
+424
+00:15:55,880 --> 00:15:57,450
+beneficial to sequential data
+
+425
+00:15:57,450 --> 00:15:59,080
+which is the case of
+time series data.
+
+426
+00:15:59,080 --> 00:16:01,480
+That's why we've seen
+a lot of LSTM networks
+
+427
+00:16:01,480 --> 00:16:05,050
+being used in time series data.
+
+428
+00:16:05,050 --> 00:16:06,850
+Let's get into some EDA.
+
+429
+00:16:06,850 --> 00:16:09,180
+Like I said, I'm going to
+answer some questions now.
+
+430
+00:16:09,180 --> 00:16:10,610
+All right,
+
+431
+00:16:10,610 --> 00:16:13,380
+so what are some questions?
+
+432
+00:16:16,050 --> 00:16:17,410
+Okay.
+
+433
+00:16:18,910 --> 00:16:20,280
+What's out of focus?
+
+434
+00:16:21,450 --> 00:16:22,350
+I know it is.
+
+435
+00:16:22,350 --> 00:16:23,410
+Okay.
+
+436
+00:16:23,410 --> 00:16:25,410
+When did you start programming?
+
+437
+00:16:25,410 --> 00:16:27,750
+I started programming...
+
+438
+00:16:27,750 --> 00:16:31,580
+You know, that's a hard question,
+because I've been,
+
+439
+00:16:31,580 --> 00:16:32,510
+I used to like,
+
+440
+00:16:32,510 --> 00:16:35,250
+I guess the,
+
+441
+00:16:35,250 --> 00:16:39,080
+I guess the earliest time
+that I started programming was
+
+442
+00:16:39,080 --> 00:16:40,910
+It's almost embarrassing
+to say, but like
+
+443
+00:16:40,910 --> 00:16:43,110
+like modifying Halo 2
+when I was
+
+444
+00:16:43,110 --> 00:16:44,980
+I think 13 or 14.
+
+445
+00:16:44,980 --> 00:16:47,650
+So, that was a while ago.
+
+446
+00:16:47,650 --> 00:16:49,050
+But, I wasn't even programming.
+
+447
+00:16:49,050 --> 00:16:50,480
+I was more like downloading scripts,
+
+448
+00:16:50,480 --> 00:16:51,610
+and just like
+
+449
+00:16:51,610 --> 00:16:52,980
+hacking it and stuff.
+
+450
+00:16:52,980 --> 00:16:55,550
+So, it's been a while,
+but really seriously programming
+
+451
+00:16:57,250 --> 00:16:58,650
+probably a couple years,
+
+452
+00:16:58,650 --> 00:16:59,710
+a couple years.
+
+453
+00:16:59,710 --> 00:17:00,910
+Okay, who is paying you?
+
+454
+00:17:00,910 --> 00:17:01,710
+Nobody's paying me.
+
+455
+00:17:01,710 --> 00:17:03,110
+I mean YouTube ads
+are paying me.
+
+456
+00:17:03,110 --> 00:17:05,410
+Patreon, you guys
+are paying me.
+
+457
+00:17:06,250 --> 00:17:07,410
+To do this,
+nobody's paying me.
+
+458
+00:17:07,410 --> 00:17:08,180
+Nobody's paying me.
+
+459
+00:17:08,180 --> 00:17:09,050
+Kaggle,
+nobody's paying me.
+
+460
+00:17:09,050 --> 00:17:11,410
+I would have to say that
+if somebody was paying.
+
+461
+00:17:11,910 --> 00:17:13,410
+Which is the best book for RL?
+
+462
+00:17:13,410 --> 00:17:16,210
+Sutton and Bartow have the Bible of RL,
+
+463
+00:17:16,210 --> 00:17:18,850
+which is called
+"an introduction to reinforcement learning".
+
+464
+00:17:18,850 --> 00:17:20,780
+Find it on the Internet.
+
+465
+00:17:20,780 --> 00:17:22,780
+It's all available for free.
+
+466
+00:17:22,780 --> 00:17:24,910
+Last question is,
+
+467
+00:17:26,880 --> 00:17:28,250
+I'm going to
+get a haircut, for sure.
+
+468
+00:17:28,250 --> 00:17:29,210
+Will you attend...
+
+469
+00:17:29,210 --> 00:17:30,010
+I will.
+
+470
+00:17:30,010 --> 00:17:33,780
+Do time series data
+definitely depends on other factors?
+
+471
+00:17:33,780 --> 00:17:37,180
+It depends on a lot of factors,
+if there's multiple variables.
+
+472
+00:17:37,410 --> 00:17:38,250
+Okay?
+
+473
+00:17:39,580 --> 00:17:40,310
+Okay.
+
+474
+00:17:40,550 --> 00:17:42,010
+Now, to the dataset,
+
+475
+00:17:42,010 --> 00:17:43,910
+let's go ahead and do this.
+
+476
+00:17:43,910 --> 00:17:46,750
+So first of all, now the dataset is
+in the video description.
+
+477
+00:17:46,750 --> 00:17:47,780
+So check the video description.
+
+478
+00:17:47,780 --> 00:17:50,280
+We're going to do this
+in Google Collab together.
+
+479
+00:17:50,280 --> 00:17:54,550
+We're ready for our
+exploratory data analysis step.
+
+480
+00:17:54,550 --> 00:17:56,310
+What I did was...
+
+481
+00:17:56,310 --> 00:17:57,550
+By the way, with Google Collab
+
+482
+00:17:57,550 --> 00:17:59,650
+with these two lines, you can mount
+
+483
+00:17:59,650 --> 00:18:00,880
+whatever dataset you want
+
+484
+00:18:00,880 --> 00:18:02,480
+into Google Collab, and then
+
+485
+00:18:02,480 --> 00:18:03,650
+call it directly.
+
+486
+00:18:03,650 --> 00:18:04,980
+So, what I did was, I downloaded it.
+
+487
+00:18:04,980 --> 00:18:06,480
+It's an h5 file.
+
+488
+00:18:06,480 --> 00:18:08,080
+Uploaded it to my Google Drive,
+
+489
+00:18:08,080 --> 00:18:08,850
+and then called it
+
+490
+00:18:08,850 --> 00:18:10,080
+with this
+
+491
+00:18:10,080 --> 00:18:11,410
+these two lines of code.
+
+492
+00:18:11,410 --> 00:18:11,980
+Very simple.
+
+493
+00:18:11,980 --> 00:18:12,910
+Thank you, Google Collab,
+
+494
+00:18:12,910 --> 00:18:14,910
+for making it much easier to do.
+
+495
+00:18:14,910 --> 00:18:17,050
+Alright, so let's get into this code.
+
+496
+00:18:18,010 --> 00:18:19,250
+Our first step
+
+497
+00:18:19,250 --> 00:18:21,810
+is going to be to list out our dataset.
+
+498
+00:18:21,810 --> 00:18:24,580
+We have this dataset,
+or I have this dataset
+
+499
+00:18:24,580 --> 00:18:26,010
+in my Google Drive.
+
+500
+00:18:26,010 --> 00:18:28,810
+And, I have a link for you
+in the video description.
+
+501
+00:18:28,810 --> 00:18:30,450
+I just want to see, if it's there.
+
+502
+00:18:30,450 --> 00:18:31,280
+Okay, good. It's there.
+
+503
+00:18:31,280 --> 00:18:31,850
+That was it.
+
+504
+00:18:31,850 --> 00:18:34,150
+Once I've seen that it's there,
+
+505
+00:18:34,150 --> 00:18:37,410
+now I'm going to convert it
+into a pandas dataframe.
+
+506
+00:18:37,410 --> 00:18:39,450
+But, before that I've got to
+import this dependency,
+
+507
+00:18:39,450 --> 00:18:41,980
+or install this dependency, called tables.
+
+508
+00:18:41,980 --> 00:18:43,010
+That's going to let me do that.
+
+509
+00:18:43,010 --> 00:18:45,410
+Now, we can import pandas,
+
+510
+00:18:45,410 --> 00:18:49,150
+our handy-dandy data
+pre-processing Python library.
+
+511
+00:18:49,150 --> 00:18:50,980
+To then,
+
+512
+00:18:50,980 --> 00:18:52,550
+to then say,
+
+513
+00:18:52,550 --> 00:18:55,210
+let's import this dataset
+
+514
+00:18:55,210 --> 00:18:57,180
+that train.h5.
+
+515
+00:18:57,180 --> 00:18:59,050
+Okay, recursively,
+
+516
+00:18:59,050 --> 00:19:00,980
+and we're going to
+import it as train.
+
+517
+00:19:00,980 --> 00:19:02,550
+That's what we're going to call it.
+
+518
+00:19:02,550 --> 00:19:03,480
+Then, we're going to say,
+
+519
+00:19:03,480 --> 00:19:06,610
+our dataframe is going to be train.get,
+
+520
+00:19:06,610 --> 00:19:10,180
+and then we'll call it by
+its name train, and that's it.
+
+521
+00:19:10,180 --> 00:19:12,050
+And hopefully...
+
+522
+00:19:14,550 --> 00:19:14,980
+Good
+
+523
+00:19:14,980 --> 00:19:16,680
+So, now we have it as a dataframe.
+
+524
+00:19:16,680 --> 00:19:18,810
+Now, we can see how big is our dataset.
+
+525
+00:19:18,810 --> 00:19:19,650
+How big is this thing?
+
+526
+00:19:19,650 --> 00:19:21,080
+We got to check it out.
+
+527
+00:19:21,080 --> 00:19:22,850
+This thing is
+
+528
+00:19:22,850 --> 00:19:23,680
+massive.
+
+529
+00:19:23,680 --> 00:19:28,050
+It is over 1.7 million datapoints,
+
+530
+00:19:28,050 --> 00:19:28,780
+which is big.
+
+531
+00:19:28,780 --> 00:19:30,380
+Let's examine this dataset.
+
+532
+00:19:30,380 --> 00:19:32,080
+Just to see the head, just of
+
+533
+00:19:32,080 --> 00:19:34,050
+the first few variables.
+
+534
+00:19:37,450 --> 00:19:38,210
+Okay, so
+
+535
+00:19:38,210 --> 00:19:39,210
+here's our dataset.
+
+536
+00:19:39,210 --> 00:19:40,580
+We have an id.
+
+537
+00:19:40,580 --> 00:19:43,750
+We have a timestamp,
+which is going to be a different time.
+
+538
+00:19:43,750 --> 00:19:47,680
+These are all of our predictor variables.
+
+539
+00:19:47,680 --> 00:19:51,350
+What do these mean?
+
+540
+00:19:51,350 --> 00:19:52,550
+And...
+
+541
+00:19:52,550 --> 00:19:54,410
+There's like more than 40 to
+
+542
+00:19:54,410 --> 00:19:55,550
+44 variables,
+
+543
+00:19:55,550 --> 00:19:56,650
+and then we have ys.
+
+544
+00:19:56,650 --> 00:19:58,310
+y is our predictor variable.
+
+545
+00:19:58,310 --> 00:20:00,980
+In this competition,
+
+546
+00:20:00,980 --> 00:20:02,580
+two sigma, what they did was,
+they said,
+
+547
+00:20:02,580 --> 00:20:05,780
+These are a bunch of
+financial instruments.
+
+548
+00:20:05,780 --> 00:20:07,210
+Financial instruments are like
+
+549
+00:20:07,210 --> 00:20:11,910
+derivatives, bonds, mortgages,
+stocks, assets,
+
+550
+00:20:11,910 --> 00:20:13,850
+all of these different types of
+financial instruments.
+
+551
+00:20:13,850 --> 00:20:15,850
+but they anonymize them.
+
+552
+00:20:15,850 --> 00:20:19,410
+So, we're calling them just
+technical_41, technical_42.
+
+553
+00:20:19,410 --> 00:20:21,010
+And then, we have a predictor variable.
+
+554
+00:20:21,010 --> 00:20:23,610
+What is this predictor variable?
+They didn't reveal to us,
+
+555
+00:20:23,610 --> 00:20:25,450
+but we can think of it as a price.
+
+556
+00:20:25,450 --> 00:20:28,110
+Let's just think of it as
+a price in a trend,
+
+557
+00:20:28,110 --> 00:20:31,210
+and this price for
+this asset is dependent
+
+558
+00:20:31,210 --> 00:20:34,650
+on all these other anonymized
+financial instruments.
+
+559
+00:20:34,650 --> 00:20:36,710
+Based on all of these
+financial instruments,
+
+560
+00:20:36,710 --> 00:20:38,410
+can we predict the price?
+
+561
+00:20:38,410 --> 00:20:39,280
+For whatever this is.
+
+562
+00:20:39,280 --> 00:20:41,580
+Let's just say, it's a stock
+for this case.
+
+563
+00:20:41,580 --> 00:20:42,950
+Okay?
+
+564
+00:20:42,950 --> 00:20:44,780
+Let's keep going here.
+
+565
+00:20:44,780 --> 00:20:46,210
+Our next step is to say,
+
+566
+00:20:46,210 --> 00:20:48,580
+We'll call them labels.
+
+567
+00:20:48,580 --> 00:20:50,680
+So, y is going to be labels.
+
+568
+00:20:50,680 --> 00:20:53,850
+How many labels, and how many
+values do we have.
+
+569
+00:20:53,850 --> 00:20:56,280
+So, what we're going to do is
+we're going to list them both
+
+570
+00:20:56,280 --> 00:20:59,210
+by creating two matrices,
+
+571
+00:20:59,210 --> 00:21:00,510
+and saying
+
+572
+00:21:00,510 --> 00:21:01,950
+the labels
+
+573
+00:21:01,950 --> 00:21:06,180
+are going to be appended
+by the number of columns that we have.
+
+574
+00:21:06,180 --> 00:21:08,380
+The values are going to be
+appended by
+
+575
+00:21:08,380 --> 00:21:09,880
+the number of
+
+576
+00:21:13,680 --> 00:21:16,510
+non-empty variables we have.
+
+577
+00:21:16,510 --> 00:21:19,250
+And then, we'll print out
+all of those columns,
+
+578
+00:21:19,250 --> 00:21:21,680
+and all of those values
+starting from
+
+579
+00:21:21,680 --> 00:21:23,110
+the very beginning.
+
+580
+00:21:23,950 --> 00:21:24,850
+All right.
+
+581
+00:21:27,510 --> 00:21:28,210
+Oh, right.
+
+582
+00:21:28,450 --> 00:21:29,210
+df
+
+583
+00:21:29,780 --> 00:21:30,950
+Let's see if that works.
+
+584
+00:21:30,950 --> 00:21:31,980
+Good, okay.
+
+585
+00:21:31,980 --> 00:21:33,480
+These are all of our variables,
+
+586
+00:21:33,480 --> 00:21:34,610
+all of our values,
+
+587
+00:21:34,610 --> 00:21:35,980
+or all of our labels and values.
+
+588
+00:21:35,980 --> 00:21:36,980
+Okay, so
+
+589
+00:21:36,980 --> 00:21:37,980
+just like that.
+
+590
+00:21:37,980 --> 00:21:41,080
+So now, we want to see how much
+we have to do some data cleaning.
+
+591
+00:21:41,080 --> 00:21:43,210
+How much missing data do we have?
+
+592
+00:21:43,210 --> 00:21:47,080
+So now, we can use matplotlib.
+
+593
+00:21:47,080 --> 00:21:49,610
+To see just how much
+missing data we have.
+
+594
+00:21:49,610 --> 00:21:51,550
+Because, we probably have a lot.
+
+595
+00:21:51,550 --> 00:21:53,950
+So, plt as our matplotlib,
+
+596
+00:21:53,950 --> 00:21:55,850
+and then we'll say,
+
+597
+00:21:55,850 --> 00:21:57,410
+We'll use this inline.
+
+598
+00:21:59,450 --> 00:22:01,380
+Call, to say that
+we want to be able to
+
+599
+00:22:01,380 --> 00:22:07,110
+show a matplotlib graph
+inside of the browser.
+
+600
+00:22:07,110 --> 00:22:10,580
+We're going to create a matplotlib graph,
+
+601
+00:22:10,580 --> 00:22:12,280
+and we're going to say that
+
+602
+00:22:12,280 --> 00:22:14,610
+it's going to contain
+
+603
+00:22:14,610 --> 00:22:16,310
+a
+
+604
+00:22:16,310 --> 00:22:17,980
+figure size.
+
+605
+00:22:17,980 --> 00:22:20,410
+That's going to be between
+12 and 50, so we'll
+
+606
+00:22:20,410 --> 00:22:23,610
+we'll keep it
+
+607
+00:22:24,150 --> 00:22:25,850
+small, relatively small,
+
+608
+00:22:25,850 --> 00:22:29,110
+and we're going to start
+from those labels,
+
+609
+00:22:29,110 --> 00:22:31,510
+which I named an ind.
+
+610
+00:22:31,510 --> 00:22:33,350
+And, connect to those labels.
+
+611
+00:22:33,350 --> 00:22:35,950
+We have all of our values.
+
+612
+00:22:35,950 --> 00:22:37,880
+And, I'm going to color them.
+
+613
+00:22:39,280 --> 00:22:41,050
+I'm going to label them y.
+
+614
+00:22:41,050 --> 00:22:43,210
+So, in my graph,
+it's going to say y.
+
+615
+00:22:43,210 --> 00:22:45,450
+And now, we can say,
+
+616
+00:22:47,480 --> 00:22:49,080
+let's say,
+
+617
+00:22:49,080 --> 00:22:50,980
+set the y ticks,
+
+618
+00:22:50,980 --> 00:22:53,650
+so these are going to be
+the intervals between these variables
+
+619
+00:22:53,650 --> 00:22:55,550
+to
+
+620
+00:22:56,380 --> 00:23:00,580
+Let's say, it's gonna be half of the width
+that I defined for which is 0.9,
+
+621
+00:23:00,580 --> 00:23:03,110
+because those values we saw before
+
+622
+00:23:03,110 --> 00:23:04,780
+they seem to be
+
+623
+00:23:07,310 --> 00:23:09,250
+they seem to be
+
+624
+00:23:11,710 --> 00:23:12,780
+in that range.
+
+625
+00:23:12,780 --> 00:23:14,350
+So now, we'll say,
+
+626
+00:23:15,550 --> 00:23:17,110
+y ticks.
+
+627
+00:23:19,050 --> 00:23:21,780
+And, let me just
+do that again y ticks.
+
+628
+00:23:21,780 --> 00:23:23,310
+tick labels,
+
+629
+00:23:23,310 --> 00:23:24,980
+so
+
+630
+00:23:25,910 --> 00:23:27,310
+that's the labels,
+
+631
+00:23:27,850 --> 00:23:29,480
+and then we have
+
+632
+00:23:30,750 --> 00:23:31,980
+our other
+
+633
+00:23:32,610 --> 00:23:34,950
+line which is our horizontal line.
+
+634
+00:23:34,950 --> 00:23:37,880
+Oh, I'm going to name it
+the other line horizontal,
+
+635
+00:23:39,310 --> 00:23:40,510
+and we're going to have,
+
+636
+00:23:40,510 --> 00:23:42,650
+That's for y.
+
+637
+00:23:42,650 --> 00:23:44,780
+and then count of missing values.
+
+638
+00:23:44,780 --> 00:23:46,710
+That's what we're looking for
+the count of missing values.
+
+639
+00:23:46,710 --> 00:23:48,210
+xlabel
+
+640
+00:23:48,210 --> 00:23:49,050
+and
+
+641
+00:23:49,050 --> 00:23:51,580
+one more which is
+our title for our graph.
+
+642
+00:23:51,580 --> 00:23:52,780
+Number of
+
+643
+00:23:54,150 --> 00:23:56,380
+missing values in each column.
+
+644
+00:23:57,050 --> 00:23:58,250
+Okay, that's it.
+
+645
+00:23:58,250 --> 00:23:59,910
+And, show the plot.
+
+646
+00:23:59,910 --> 00:24:01,780
+Okay, let's see.
+
+647
+00:24:01,780 --> 00:24:02,650
+Of course.
+
+648
+00:24:02,650 --> 00:24:04,580
+Invalid syntax.
+
+649
+00:24:04,580 --> 00:24:06,180
+2
+
+650
+00:24:06,180 --> 00:24:07,350
+ax.
+
+651
+00:24:07,350 --> 00:24:09,280
+ax.set
+
+652
+00:24:09,280 --> 00:24:10,410
+yticks
+
+653
+00:24:10,410 --> 00:24:11,580
+ind
+
+654
+00:24:11,580 --> 00:24:12,210
++
+
+655
+00:24:12,210 --> 00:24:13,380
+width
+
+656
+00:24:13,380 --> 00:24:14,610
+just like that
+
+657
+00:24:18,410 --> 00:24:19,810
+ind
+
+658
+00:24:19,810 --> 00:24:21,810
+np is not defined.
+
+659
+00:24:21,810 --> 00:24:23,150
+Right.
+
+660
+00:24:23,150 --> 00:24:24,310
+Is it really not defined?
+
+661
+00:24:24,310 --> 00:24:25,610
+I didn't import numpy up there?
+
+662
+00:24:25,610 --> 00:24:26,710
+Okay, fine.
+
+663
+00:24:26,710 --> 00:24:28,050
+as np
+
+664
+00:24:33,780 --> 00:24:35,080
+Okay...
+
+665
+00:24:35,080 --> 00:24:36,310
+figsize, right.
+
+666
+00:24:37,650 --> 00:24:39,550
+So, sometimes you just got to
+
+667
+00:24:39,550 --> 00:24:40,480
+deal with these
+
+668
+00:24:40,480 --> 00:24:41,710
+errors...
+
+669
+00:24:43,210 --> 00:24:43,950
+Nice.
+
+670
+00:24:44,510 --> 00:24:48,610
+Looks like we've got quite a lot of
+missing values in our data
+
+671
+00:24:48,610 --> 00:24:50,050
+And so, you know,
+
+672
+00:24:50,050 --> 00:24:53,050
+if we could, we could just
+clean them all out, but
+
+673
+00:24:53,050 --> 00:24:54,250
+this is a good step to
+
+674
+00:24:54,250 --> 00:24:57,810
+Wow, fundamental_61 has
+a lot of missing values.
+
+675
+00:24:57,810 --> 00:24:59,650
+There's a lot of missing values
+in this data.
+
+676
+00:24:59,650 --> 00:25:01,980
+So, that's what we wanted to do.
+
+677
+00:25:01,980 --> 00:25:03,450
+Just to see that.
+
+678
+00:25:03,450 --> 00:25:05,880
+Let's just show one more pretty graph.
+
+679
+00:25:05,880 --> 00:25:07,380
+It's a rainbow graph.
+
+680
+00:25:07,380 --> 00:25:11,310
+We can use the other plotting library,
+called Seabourn to do this.
+
+681
+00:25:11,310 --> 00:25:14,350
+It's just one more very simple graph.
+
+682
+00:25:14,350 --> 00:25:16,850
+And so, we'll say...
+
+683
+00:25:16,850 --> 00:25:18,510
+and I'll take questions
+
+684
+00:25:18,510 --> 00:25:19,410
+right after
+
+685
+00:25:19,410 --> 00:25:20,510
+number 8 here.
+
+686
+00:25:22,450 --> 00:25:23,580
+6
+
+687
+00:25:23,580 --> 00:25:24,980
+How many people
+do we have in here?
+
+688
+00:25:24,980 --> 00:25:25,710
+Okay.
+
+689
+00:25:25,710 --> 00:25:26,550
+233
+
+690
+00:25:26,550 --> 00:25:27,980
+Okay, cool.
+
+691
+00:25:27,980 --> 00:25:29,410
+So...
+
+692
+00:25:32,610 --> 00:25:34,050
+That's it for this.
+
+693
+00:25:34,050 --> 00:25:35,980
+Now, we can see
+
+694
+00:25:35,980 --> 00:25:37,310
+at each timestep,
+
+695
+00:25:37,310 --> 00:25:38,710
+We want to see at each time step
+
+696
+00:25:38,710 --> 00:25:40,150
+what the data looks like.
+
+697
+00:25:41,610 --> 00:25:42,850
+We'll say,
+
+698
+00:25:46,610 --> 00:25:48,580
+how much of each
+
+699
+00:25:49,880 --> 00:25:53,850
+predictor variable
+do we have at each time step?
+
+700
+00:25:54,680 --> 00:25:56,680
+Okay, so now,
+
+701
+00:25:58,680 --> 00:25:59,750
+we can see that.
+
+702
+00:25:59,750 --> 00:26:00,680
+Cool.
+
+703
+00:26:00,680 --> 00:26:02,010
+Okay, that's the count
+
+704
+00:26:02,010 --> 00:26:03,450
+for each versus the time step.
+
+705
+00:26:03,450 --> 00:26:06,950
+There's more and more it's going up
+
+706
+00:26:06,950 --> 00:26:09,580
+the trend of the data is going up.
+
+707
+00:26:09,580 --> 00:26:12,650
+That's just one thing to know.
+It's a linear trend upwards,
+
+708
+00:26:12,650 --> 00:26:15,650
+as time goes on.
+
+709
+00:26:15,650 --> 00:26:16,350
+Okay.
+
+710
+00:26:16,350 --> 00:26:18,180
+Lastly, we'll just add one line of code,
+
+711
+00:26:18,180 --> 00:26:20,180
+and we're done with this EDA part.
+
+712
+00:26:23,280 --> 00:26:26,850
+How many unique assets
+do we have in total?
+
+713
+00:26:26,850 --> 00:26:28,180
+And, that's...
+
+714
+00:26:30,250 --> 00:26:33,950
+prints the length of df.id.unique().
+
+715
+00:26:37,050 --> 00:26:38,010
+1424
+
+716
+00:26:38,850 --> 00:26:41,580
+Let's answer some questions,
+then I'll talk about
+
+717
+00:26:41,580 --> 00:26:42,910
+reinforcement learning.
+
+718
+00:26:51,850 --> 00:26:55,050
+Can we use RNN with LSTM
+to predict these scenarios?
+
+719
+00:26:55,050 --> 00:26:56,780
+Yes, you can like
+I mentioned before.
+
+720
+00:26:56,780 --> 00:27:00,310
+Deep reinforcement learning
+is the cutting edge for that.
+
+721
+00:27:00,310 --> 00:27:02,410
+Two,
+
+722
+00:27:02,410 --> 00:27:04,150
+Phillip asked,
+
+723
+00:27:04,150 --> 00:27:07,150
+Why not use pandas dataframe methods
+to call the columns
+
+724
+00:27:07,150 --> 00:27:08,750
+instead of using loops?
+
+725
+00:27:08,750 --> 00:27:10,650
+Phillip, that's a totally valid question.
+
+726
+00:27:10,650 --> 00:27:12,210
+We could have done that.
+
+727
+00:27:12,210 --> 00:27:14,280
+Lastly, one more question.
+
+728
+00:27:14,280 --> 00:27:15,980
+What is your opinion of...
+
+729
+00:27:15,980 --> 00:27:17,010
+Nah, that's no...
+
+730
+00:27:21,210 --> 00:27:28,250
+How deep do you need to know
+math for reinforcement learning?
+
+731
+00:27:29,180 --> 00:27:31,050
+That's a great question.
+
+732
+00:27:31,050 --> 00:27:32,550
+Compared to
+
+733
+00:27:32,550 --> 00:27:34,450
+supervised and
+unsupervised learning,
+
+734
+00:27:34,450 --> 00:27:37,510
+it is more necessary
+to know the math behind it,
+
+735
+00:27:37,510 --> 00:27:38,880
+because,
+
+736
+00:27:38,880 --> 00:27:41,410
+that ecosystem is not as developed
+
+737
+00:27:41,410 --> 00:27:43,850
+as a supervised learning ecosystem.
+
+738
+00:27:43,850 --> 00:27:47,050
+While we can use OpenAI Gym
+
+739
+00:27:47,050 --> 00:27:49,380
+to do a simple random policy
+
+740
+00:27:49,380 --> 00:27:51,450
+for an agent inside of a game,
+
+741
+00:27:51,450 --> 00:27:53,650
+if you want to do
+anything more complex,
+
+742
+00:27:53,650 --> 00:27:56,450
+deep Q, if you really want to
+understand these algorithms,
+
+743
+00:27:56,450 --> 00:27:57,980
+then yes.
+You're going need to know
+
+744
+00:27:57,980 --> 00:28:00,480
+how, what the idea behind
+policy functions are,
+
+745
+00:28:00,480 --> 00:28:02,410
+and the idea behind value functions
+
+746
+00:28:02,410 --> 00:28:04,610
+both for a state and an action.
+
+747
+00:28:04,610 --> 00:28:06,750
+You're going to need to know
+how the bellman equation works.
+
+748
+00:28:06,750 --> 00:28:08,580
+And, that's really what
+it what it comes down to.
+
+749
+00:28:08,580 --> 00:28:10,680
+Understand the bellman equation,
+
+750
+00:28:10,680 --> 00:28:12,150
+and everything else will follow.
+
+751
+00:28:12,150 --> 00:28:14,610
+There's four of them actually,
+
+752
+00:28:14,610 --> 00:28:16,810
+and I will continue to talk about them.
+
+753
+00:28:16,810 --> 00:28:19,480
+But, let's continue going here.
+
+754
+00:28:19,480 --> 00:28:21,010
+That's it for my Q&A.
+
+755
+00:28:21,010 --> 00:28:21,950
+Now, to RL.
+
+756
+00:28:21,950 --> 00:28:23,250
+Right. So, that's our EDA.
+
+757
+00:28:23,250 --> 00:28:24,380
+Now for RL.
+
+758
+00:28:25,450 --> 00:28:28,050
+How do we use reinforcement learning
+in time series data?
+
+759
+00:28:29,210 --> 00:28:30,880
+In reinforcement learning,
+
+760
+00:28:30,880 --> 00:28:33,980
+there is an agent
+that is acting on the outside world.
+
+761
+00:28:33,980 --> 00:28:36,150
+It is observing the effects
+of the environment,
+
+762
+00:28:36,150 --> 00:28:38,310
+and it's learning how to
+improve its behavior.
+
+763
+00:28:38,310 --> 00:28:41,250
+That's why we see it being
+used so often in games.
+
+764
+00:28:42,180 --> 00:28:43,510
+But, in contrast,
+
+765
+00:28:43,510 --> 00:28:45,380
+a time series forecast
+
+766
+00:28:45,380 --> 00:28:48,380
+is a setting where
+there is a passive observer,
+
+767
+00:28:48,380 --> 00:28:50,980
+so the agent is passively observing
+
+768
+00:28:50,980 --> 00:28:53,010
+the data set.
+
+769
+00:28:53,010 --> 00:28:56,250
+It's not really interacting with
+the environments, because
+
+770
+00:28:56,250 --> 00:28:59,150
+the environment is
+not reacting to the agent.
+
+771
+00:28:59,150 --> 00:29:04,180
+It is a one way
+
+772
+00:29:04,850 --> 00:29:06,310
+action, right?
+
+773
+00:29:06,310 --> 00:29:07,980
+Whereas in a game world,
+
+774
+00:29:07,980 --> 00:29:09,310
+for example, like Hart Pole,
+
+775
+00:29:09,310 --> 00:29:12,010
+where the where the pole is
+trying to balance itself.
+
+776
+00:29:12,010 --> 00:29:15,350
+If the agents action in a given state
+is to move to the left,
+
+777
+00:29:15,350 --> 00:29:19,250
+then the environment,
+the platform that its balancing on
+
+778
+00:29:19,250 --> 00:29:21,380
+will then move its reacting.
+
+779
+00:29:21,380 --> 00:29:23,850
+So, in a real world,
+how do we use this?
+
+780
+00:29:23,850 --> 00:29:25,710
+What is a system that adapts
+
+781
+00:29:25,710 --> 00:29:28,550
+to changes that
+an agent, an AI makes?
+
+782
+00:29:28,550 --> 00:29:29,880
+Well...
+
+783
+00:29:29,880 --> 00:29:32,010
+The stock market could be one where
+
+784
+00:29:32,010 --> 00:29:34,610
+a state will change, because
+
+785
+00:29:34,610 --> 00:29:36,650
+the state is the account balance.
+
+786
+00:29:36,650 --> 00:29:38,080
+If you have an account balance
+
+787
+00:29:38,080 --> 00:29:40,110
+when an agent makes an action
+
+788
+00:29:40,110 --> 00:29:42,150
+like buy sell or hold,
+
+789
+00:29:42,150 --> 00:29:43,380
+the balance will change.
+
+790
+00:29:43,380 --> 00:29:45,450
+Or, if we want to get more meta,
+
+791
+00:29:45,450 --> 00:29:46,780
+then the
+
+792
+00:29:46,780 --> 00:29:48,950
+the entire stock market will change.
+
+793
+00:29:48,950 --> 00:29:50,780
+If an agent makes a trade,
+
+794
+00:29:50,780 --> 00:29:53,110
+then the market will change.
+
+795
+00:29:53,110 --> 00:29:55,410
+That is a reactive environment.
+
+796
+00:29:55,410 --> 00:29:57,450
+What is another reactive environment?
+
+797
+00:29:58,150 --> 00:29:59,650
+Electricity grids,
+
+798
+00:29:59,650 --> 00:30:00,750
+sensor networks,
+
+799
+00:30:00,750 --> 00:30:03,880
+interconnected routing grids of data
+
+800
+00:30:03,880 --> 00:30:06,350
+of connections.
+
+801
+00:30:06,350 --> 00:30:08,650
+Any kind of system that adapts
+
+802
+00:30:08,650 --> 00:30:11,380
+an adaptive system that reacts
+
+803
+00:30:11,380 --> 00:30:13,880
+to an agent interacting with
+that environment
+
+804
+00:30:13,880 --> 00:30:16,610
+is a use case for
+reinforcement learning.
+
+805
+00:30:16,610 --> 00:30:19,150
+So, a static data set is
+not necessarily
+
+806
+00:30:19,150 --> 00:30:21,480
+a reinforcement learning scenario.
+
+807
+00:30:21,480 --> 00:30:22,550
+How do we solve this?
+
+808
+00:30:22,550 --> 00:30:24,610
+Because there are a bunch of
+companies out there
+
+809
+00:30:24,610 --> 00:30:26,050
+that have these systems.
+
+810
+00:30:26,050 --> 00:30:27,380
+Like Google, for example,
+
+811
+00:30:27,380 --> 00:30:29,250
+they use reinforcement learning
+
+812
+00:30:29,250 --> 00:30:31,680
+to improve the
+
+813
+00:30:31,680 --> 00:30:35,580
+They use it to improve
+the quality of their
+
+814
+00:30:35,580 --> 00:30:37,650
+power usage in their
+giant data center.
+
+815
+00:30:37,650 --> 00:30:39,810
+They reduce their cooling bill.
+
+816
+00:30:39,810 --> 00:30:42,950
+I think it was 40%, and
+even more after that
+
+817
+00:30:42,950 --> 00:30:44,180
+So, there are companies out there.
+
+818
+00:30:44,180 --> 00:30:47,280
+Electricity companies,
+power utility companies,
+
+819
+00:30:47,280 --> 00:30:48,850
+public works companies,
+
+820
+00:30:48,850 --> 00:30:51,610
+that have these systems
+that need to be optimized,
+
+821
+00:30:51,610 --> 00:30:53,050
+but they don't.
+
+822
+00:30:53,050 --> 00:30:56,250
+They have these real-time datasets
+
+823
+00:30:56,250 --> 00:30:58,350
+meters that are happening in real time.
+
+824
+00:30:58,350 --> 00:31:02,280
+What they need then is
+a reinforcement learning solution.
+
+825
+00:31:02,280 --> 00:31:03,180
+But, right now,
+
+826
+00:31:03,180 --> 00:31:06,710
+and here's a startup idea
+I want to get to you guys.
+
+827
+00:31:06,710 --> 00:31:08,680
+This stream is going up and down.
+
+828
+00:31:08,680 --> 00:31:09,710
+Like there were 200 people here.
+
+829
+00:31:09,710 --> 00:31:10,910
+Now, there's 600 people here.
+
+830
+00:31:10,910 --> 00:31:12,310
+This is crazy by the way.
+
+831
+00:31:13,950 --> 00:31:16,050
+Where was I?
+
+832
+00:31:16,050 --> 00:31:18,850
+This is a call to action for startups,
+
+833
+00:31:18,850 --> 00:31:20,080
+because I see a real need here.
+
+834
+00:31:20,080 --> 00:31:22,010
+Here's a pain point, where
+
+835
+00:31:22,010 --> 00:31:24,050
+there are companies that need
+
+836
+00:31:24,050 --> 00:31:26,710
+a reinforcement learning
+solution to help optimize
+
+837
+00:31:26,710 --> 00:31:29,280
+their profits for their systems.
+
+838
+00:31:29,280 --> 00:31:31,180
+There are data scientists
+out there, that
+
+839
+00:31:31,180 --> 00:31:34,110
+that want to use
+reinforcement learning to then
+
+840
+00:31:34,110 --> 00:31:35,850
+solve these systems.
+
+841
+00:31:35,850 --> 00:31:38,210
+So what there needs to be
+is an intermediary,
+
+842
+00:31:38,210 --> 00:31:41,810
+that offers a simulation as a service.
+
+843
+00:31:41,810 --> 00:31:43,980
+What these simulation is
+the service companies do,
+
+844
+00:31:43,980 --> 00:31:45,310
+or startups will do
+
+845
+00:31:45,310 --> 00:31:46,950
+is they'll approach
+
+846
+00:31:46,950 --> 00:31:47,850
+and here's how I would do it
+
+847
+00:31:47,850 --> 00:31:51,050
+I would approach one of these
+companies and say,
+
+848
+00:31:51,050 --> 00:31:52,680
+I understand reinforcement learning.
+
+849
+00:31:52,680 --> 00:31:57,050
+I understand that we can offer you
+a 30% reduction in your costs,
+
+850
+00:31:57,050 --> 00:31:59,810
+if you give us access to
+your real-time API.
+
+851
+00:31:59,810 --> 00:32:02,250
+And, we'll create a
+simulated environment
+
+852
+00:32:02,250 --> 00:32:03,480
+based on that.
+
+853
+00:32:03,480 --> 00:32:04,750
+Then, we will give it to say,
+
+854
+00:32:04,750 --> 00:32:05,880
+Kaggle
+
+855
+00:32:05,880 --> 00:32:09,280
+to then allow their
+data scientists to
+
+856
+00:32:09,280 --> 00:32:11,250
+create RL algorithms.
+
+857
+00:32:11,250 --> 00:32:13,510
+So, there is an intermediary step here.
+
+858
+00:32:13,510 --> 00:32:15,250
+Now, Kaggle can do this themselves.
+
+859
+00:32:15,250 --> 00:32:17,550
+They have thought about this.
+
+860
+00:32:17,550 --> 00:32:19,210
+Who knows what's going to
+happen there? But,
+
+861
+00:32:19,210 --> 00:32:22,110
+this is an idea that time has come.
+
+862
+00:32:22,110 --> 00:32:23,850
+More and more people are
+getting interested
+
+863
+00:32:23,850 --> 00:32:25,010
+ in reinforcement learning.
+
+864
+00:32:25,010 --> 00:32:27,650
+There needs to be more
+simulated real world,
+
+865
+00:32:27,650 --> 00:32:28,980
+not game world,
+
+866
+00:32:28,980 --> 00:32:30,380
+environments out there.
+
+867
+00:32:30,380 --> 00:32:31,950
+That's my suggestion.
+
+868
+00:32:31,950 --> 00:32:33,550
+Hopefully, you understand
+the difference here
+
+869
+00:32:33,550 --> 00:32:35,380
+between time series forecasting
+
+870
+00:32:35,380 --> 00:32:37,210
+and reinforcement learning
+
+871
+00:32:37,210 --> 00:32:39,210
+from what I've said so far,
+
+872
+00:32:39,210 --> 00:32:40,810
+and why there's a need for it,
+
+873
+00:32:40,810 --> 00:32:43,210
+and how we can apply
+reinforcement learning
+
+874
+00:32:43,210 --> 00:32:44,250
+to time series.
+
+875
+00:32:44,250 --> 00:32:47,150
+If there is some
+reactive component
+
+876
+00:32:47,150 --> 00:32:48,650
+to the data set itself,
+
+877
+00:32:48,650 --> 00:32:50,580
+it can't just be a static dataset.
+
+878
+00:32:50,580 --> 00:32:53,080
+It has to be a real-time API.
+
+879
+00:32:53,080 --> 00:32:54,910
+Okay, so there is a possibility
+
+880
+00:32:54,910 --> 00:32:56,810
+that we're going to see
+more of that in the future.
+
+881
+00:32:56,810 --> 00:32:58,380
+Now,
+
+882
+00:33:00,250 --> 00:33:01,650
+what I did find though
+
+883
+00:33:01,650 --> 00:33:03,580
+what I did find was a library.
+
+884
+00:33:03,580 --> 00:33:05,810
+The closest thing on Kaggle
+
+885
+00:33:05,810 --> 00:33:07,510
+to
+
+886
+00:33:07,510 --> 00:33:09,950
+to this idea of
+reinforcement learning
+
+887
+00:33:09,950 --> 00:33:12,180
+was created by this guy,
+
+888
+00:33:12,180 --> 00:33:14,050
+and it's called the Kaggle gym.
+
+889
+00:33:14,050 --> 00:33:16,710
+What he did was
+he framed
+
+890
+00:33:16,710 --> 00:33:19,680
+he framed the reinforcement
+learning problem
+
+891
+00:33:19,680 --> 00:33:21,150
+he framed the
+
+892
+00:33:21,150 --> 00:33:22,480
+not the reinforcement learning
+
+893
+00:33:22,480 --> 00:33:25,010
+he framed the
+two sigma problem
+
+894
+00:33:25,010 --> 00:33:27,950
+of predicting the target variable
+
+895
+00:33:27,950 --> 00:33:30,110
+as a reinforcement
+learning problem
+
+896
+00:33:30,110 --> 00:33:32,850
+as a Markov decision process.
+
+897
+00:33:32,850 --> 00:33:33,780
+What I think is
+
+898
+00:33:33,780 --> 00:33:36,750
+this was the pioneering step
+
+899
+00:33:36,750 --> 00:33:38,150
+in saying...
+
+900
+00:33:38,150 --> 00:33:41,450
+Let's create a simulation of a dataset,
+
+901
+00:33:41,450 --> 00:33:45,110
+and then solve the datasets
+
+902
+00:33:45,110 --> 00:33:49,080
+and then solve the dataset
+in the context of a simulated setting.
+
+903
+00:33:49,080 --> 00:33:51,880
+He created this library
+called Kaggle gym.
+
+904
+00:33:51,880 --> 00:33:54,910
+Which takes that library
+and what I've done is
+
+905
+00:33:54,910 --> 00:33:57,710
+I've pasted it in this library here,
+
+906
+00:33:57,710 --> 00:33:59,480
+and we're gonna talk about it,
+and then we're gonna use it.
+
+907
+00:33:59,480 --> 00:34:01,450
+We're going to use that
+Kaggle gym library
+
+908
+00:34:01,450 --> 00:34:03,450
+to solve this problem.
+
+909
+00:34:04,050 --> 00:34:05,280
+Little refresher here.
+
+910
+00:34:05,280 --> 00:34:06,710
+In reinforcement learning,
+
+911
+00:34:06,710 --> 00:34:09,150
+we have a Markov decision process.
+
+912
+00:34:09,150 --> 00:34:10,680
+Where we have an agents,
+
+913
+00:34:10,680 --> 00:34:12,310
+it performs a set of actions
+
+914
+00:34:12,310 --> 00:34:13,380
+in a given state
+
+915
+00:34:13,380 --> 00:34:15,180
+to maximize reward.
+
+916
+00:34:15,180 --> 00:34:17,580
+The action that it takes given a state
+
+917
+00:34:17,580 --> 00:34:19,480
+is considered the policy.
+
+918
+00:34:19,480 --> 00:34:20,980
+So, a policies suggest
+
+919
+00:34:20,980 --> 00:34:21,850
+it's a function
+
+920
+00:34:21,850 --> 00:34:24,080
+that says given this state.
+
+921
+00:34:24,080 --> 00:34:25,380
+And, given this action,
+
+922
+00:34:25,380 --> 00:34:26,610
+Oh, no. Given this state,
+
+923
+00:34:26,610 --> 00:34:29,010
+what's the best action to take.
+
+924
+00:34:29,010 --> 00:34:30,750
+That's how a policy works.
+
+925
+00:34:34,950 --> 00:34:37,080
+There's two other functions here.
+
+926
+00:34:37,080 --> 00:34:38,980
+That are a part of
+a Markov decision process.
+
+927
+00:34:38,980 --> 00:34:40,450
+The transition probability
+
+928
+00:34:40,450 --> 00:34:42,850
+that says what is
+the next likely state
+
+929
+00:34:42,850 --> 00:34:44,550
+to go in if you take an action
+
+930
+00:34:44,550 --> 00:34:45,780
+in this given state.
+
+931
+00:34:45,780 --> 00:34:46,950
+And, a reward function
+
+932
+00:34:46,950 --> 00:34:51,550
+that's going to help the agent
+maximize what reward it receives
+
+933
+00:34:51,550 --> 00:34:52,980
+for taking a given action.
+
+934
+00:34:52,980 --> 00:34:54,880
+This can be learned over time,
+
+935
+00:34:54,880 --> 00:34:56,850
+and that would be
+considered Q learning.
+
+936
+00:34:56,850 --> 00:34:58,550
+That would be considered
+a model free method.
+
+937
+00:34:58,550 --> 00:35:01,150
+These two functions
+could be learned over time,
+
+938
+00:35:01,150 --> 00:35:03,910
+or they can be given to us,
+or beforehand,
+
+939
+00:35:03,910 --> 00:35:07,750
+in which case, this will be a complete
+Markov decision process.
+
+940
+00:35:07,750 --> 00:35:09,410
+But in the real world,
+
+941
+00:35:09,410 --> 00:35:11,080
+we will never, almost never
+
+942
+00:35:11,080 --> 00:35:13,210
+have a complete
+Markov decision process
+
+943
+00:35:13,210 --> 00:35:14,880
+We will almost always
+
+944
+00:35:14,880 --> 00:35:18,280
+have a partially observable
+Markov decision process.
+
+945
+00:35:18,280 --> 00:35:19,880
+What that means is that
+
+946
+00:35:19,880 --> 00:35:21,980
+we won't have these
+transition probabilities.
+
+947
+00:35:21,980 --> 00:35:23,750
+We won't have this reward function.
+
+948
+00:35:23,750 --> 00:35:24,880
+We'll have to learn them.
+
+949
+00:35:24,880 --> 00:35:25,680
+Or,
+
+950
+00:35:25,680 --> 00:35:27,510
+we could just avoid those functions,
+
+951
+00:35:27,510 --> 00:35:30,410
+and learn what's called
+Q function directly.
+
+952
+00:35:30,410 --> 00:35:32,250
+Let me talk about that at the end.
+
+953
+00:35:32,250 --> 00:35:34,110
+Okay, I just wanted to introduce
+
+954
+00:35:34,110 --> 00:35:36,680
+the idea of a Markov
+decision process,
+
+955
+00:35:36,680 --> 00:35:39,380
+before we get into this code.
+
+956
+00:35:39,380 --> 00:35:41,810
+In this Kaggle gym environment
+
+957
+00:35:41,810 --> 00:35:47,050
+that Frans Slothoubers suggested,
+
+958
+00:35:47,050 --> 00:35:48,050
+we have an R score.
+
+959
+00:35:48,050 --> 00:35:51,750
+So, what Kaggle suggested
+was that
+
+960
+00:35:55,050 --> 00:35:57,980
+What kaggle suggested
+
+961
+00:35:57,980 --> 00:35:59,480
+Let me just go back.
+
+962
+00:36:00,080 --> 00:36:02,780
+was that the data
+
+963
+00:36:02,780 --> 00:36:05,450
+we evaluate the scores
+using this equation right here.
+
+964
+00:36:05,450 --> 00:36:07,350
+Okay, let me make this bigger.
+
+965
+00:36:07,350 --> 00:36:08,510
+This
+
+966
+00:36:08,510 --> 00:36:10,410
+is called the R score.
+
+967
+00:36:10,410 --> 00:36:11,910
+The R score is
+
+968
+00:36:11,910 --> 00:36:13,050
+1 minus
+
+969
+00:36:13,050 --> 00:36:18,550
+the difference between
+the target, and the
+
+970
+00:36:18,550 --> 00:36:20,210
+predicted variable squared,
+
+971
+00:36:20,210 --> 00:36:21,280
+the sum of all of them,
+
+972
+00:36:21,280 --> 00:36:22,350
+divided by
+
+973
+00:36:22,350 --> 00:36:25,950
+the predicted variable minus
+
+974
+00:36:28,680 --> 00:36:29,310
+What was u again?
+
+975
+00:36:29,310 --> 00:36:31,050
+This constant value u.
+
+976
+00:36:31,050 --> 00:36:31,980
+It's not called u.
+
+977
+00:36:31,980 --> 00:36:33,750
+It's called... forgetting the...
+
+978
+00:36:33,750 --> 00:36:34,410
+name of it
+
+979
+00:36:34,410 --> 00:36:35,580
+but this constant value.
+
+980
+00:36:35,580 --> 00:36:36,310
+and one minus that
+
+981
+00:36:36,310 --> 00:36:37,480
+and that's R squared.
+
+982
+00:36:37,480 --> 00:36:39,780
+And then, we can derive R
+from R squared
+
+983
+00:36:39,780 --> 00:36:41,380
+by saying R equals
+
+984
+00:36:41,380 --> 00:36:43,310
+sign of R squared times
+
+985
+00:36:43,310 --> 00:36:45,710
+the square root of the absolute value
+
+986
+00:36:45,710 --> 00:36:46,880
+of R squared
+
+987
+00:36:46,880 --> 00:36:47,980
+and that's going to give us R
+
+988
+00:36:47,980 --> 00:36:48,910
+and that's going to be our
+
+989
+00:36:48,910 --> 00:36:50,880
+We can consider that a loss function,
+
+990
+00:36:50,880 --> 00:36:52,880
+because it's going to give us one scalar
+
+991
+00:36:52,880 --> 00:36:55,080
+it's going to give us a scalar value,
+
+992
+00:36:55,080 --> 00:36:58,410
+which we can use to measure
+how good are our
+
+993
+00:36:58,410 --> 00:37:00,080
+our predicted variable is
+
+994
+00:37:00,080 --> 00:37:02,310
+our predicted target is.
+
+995
+00:37:02,310 --> 00:37:04,110
+Then, based on that R score,
+
+996
+00:37:04,110 --> 00:37:05,810
+we can see what the leaderboard says.
+
+997
+00:37:05,810 --> 00:37:09,150
+We can see what everybody's R score is here.
+
+998
+00:37:09,150 --> 00:37:11,280
+The highest one was 0.02.
+
+999
+00:37:11,280 --> 00:37:12,550
+We'll see what we can get
+
+1000
+00:37:12,550 --> 00:37:15,910
+using this Kaggle gym library
+that was created before.
+
+1001
+00:37:15,910 --> 00:37:18,450
+Let me answer any other questions.
+
+1002
+00:37:19,850 --> 00:37:21,350
+Mu! Yes, thank you very much.
+
+1003
+00:37:21,350 --> 00:37:22,480
+mu(μ), alpha(α), theta(θ)
+
+1004
+00:37:22,480 --> 00:37:24,850
+I was in mu, alpha, theta in high school.
+
+1005
+00:37:24,850 --> 00:37:26,410
+How can I forget mu!
+
+1006
+00:37:26,410 --> 00:37:27,280
+Okay.
+
+1007
+00:37:27,280 --> 00:37:28,180
+How do i start the basics?
+
+1008
+00:37:28,180 --> 00:37:29,510
+Move 37 is my course.
+
+1009
+00:37:29,510 --> 00:37:31,410
+It's all on YouTube for free.
+Check it out.
+
+1010
+00:37:32,750 --> 00:37:34,250
+Right.
+
+1011
+00:37:34,250 --> 00:37:35,080
+miu
+
+1012
+00:37:35,080 --> 00:37:35,680
+Alright.
+
+1013
+00:37:35,680 --> 00:37:36,850
+Great, guys. Thank you.
+
+1014
+00:37:38,080 --> 00:37:39,010
+What is this?
+
+1015
+00:37:39,010 --> 00:37:40,110
+Let me start off with this.
+
+1016
+00:37:40,110 --> 00:37:41,180
+The R score,
+
+1017
+00:37:41,180 --> 00:37:43,310
+this function is just the
+programmatic version
+
+1018
+00:37:43,310 --> 00:37:45,250
+of the equation that
+I've just showed.
+
+1019
+00:37:45,250 --> 00:37:46,350
+That's it.
+
+1020
+00:37:46,350 --> 00:37:47,380
+That's how we're going to compute it.
+
+1021
+00:37:47,380 --> 00:37:49,210
+Let me go through this.
+
+1022
+00:37:49,210 --> 00:37:53,550
+Inside of this Kaggle gym environment,
+
+1023
+00:37:53,550 --> 00:37:55,410
+we have an observation.
+
+1024
+00:37:55,410 --> 00:37:57,110
+What the observation is
+
+1025
+00:37:57,110 --> 00:37:59,580
+it is our training
+
+1026
+00:37:59,580 --> 00:38:02,050
+it is our predicted variable
+
+1027
+00:38:02,050 --> 00:38:03,450
+what we want to predict.
+
+1028
+00:38:03,450 --> 00:38:04,410
+And, our...
+
+1029
+00:38:04,410 --> 00:38:05,610
+It is our...
+
+1030
+00:38:06,950 --> 00:38:08,710
+It is the variable that
+we are predicting.
+
+1031
+00:38:08,710 --> 00:38:10,910
+So, the predicted variable,
+and the target variable.
+
+1032
+00:38:10,910 --> 00:38:11,880
+what is already there
+
+1033
+00:38:11,880 --> 00:38:14,010
+because we already have
+those targets or labels.
+
+1034
+00:38:14,010 --> 00:38:15,680
+We can call them labels. right?
+
+1035
+00:38:15,680 --> 00:38:16,410
+So, labels.
+
+1036
+00:38:16,410 --> 00:38:18,310
+Man, I'm sweating today.
+
+1037
+00:38:18,310 --> 00:38:18,880
+Yes!
+
+1038
+00:38:18,880 --> 00:38:19,610
+Okay.
+
+1039
+00:38:19,610 --> 00:38:20,680
+We can call them labels.
+
+1040
+00:38:20,680 --> 00:38:22,880
+Inside of our environment,
+
+1041
+00:38:22,880 --> 00:38:24,280
+Inside of this environment,
+
+1042
+00:38:24,280 --> 00:38:26,180
+and in our environment, what is it?
+
+1043
+00:38:26,180 --> 00:38:29,710
+Our environment is
+our static dataset.
+
+1044
+00:38:29,710 --> 00:38:32,410
+We'll split it up into
+training and testing data.
+
+1045
+00:38:34,150 --> 00:38:35,310
+Here's the step function.
+
+1046
+00:38:35,310 --> 00:38:38,450
+This is basically recreating that
+open AI gym environment,
+
+1047
+00:38:38,450 --> 00:38:41,180
+or an agent takes a step,
+
+1048
+00:38:41,180 --> 00:38:43,350
+the parameter is the action that it takes.
+
+1049
+00:38:43,350 --> 00:38:45,750
+It receives an observation and a reward.
+
+1050
+00:38:45,750 --> 00:38:49,550
+In this very naive implementation,
+
+1051
+00:38:50,450 --> 00:38:51,780
+how it's computed
+
+1052
+00:38:51,780 --> 00:38:54,150
+how the R score is computed
+
+1053
+00:38:54,150 --> 00:38:56,550
+is just by saying that
+
+1054
+00:38:56,550 --> 00:38:59,010
+the predicted variable is
+only going to be
+
+1055
+00:38:59,010 --> 00:39:00,950
+the variable from
+the previous time step.
+
+1056
+00:39:00,950 --> 00:39:02,910
+We could do that, actually.
+
+1057
+00:39:02,910 --> 00:39:05,850
+We could choose our own policy
+based on this.
+
+1058
+00:39:05,850 --> 00:39:07,880
+But, what inside of this alone
+
+1059
+00:39:07,880 --> 00:39:10,250
+all it's saying is
+
+1060
+00:39:10,250 --> 00:39:12,080
+This is really the key right here
+
+1061
+00:39:12,080 --> 00:39:13,480
+like this part right here.
+
+1062
+00:39:13,480 --> 00:39:15,710
+The reward for taking a step
+
+1063
+00:39:15,710 --> 00:39:17,650
+in this environment is going to be
+
+1064
+00:39:17,650 --> 00:39:19,780
+the R score of our
+predicted variable
+
+1065
+00:39:19,780 --> 00:39:21,310
+and our target.
+
+1066
+00:39:21,310 --> 00:39:23,380
+That's our reward and
+we return that
+
+1067
+00:39:23,380 --> 00:39:25,380
+as well as an observation,
+which is going to be
+
+1068
+00:39:25,380 --> 00:39:26,750
+the values of both
+
+1069
+00:39:26,750 --> 00:39:29,010
+as we saw before,
+
+1070
+00:39:29,010 --> 00:39:30,450
+a boolean that says
+done or not,
+
+1071
+00:39:30,450 --> 00:39:34,510
+and an info which is
+a logging variable.
+
+1072
+00:39:34,510 --> 00:39:36,880
+Based on that, we can create a policy.
+
+1073
+00:39:36,880 --> 00:39:39,450
+Let's write one
+using this variable.
+
+1074
+00:39:39,450 --> 00:39:41,050
+The reason I pasted it all is
+
+1075
+00:39:41,050 --> 00:39:43,480
+because this could be its own Python file.
+
+1076
+00:39:43,480 --> 00:39:44,980
+KaggleGym.py
+
+1077
+00:39:46,710 --> 00:39:47,810
+Let's test this out.
+
+1078
+00:39:47,810 --> 00:39:48,750
+We'll say
+
+1079
+00:39:48,750 --> 00:39:50,810
+Let's create our own agent
+environment loop.
+
+1080
+00:39:50,810 --> 00:39:52,710
+we'll define our own policy,
+
+1081
+00:39:52,710 --> 00:39:54,650
+and then based on that,
+
+1082
+00:39:57,380 --> 00:39:59,850
+we'll try to improve it.
+
+1083
+00:40:03,880 --> 00:40:05,710
+Inside of this test function, will say
+
+1084
+00:40:05,710 --> 00:40:07,780
+go ahead and create
+the environment using make,
+
+1085
+00:40:07,780 --> 00:40:09,780
+which is the function
+that I just defined,
+
+1086
+00:40:09,780 --> 00:40:12,280
+get the initial observation
+which is going to be
+
+1087
+00:40:12,280 --> 00:40:15,310
+our variables that we
+defined before.
+
+1088
+00:40:15,310 --> 00:40:16,210
+We'll print them out,
+
+1089
+00:40:16,210 --> 00:40:19,010
+so we can see them
+just for logging purposes.
+
+1090
+00:40:19,010 --> 00:40:22,580
+What is the observation of
+both the target
+
+1091
+00:40:22,580 --> 00:40:28,350
+and of the training data
+
+1092
+00:40:28,350 --> 00:40:32,110
+or the predicted value.
+
+1093
+00:40:32,110 --> 00:40:34,910
+Based on both of those,
+
+1094
+00:40:37,510 --> 00:40:40,150
+we'll create our training loop.
+
+1095
+00:40:40,150 --> 00:40:44,080
+This is the agent environment loop
+based on that.
+
+1096
+00:40:44,080 --> 00:40:46,910
+So, what we'll say is
+
+1097
+00:40:46,910 --> 00:40:48,010
+while true,
+
+1098
+00:40:48,010 --> 00:40:49,650
+Here's the loop begins.
+
+1099
+00:40:49,650 --> 00:40:53,710
+The target value is going to be
+the initial observation.
+
+1100
+00:40:58,610 --> 00:41:02,510
+We'll choose some starting point
+to just start from.
+
+1101
+00:41:02,510 --> 00:41:05,210
+Like, what is the predictor variable
+that we want to start from?
+
+1102
+00:41:05,210 --> 00:41:07,980
+We'll just say...
+
+1103
+00:41:13,810 --> 00:41:16,580
+And then...
+
+1104
+00:41:16,580 --> 00:41:17,610
+observation
+
+1105
+00:41:17,610 --> 00:41:19,750
+What are we going to get returned
+when we take a step.
+
+1106
+00:41:19,750 --> 00:41:21,350
+I'll continue to explain this guys.
+
+1107
+00:41:21,350 --> 00:41:22,550
+Let me just write this out.
+
+1108
+00:41:22,550 --> 00:41:24,450
+I'm not done explaining this.
+
+1109
+00:41:27,110 --> 00:41:29,010
+This is the class that
+we just talked about.
+
+1110
+00:41:29,010 --> 00:41:31,480
+It's going to return
+all three of these things
+
+1111
+00:41:31,480 --> 00:41:34,880
+based on the action
+which is the target we take.
+
+1112
+00:41:34,880 --> 00:41:36,150
+And, if we're done,
+
+1113
+00:41:36,150 --> 00:41:37,750
+break, we're done
+with the loop.
+
+1114
+00:41:37,750 --> 00:41:38,450
+Else,
+
+1115
+00:41:38,450 --> 00:41:40,480
+Now, what do we do
+with the rewards?
+
+1116
+00:41:40,480 --> 00:41:42,210
+We can choose any policy.
+
+1117
+00:41:42,210 --> 00:41:46,810
+Here is where we actually show
+what that policy is going to be.
+
+1118
+00:41:48,810 --> 00:41:52,610
+What I'm going to do it
+as you're seeing right now is,
+
+1119
+00:41:52,610 --> 00:41:55,710
+I'm going to print out three variables,
+
+1120
+00:41:55,710 --> 00:41:56,610
+and then I'm done.
+
+1121
+00:41:56,610 --> 00:41:57,980
+I'm going to print out the info.
+
+1122
+00:41:57,980 --> 00:42:01,210
+I'm going to print out
+the amount of rewards.
+
+1123
+00:42:01,210 --> 00:42:03,010
+I'm going to print out
+
+1124
+00:42:04,480 --> 00:42:06,350
+the first few rewards.
+
+1125
+00:42:06,350 --> 00:42:07,950
+0 through 15.
+
+1126
+00:42:07,950 --> 00:42:09,810
+Okay, so that's that.
+
+1127
+00:42:11,480 --> 00:42:13,210
+Invalid syntax for make?
+
+1128
+00:42:13,210 --> 00:42:13,650
+All right.
+
+1129
+00:42:13,650 --> 00:42:14,980
+Environment
+
+1130
+00:42:15,310 --> 00:42:16,680
+equals make.
+
+1131
+00:42:20,010 --> 00:42:21,110
+And then, I'll test it out.
+
+1132
+00:42:21,110 --> 00:42:23,180
+All I do is just run tests.
+
+1133
+00:42:23,180 --> 00:42:25,350
+And that's gonna give us,
+
+1134
+00:42:27,480 --> 00:42:28,280
+What?
+
+1135
+00:42:29,710 --> 00:42:31,610
+Environment is not defined?
+
+1136
+00:42:32,150 --> 00:42:33,480
+Did i, really?
+
+1137
+00:42:33,780 --> 00:42:35,350
+No, it is.
+
+1138
+00:42:35,780 --> 00:42:36,780
+Check this out.
+
+1139
+00:42:37,610 --> 00:42:38,550
+Right.
+
+1140
+00:42:39,580 --> 00:42:40,750
+Right.
+
+1141
+00:42:41,750 --> 00:42:43,150
+And then,
+
+1142
+00:42:43,810 --> 00:42:44,750
+Yep.
+
+1143
+00:42:49,080 --> 00:42:49,980
+Oh, okay.
+
+1144
+00:42:49,980 --> 00:42:52,750
+Observation is not defined.
+
+1145
+00:42:52,750 --> 00:42:53,680
+Line 9.
+
+1146
+00:42:53,680 --> 00:42:55,110
+Obser...
+
+1147
+00:42:56,310 --> 00:42:57,650
+...vation.
+
+1148
+00:43:04,010 --> 00:43:05,610
+Rewards is not defined.
+
+1149
+00:43:05,610 --> 00:43:07,450
+rewards.append
+
+1150
+00:43:09,380 --> 00:43:10,410
+Oh, rewards.
+
+1151
+00:43:17,210 --> 00:43:18,210
+Okay.
+
+1152
+00:43:20,510 --> 00:43:21,850
+Okay, let me answer some
+questions now.
+
+1153
+00:43:21,850 --> 00:43:24,850
+Because, we're definitely going to
+have some questions here.
+
+1154
+00:43:26,580 --> 00:43:27,550
+Okay.
+
+1155
+00:43:31,910 --> 00:43:33,250
+Oh, break.
+
+1156
+00:43:33,250 --> 00:43:34,180
+How did this not catch it?
+
+1157
+00:43:34,180 --> 00:43:35,180
+Okay, gotcha.
+
+1158
+00:43:35,950 --> 00:43:37,910
+Let me answer some questions here.
+
+1159
+00:43:39,050 --> 00:43:40,280
+Thank you.
+
+1160
+00:43:50,480 --> 00:43:52,410
+Let's see what we get here.
+
+1161
+00:43:52,410 --> 00:43:55,950
+So, our public score
+is going to be 0.017.
+
+1162
+00:43:55,950 --> 00:43:58,980
+Compared to...
+
+1163
+00:43:58,980 --> 00:44:01,080
+So, we're like #43.
+
+1164
+00:44:01,080 --> 00:44:02,250
+Guess what this
+
+1165
+00:44:02,250 --> 00:44:03,710
+Okay, so guess what?
+
+1166
+00:44:03,710 --> 00:44:04,950
+Here's our policy.
+
+1167
+00:44:04,950 --> 00:44:07,080
+Here's our policy right here.
+
+1168
+00:44:07,780 --> 00:44:09,280
+All we're saying,
+
+1169
+00:44:09,280 --> 00:44:10,580
+This is a naive method,
+
+1170
+00:44:10,580 --> 00:44:13,450
+but in the context of
+a Markov decision process.
+
+1171
+00:44:13,450 --> 00:44:14,280
+That's it.
+
+1172
+00:44:14,280 --> 00:44:15,980
+The basic idea here is
+
+1173
+00:44:15,980 --> 00:44:18,450
+that we framed this as
+a Markov decision process,
+
+1174
+00:44:18,450 --> 00:44:21,080
+where an agent is taking action
+in an environment
+
+1175
+00:44:21,080 --> 00:44:23,080
+to move from one state
+to the next state.
+
+1176
+00:44:23,910 --> 00:44:25,450
+And, we're trying to maximize reward.
+
+1177
+00:44:25,450 --> 00:44:29,280
+The policy to choose
+that action is going to be
+
+1178
+00:44:29,280 --> 00:44:32,480
+the variable that we
+want to predict
+
+1179
+00:44:32,480 --> 00:44:35,410
+is going to be the variable
+from the last time step.
+
+1180
+00:44:35,410 --> 00:44:38,480
+To compute the how good it is
+
+1181
+00:44:38,480 --> 00:44:39,780
+we're just going to
+find the difference
+
+1182
+00:44:39,780 --> 00:44:41,780
+between the predicted
+and the actual variable.
+
+1183
+00:44:42,280 --> 00:44:45,850
+So, it's going to be
+the variable in t-1 and t.
+
+1184
+00:44:45,850 --> 00:44:46,610
+That's it.
+
+1185
+00:44:46,610 --> 00:44:48,410
+We could have done this
+in one line of code.
+
+1186
+00:44:48,410 --> 00:44:49,210
+However,
+
+1187
+00:44:49,210 --> 00:44:52,410
+In the context of a Markov decision
+process which we have here,
+
+1188
+00:44:52,410 --> 00:44:55,250
+we could then add to it
+by creating another policy,
+
+1189
+00:44:55,250 --> 00:44:56,950
+by creating a better policy,
+
+1190
+00:44:56,950 --> 00:44:58,710
+that's going to improve on this.
+
+1191
+00:44:58,710 --> 00:45:00,310
+It's like what would
+be an example
+
+1192
+00:45:00,310 --> 00:45:01,180
+Q learning
+
+1193
+00:45:01,180 --> 00:45:02,610
+Okay? So, Q learning
+
+1194
+00:45:02,610 --> 00:45:03,610
+where
+
+1195
+00:45:04,510 --> 00:45:07,180
+an agent is taking
+an action given a state
+
+1196
+00:45:07,180 --> 00:45:09,550
+in order to maximize a reward,
+
+1197
+00:45:09,550 --> 00:45:12,250
+and we are computing
+this Q table
+
+1198
+00:45:12,250 --> 00:45:18,150
+which is a giant matrix of
+possible actions that we can take
+
+1199
+00:45:18,150 --> 00:45:19,680
+in any given state.
+
+1200
+00:45:19,680 --> 00:45:22,950
+Then, we're going to optimally
+choose what those actions will be
+
+1201
+00:45:22,950 --> 00:45:25,380
+by iteratively updating
+the cue table
+
+1202
+00:45:25,380 --> 00:45:27,750
+using what's called
+the bellman equation.
+
+1203
+00:45:27,750 --> 00:45:30,080
+What the bellman equation does
+
+1204
+00:45:30,080 --> 00:45:32,480
+it relates one state to another.
+
+1205
+00:45:32,480 --> 00:45:36,210
+If we can relate any one state
+in an environment
+
+1206
+00:45:36,210 --> 00:45:37,750
+to another state,
+
+1207
+00:45:37,750 --> 00:45:40,150
+then we can compute
+those variables
+
+1208
+00:45:40,150 --> 00:45:41,850
+that are different between them.
+
+1209
+00:45:41,850 --> 00:45:46,880
+Like, the state value function,
+and the action value function.
+
+1210
+00:45:46,880 --> 00:45:50,150
+Using those, we can compute
+an optimal policy.
+
+1211
+00:45:50,150 --> 00:45:52,150
+That's how we could improve on this.
+
+1212
+00:45:52,150 --> 00:45:53,780
+However, like I said before,
+
+1213
+00:45:53,780 --> 00:45:56,050
+we need an environment
+that's going to be reactive.
+
+1214
+00:45:56,050 --> 00:45:57,980
+This is also just to show that
+
+1215
+00:45:57,980 --> 00:46:00,610
+you don't necessarily
+have to have the greatest
+
+1216
+00:46:00,610 --> 00:46:03,380
+cutting edge algorithm
+in the world to place well
+
+1217
+00:46:05,110 --> 00:46:09,110
+to on a challenge, or to do well in general
+in machine learning.
+
+1218
+00:46:09,110 --> 00:46:11,510
+Sometimes linear regression can work better
+
+1219
+00:46:11,510 --> 00:46:12,650
+than a deep neural network,
+
+1220
+00:46:12,650 --> 00:46:13,950
+if your data set is small,
+
+1221
+00:46:13,950 --> 00:46:17,850
+or for a variety of reasons.
+
+1222
+00:46:19,410 --> 00:46:20,850
+My point is that
+
+1223
+00:46:22,150 --> 00:46:24,880
+we placed using this
+very simple methodology.
+
+1224
+00:46:24,880 --> 00:46:27,280
+Obviously, it's a very naive method.
+
+1225
+00:46:27,280 --> 00:46:29,980
+But, I wanted to really sneak in
+
+1226
+00:46:29,980 --> 00:46:31,980
+a lecture on reinforcement learning
+
+1227
+00:46:31,980 --> 00:46:32,910
+on Q learning
+
+1228
+00:46:32,910 --> 00:46:35,750
+on the difference betwee
+ time series forecasting
+
+1229
+00:46:35,750 --> 00:46:37,910
+and reinforcement learning into this
+
+1230
+00:46:37,910 --> 00:46:40,750
+problem of this Kaggle challenge.
+
+1231
+00:46:40,750 --> 00:46:42,580
+This was the the most...
+
+1232
+00:46:42,580 --> 00:46:46,350
+This specific challenge wa
+ the most RL friendly challenge
+
+1233
+00:46:46,350 --> 00:46:48,150
+that's available on Kaggle right now.
+
+1234
+00:46:48,150 --> 00:46:52,450
+And like I've said,
+this is a great opportunity
+
+1235
+00:46:52,450 --> 00:46:54,580
+for aspiring data scientists out there
+
+1236
+00:46:54,580 --> 00:46:56,180
+to create a service
+
+1237
+00:46:56,180 --> 00:46:58,010
+that creates simulated environments
+
+1238
+00:46:58,010 --> 00:47:00,910
+that can be offered
+to real-world companies
+
+1239
+00:47:00,910 --> 00:47:04,310
+and to create a business out of that.
+
+1240
+00:47:04,310 --> 00:47:05,980
+I see a real need for that
+
+1241
+00:47:05,980 --> 00:47:08,150
+that could be
+a use case for this.
+
+1242
+00:47:08,950 --> 00:47:11,280
+I'll answer two more questions.
+
+1243
+00:47:11,280 --> 00:47:15,550
+I actually have a great Q learning video
+coming out this weekend.
+
+1244
+00:47:15,550 --> 00:47:17,750
+I'm going to have some great links
+for you in the video description.
+
+1245
+00:47:17,750 --> 00:47:19,580
+The datasets in the video description.
+
+1246
+00:47:21,450 --> 00:47:23,450
+Let me
+
+1247
+00:47:23,450 --> 00:47:24,080
+do a rap.
+
+1248
+00:47:24,080 --> 00:47:26,250
+So, just say a
+
+1249
+00:47:26,250 --> 00:47:28,380
+just say a
+
+1250
+00:47:28,380 --> 00:47:30,210
+a topic and
+I'll do a free-style rap
+
+1251
+00:47:30,210 --> 00:47:33,950
+on the topic, before I end
+this live stream.
+
+1252
+00:47:39,880 --> 00:47:43,110
+My favorite AI company is
+School of AI.
+
+1253
+00:47:43,110 --> 00:47:45,810
+We're actually a nonprofit organization,
+
+1254
+00:47:45,810 --> 00:47:47,580
+and it is the adventure
+of a lifetime,
+
+1255
+00:47:47,580 --> 00:47:50,910
+and it is a story
+that's going to be told
+
+1256
+00:47:50,910 --> 00:47:51,910
+decades from now,
+
+1257
+00:47:51,910 --> 00:47:52,980
+and it's not even about me.
+
+1258
+00:47:52,980 --> 00:47:55,810
+It's about the deans.
+It's about the people running this.
+
+1259
+00:47:56,910 --> 00:47:58,850
+Really, it's a family,
+
+1260
+00:47:58,850 --> 00:48:00,250
+the students, the wizards,
+
+1261
+00:48:00,250 --> 00:48:02,280
+were all a family,
+the people watching this.
+
+1262
+00:48:02,280 --> 00:48:05,480
+We are all a family, if you are here
+at the end of this live stream.
+
+1263
+00:48:05,480 --> 00:48:08,150
+You are a dedicated data scientist
+
+1264
+00:48:08,150 --> 00:48:09,080
+who cares
+
+1265
+00:48:09,080 --> 00:48:10,980
+or AI researcher who cares
+
+1266
+00:48:10,980 --> 00:48:12,950
+about the future of AI
+and using it
+
+1267
+00:48:12,950 --> 00:48:14,350
+to solve real-world problems.
+
+1268
+00:48:14,350 --> 00:48:16,310
+That's our mission, our values.
+
+1269
+00:48:19,750 --> 00:48:20,980
+Open AI.
+
+1270
+00:48:20,980 --> 00:48:23,180
+No, I want to do a different one.
+
+1271
+00:48:23,180 --> 00:48:24,250
+Chatbot.
+
+1272
+00:48:26,050 --> 00:48:26,880
+Okay.
+
+1273
+00:48:27,350 --> 00:48:29,380
+(beat starts)
+
+1274
+00:48:29,380 --> 00:48:30,210
+Okay, here we go.
+
+1275
+00:48:33,280 --> 00:48:35,610
+There's always a little tag
+at the beginning.
+
+1276
+00:48:40,810 --> 00:48:42,450
+♪ I've tried to use a chatbot ♪
+
+1277
+00:48:42,450 --> 00:48:44,910
+♪ I've tried to make matplotlib ♪
+
+1278
+00:48:44,910 --> 00:48:46,780
+♪ plot it out with the graph ♪
+
+1279
+00:48:46,780 --> 00:48:49,180
+♪ but you can't because it's text data ♪
+
+1280
+00:48:49,180 --> 00:48:50,880
+♪ man you gotta use math ♪
+
+1281
+00:48:50,880 --> 00:48:52,110
+♪ I don't know what you're using man ♪
+
+1282
+00:48:52,110 --> 00:48:53,450
+♪ you're out of class ♪
+
+1283
+00:48:53,450 --> 00:48:55,010
+♪ you gotta take a chatbot ♪
+
+1284
+00:48:55,010 --> 00:48:56,010
+♪ and visualize it ♪
+
+1285
+00:48:56,010 --> 00:48:58,350
+♪ in a way that people can realize it ♪
+
+1286
+00:48:58,350 --> 00:49:00,050
+♪ it's okay let me show you ♪
+
+1287
+00:49:00,050 --> 00:49:01,710
+♪ instead of matplotlib ♪
+
+1288
+00:49:01,710 --> 00:49:04,050
+♪ let's use something else like I call it ♪
+
+1289
+00:49:04,050 --> 00:49:05,680
+♪ matplotjive ♪
+
+1290
+00:49:05,680 --> 00:49:06,880
+♪ it's a new library ♪
+
+1291
+00:49:06,880 --> 00:49:08,050
+♪ I've just invented it ♪
+
+1292
+00:49:08,050 --> 00:49:09,180
+♪ it's made for chatbots ♪
+
+1293
+00:49:09,180 --> 00:49:11,110
+♪ to visualize in the browser ♪
+
+1294
+00:49:11,110 --> 00:49:12,180
+♪ it's like a laptop ♪
+
+1295
+00:49:12,180 --> 00:49:13,510
+♪ it runs on anything ♪
+
+1296
+00:49:13,510 --> 00:49:17,010
+♪ browser, in the cloud, GPU, CPU, TPU ♪
+
+1297
+00:49:17,010 --> 00:49:17,850
+♪ I don't care ♪
+
+1298
+00:49:17,850 --> 00:49:19,210
+♪ that's it for you ♪
+
+1299
+00:49:19,210 --> 00:49:20,250
+All right, that's it.
+
+1300
+00:49:20,250 --> 00:49:21,380
+That's it for the rap.
+
+1301
+00:49:21,380 --> 00:49:22,610
+Thank you guys for showing up.
+
+1302
+00:49:22,610 --> 00:49:23,910
+I hope I made this
+enjoyable for you.
+
+1303
+00:49:23,910 --> 00:49:27,880
+time series forecasting, RL,
+Markov decision precesses
+
+1304
+00:49:27,880 --> 00:49:30,610
+and the accessibility of
+Kaggle as a way to
+
+1305
+00:49:30,610 --> 00:49:33,310
+to earn a passive income,
+
+1306
+00:49:33,310 --> 00:49:35,410
+and a way to hone your
+skills as a data scientist.
+
+1307
+00:49:35,410 --> 00:49:38,250
+These are all the things that
+I hope you've learned in this live stream
+
+1308
+00:49:38,250 --> 00:49:39,750
+I love you guys.
+
+1309
+00:49:39,750 --> 00:49:41,450
+We're about to hit 500,000 subscribers,
+
+1310
+00:49:41,450 --> 00:49:42,980
+so I can't wait. Tell all your friends.
+
+1311
+00:49:42,980 --> 00:49:45,080
+We want to grow this community
+as fast as possible.
+
+1312
+00:49:45,080 --> 00:49:46,510
+So, thank you, guys.
+I love you.
+
+1313
+00:49:46,510 --> 00:49:47,710
+And, thanks for watching.
+
+1314
+00:49:47,710 --> 00:49:49,480
+For now, I've got to go.
+
+1315
+00:49:50,350 --> 00:49:52,250
+Work on school of AI stuff.
+
+1316
+00:49:52,250 --> 00:49:53,810
+So, yeah. Thanks for watching.
+

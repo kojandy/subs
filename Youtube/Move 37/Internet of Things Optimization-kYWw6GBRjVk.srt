@@ -1,0 +1,1264 @@
+﻿1
+00:00:00,000 --> 00:00:01,880
+Hello, world! It's Siraj.
+
+2
+00:00:01,880 --> 00:00:03,650
+The internet of things.
+
+3
+00:00:03,650 --> 00:00:05,920
+It's definitely a buzzword these days.
+
+4
+00:00:05,920 --> 00:00:07,420
+But, it's a real thing.
+
+5
+00:00:07,420 --> 00:00:09,220
+I'll demonstrate how to use
+
+6
+00:00:09,220 --> 00:00:10,860
+reinforcement learning
+
+7
+00:00:10,860 --> 00:00:13,760
+to optimize electricity consumption
+
+8
+00:00:13,760 --> 00:00:16,760
+amongst multiple devices
+in a smart home.
+
+9
+00:00:16,760 --> 00:00:18,360
+Marc Andriessen's quote that
+
+10
+00:00:18,360 --> 00:00:20,030
+"Software is eating the world"
+
+11
+00:00:20,030 --> 00:00:21,930
+still rings true today.
+
+12
+00:00:21,930 --> 00:00:24,370
+More and more devices are
+coming prepackaged
+
+13
+00:00:24,370 --> 00:00:25,940
+with internet access
+
+14
+00:00:25,940 --> 00:00:27,440
+that wouldn't normally be.
+
+15
+00:00:27,440 --> 00:00:28,110
+That includes:
+
+16
+00:00:28,110 --> 00:00:29,640
+smart salt shakers,
+
+17
+00:00:29,640 --> 00:00:31,340
+smart rectal thermometers,
+
+18
+00:00:31,340 --> 00:00:32,240
+smart mugs,
+
+19
+00:00:32,240 --> 00:00:33,150
+smart chairs,
+
+20
+00:00:33,150 --> 00:00:34,350
+the list goes on.
+
+21
+00:00:34,350 --> 00:00:35,650
+Because these devices
+
+22
+00:00:35,650 --> 00:00:37,950
+have a connection to the world wide web,
+
+23
+00:00:37,950 --> 00:00:40,290
+they can communicate with the outside world
+
+24
+00:00:40,290 --> 00:00:41,320
+and each other,
+
+25
+00:00:41,320 --> 00:00:44,660
+sharing information and
+even learning from one another.
+
+26
+00:00:44,660 --> 00:00:47,130
+This internet of physical things is
+
+27
+00:00:47,130 --> 00:00:50,030
+becoming increasingly common
+across the globe
+
+28
+00:00:50,030 --> 00:00:51,530
+whether it's a smart home,
+
+29
+00:00:51,530 --> 00:00:53,470
+a fleet of self-driving cars,
+
+30
+00:00:53,470 --> 00:00:55,170
+or a pipeline of assets.
+
+31
+00:00:55,170 --> 00:00:57,100
+As they are shipped across the globe,
+
+32
+00:00:57,100 --> 00:01:00,410
+having a web of
+interconnected physical devices
+
+33
+00:01:00,410 --> 00:01:02,940
+has a huge range of use cases
+in our modern world
+
+34
+00:01:02,940 --> 00:01:05,180
+for businesses and consumers.
+
+35
+00:01:05,180 --> 00:01:08,110
+But, a major concern regarding
+these devices is
+
+36
+00:01:08,110 --> 00:01:10,750
+the amount of energy
+they'll need to consume.
+
+37
+00:01:10,750 --> 00:01:12,780
+Silicon chips need electricity.
+
+38
+00:01:12,780 --> 00:01:14,550
+The more devices we have,
+
+39
+00:01:14,550 --> 00:01:16,760
+the higher our energy cost will be.
+
+40
+00:01:16,760 --> 00:01:19,690
+It turns out that we can use
+reinforcement learning
+
+41
+00:01:19,690 --> 00:01:20,930
+to create a system
+
+42
+00:01:20,930 --> 00:01:24,860
+that will minimize our
+electricity costs substantially.
+
+43
+00:01:24,860 --> 00:01:27,330
+This can apply to a
+whole range of industries
+
+44
+00:01:27,330 --> 00:01:29,940
+where an interconnected system of devices
+
+45
+00:01:29,940 --> 00:01:32,140
+is required to perform a task.
+
+46
+00:01:32,140 --> 00:01:34,010
+Agriculture, manufacturing, and
+
+47
+00:01:34,010 --> 00:01:35,570
+even a personal home
+
+48
+00:01:35,570 --> 00:01:36,940
+which will be our demo.
+
+49
+00:01:36,940 --> 00:01:39,080
+Google recently used RL
+
+50
+00:01:39,080 --> 00:01:40,950
+to reduce the amount of energy.
+
+51
+00:01:40,950 --> 00:01:42,910
+They used in their data center
+
+52
+00:01:42,910 --> 00:01:44,550
+by up to 40 percent.
+
+53
+00:01:44,550 --> 00:01:46,620
+Just like a laptop generates heat.
+
+54
+00:01:46,620 --> 00:01:48,490
+Their massive racks of servers
+
+55
+00:01:48,490 --> 00:01:49,990
+generate a lot of heat.
+
+56
+00:01:49,990 --> 00:01:52,020
+But, too much heat can
+damage the servers,
+
+57
+00:01:52,020 --> 00:01:54,560
+so a cooling system is necessary
+
+58
+00:01:54,560 --> 00:01:56,860
+to help maintain
+a certain temperature.
+
+59
+00:01:56,860 --> 00:01:59,330
+Because it's such a
+dynamic environment,
+
+60
+00:01:59,330 --> 00:02:01,600
+a learning system is required
+
+61
+00:02:01,600 --> 00:02:03,070
+to set that temperature.
+
+62
+00:02:03,070 --> 00:02:05,370
+A whole host of unforeseen scenarios
+
+63
+00:02:05,370 --> 00:02:06,810
+like changes in weather
+
+64
+00:02:06,810 --> 00:02:08,770
+and power outages can occur.
+
+65
+00:02:08,770 --> 00:02:11,580
+Also, humans interact
+with the equipment
+
+66
+00:02:11,580 --> 00:02:14,050
+in unexpected ways regularly.
+
+67
+00:02:14,050 --> 00:02:16,580
+Probably doing the
+floss dance on them.
+
+68
+00:02:16,580 --> 00:02:19,890
+And, each data center
+has a unique architecture
+
+69
+00:02:19,890 --> 00:02:21,150
+and environment.
+
+70
+00:02:21,150 --> 00:02:24,090
+So, their system needed to
+be able to adapt
+
+71
+00:02:24,090 --> 00:02:26,530
+to multiple unique environments.
+
+72
+00:02:26,530 --> 00:02:29,830
+Last week, we introduced
+the fundamental way
+
+73
+00:02:29,830 --> 00:02:32,260
+of framing the reinforcement
+learning problem,
+
+74
+00:02:32,260 --> 00:02:34,570
+where an agent is interacting
+
+75
+00:02:34,570 --> 00:02:37,540
+with an environment to maximize a reward.
+
+76
+00:02:37,540 --> 00:02:40,040
+The Markov decision process.
+
+77
+00:02:40,040 --> 00:02:42,640
+The goal of an agent is to learn a policy,
+
+78
+00:02:42,640 --> 00:02:44,540
+so it knows, given a state,
+
+79
+00:02:44,540 --> 00:02:46,140
+the best action to take
+
+80
+00:02:46,140 --> 00:02:48,450
+in order to maximize a reward.
+
+81
+00:02:48,450 --> 00:02:51,420
+In a complete Markov decision process,
+
+82
+00:02:51,420 --> 00:02:54,620
+where all of the environment
+variables are known,
+
+83
+00:02:54,620 --> 00:02:56,560
+we can use dynamic programming
+
+84
+00:02:56,560 --> 00:02:58,520
+to learn an optimal policy.
+
+85
+00:02:58,520 --> 00:03:00,560
+But, what if we don't know
+
+86
+00:03:00,560 --> 00:03:03,230
+all the environment variables beforehand?
+
+87
+00:03:03,230 --> 00:03:04,100
+Give up!
+
+88
+00:03:04,100 --> 00:03:04,830
+No.
+
+89
+00:03:04,830 --> 00:03:08,130
+Then, it'd be considered
+not model-based RL,
+
+90
+00:03:08,130 --> 00:03:10,540
+but model free RL.
+
+91
+00:03:10,540 --> 00:03:12,400
+In model free RL,
+
+92
+00:03:12,400 --> 00:03:14,340
+the first variable we miss
+
+93
+00:03:14,340 --> 00:03:15,940
+is a transition model.
+
+94
+00:03:15,940 --> 00:03:18,780
+So, we won't know
+what's going to happen
+
+95
+00:03:18,780 --> 00:03:21,550
+after each action we take beforehand.
+
+96
+00:03:21,550 --> 00:03:23,950
+This tells us
+the probabilities associated
+
+97
+00:03:23,950 --> 00:03:26,220
+with various state changes.
+
+98
+00:03:26,220 --> 00:03:28,990
+The second thing we miss is
+the reward function
+
+99
+00:03:28,990 --> 00:03:31,390
+which gives the agent the reward
+
+100
+00:03:31,390 --> 00:03:34,330
+associated with a particular state beforehand.
+
+101
+00:03:34,330 --> 00:03:38,200
+So, when we don't know either of
+these Markovian variables,
+
+102
+00:03:38,200 --> 00:03:40,670
+dynamic programming won't work.
+
+103
+00:03:40,670 --> 00:03:43,570
+We need to instead use
+a different type of method
+
+104
+00:03:43,570 --> 00:03:45,000
+called Monte Carlo.
+
+105
+00:03:45,000 --> 00:03:49,070
+Monte Carlo methods are
+a broad class of algorithms
+
+106
+00:03:49,070 --> 00:03:52,010
+that rely on repeated
+random sampling
+
+107
+00:03:52,010 --> 00:03:54,410
+to obtain numerical results.
+
+108
+00:03:54,410 --> 00:03:56,280
+The keyword here is random.
+
+109
+00:03:56,280 --> 00:03:59,420
+Monte Carlo methods
+make use of randomness
+
+110
+00:03:59,420 --> 00:04:00,690
+to solve problems,
+
+111
+00:04:00,690 --> 00:04:02,790
+which turns out to be very useful
+
+112
+00:04:02,790 --> 00:04:04,760
+in mathematics and physics.
+
+113
+00:04:04,760 --> 00:04:08,260
+Stanislaw Ulam invented it
+in the late 1940s,
+
+114
+00:04:08,260 --> 00:04:10,260
+while working on a nuclear bomb
+
+115
+00:04:10,260 --> 00:04:12,360
+as part of the Manhattan Project.
+
+116
+00:04:12,360 --> 00:04:15,170
+Then, John von Neumann
+decided he liked it,
+
+117
+00:04:15,170 --> 00:04:17,100
+and programmed a machine to do
+
+118
+00:04:17,100 --> 00:04:19,500
+those same calculations.
+
+119
+00:04:19,500 --> 00:04:22,540
+They decided to name
+the code base Monte Carlo
+
+120
+00:04:22,540 --> 00:04:26,010
+as every super-secret project
+should be named.
+
+121
+00:04:26,010 --> 00:04:28,750
+Ulam's uncle happened to be
+losing lots of money
+
+122
+00:04:28,750 --> 00:04:32,120
+in the monte carlo casino
+in Monaco.
+
+123
+00:04:32,120 --> 00:04:33,520
+So, that's why.
+
+124
+00:04:33,520 --> 00:04:34,450
+Uncle's...
+
+125
+00:04:34,450 --> 00:04:37,060
+In fact, DeepMind AlphaGo used
+
+126
+00:04:37,060 --> 00:04:39,520
+what's called
+a Monte Carlo tree search
+
+127
+00:04:39,520 --> 00:04:42,630
+to help it play against
+the reigning go champion
+
+128
+00:04:42,630 --> 00:04:45,430
+resulting in move 37.
+
+129
+00:04:45,430 --> 00:04:47,400
+More on that at the end of the course.
+
+130
+00:04:47,400 --> 00:04:50,540
+Monte Carlo techniques have
+several advantages
+
+131
+00:04:50,540 --> 00:04:52,500
+over dynamic programming.
+
+132
+00:04:52,500 --> 00:04:55,540
+First, they allow for
+learning optimal behavior
+
+133
+00:04:55,540 --> 00:04:58,640
+directly from interaction
+with the environment
+
+134
+00:04:58,640 --> 00:05:00,580
+without needing the transition
+
+135
+00:05:00,580 --> 00:05:03,750
+or reward function defined beforehand.
+
+136
+00:05:03,750 --> 00:05:07,390
+Second, it's easy and
+computationally efficient
+
+137
+00:05:07,390 --> 00:05:09,190
+to focus MC methods
+
+138
+00:05:09,190 --> 00:05:11,720
+on a small subset of the total states.
+
+139
+00:05:11,720 --> 00:05:14,930
+Third, MC can be used with simulations.
+
+140
+00:05:14,930 --> 00:05:16,660
+Let's say we have a home,
+
+141
+00:05:16,660 --> 00:05:20,130
+that consists of a bunch of
+Internet of Things devices.
+
+142
+00:05:20,130 --> 00:05:21,600
+We've got a smart TV,
+
+143
+00:05:21,600 --> 00:05:22,730
+a smart fridge,
+
+144
+00:05:22,730 --> 00:05:23,740
+a smart dog,
+
+145
+00:05:23,740 --> 00:05:25,340
+and a smart giant server
+
+146
+00:05:25,340 --> 00:05:26,340
+in our room.
+
+147
+00:05:26,340 --> 00:05:28,140
+All of this equipment requires
+
+148
+00:05:28,140 --> 00:05:30,080
+a lot of electricity to run,
+
+149
+00:05:30,080 --> 00:05:31,910
+but it also requires cooling
+
+150
+00:05:31,910 --> 00:05:34,010
+or else my room would get too hot.
+
+151
+00:05:34,010 --> 00:05:35,850
+So, I have a cooling system.
+
+152
+00:05:35,850 --> 00:05:40,520
+Now, let's say that we have access to
+our electricity usage logs,
+
+153
+00:05:40,520 --> 00:05:43,660
+thanks to partnering
+with a data friendly provider.
+
+154
+00:05:43,660 --> 00:05:47,430
+Our smart thermostat can
+set a temperature accordingly
+
+155
+00:05:47,430 --> 00:05:50,030
+depending on
+the type of system we build.
+
+156
+00:05:50,030 --> 00:05:54,030
+We can imagine electricity flowing
+into all of these devices
+
+157
+00:05:54,030 --> 00:05:56,770
+creating a closed loop system.
+
+158
+00:05:56,770 --> 00:05:59,370
+This constant stream of electricity data
+
+159
+00:05:59,370 --> 00:06:00,970
+can definitely be utilized.
+
+160
+00:06:00,970 --> 00:06:03,140
+It's giving us the electricity price,
+
+161
+00:06:03,140 --> 00:06:04,040
+cooling demand,
+
+162
+00:06:04,040 --> 00:06:06,680
+and electricity consumption as variables.
+
+163
+00:06:06,680 --> 00:06:07,450
+Using this,
+
+164
+00:06:07,450 --> 00:06:10,420
+we can construct
+our Markov decision process.
+
+165
+00:06:10,420 --> 00:06:12,120
+The goal of our system is
+
+166
+00:06:12,120 --> 00:06:14,650
+to minimize our electricity bills.
+
+167
+00:06:14,650 --> 00:06:16,620
+More money for GPUs (?)
+
+168
+00:06:16,620 --> 00:06:18,860
+Our agent will perform an action
+
+169
+00:06:18,860 --> 00:06:20,430
+in this environment.
+
+170
+00:06:20,430 --> 00:06:22,390
+That action will be to either increase
+
+171
+00:06:22,390 --> 00:06:26,360
+or decrease the temperature
+by one degree Celsius.
+
+172
+00:06:26,360 --> 00:06:27,330
+My fellow Americans,
+
+173
+00:06:27,330 --> 00:06:29,970
+most of this audience uses
+the metric system.
+
+174
+00:06:29,970 --> 00:06:32,600
+The state then, that our agent can be in,
+
+175
+00:06:32,600 --> 00:06:33,870
+will be a measure of both:
+
+176
+00:06:33,870 --> 00:06:35,970
+how much cooling demand there is,
+
+177
+00:06:35,970 --> 00:06:38,740
+as well as, the price of electricity.
+
+178
+00:06:38,740 --> 00:06:40,480
+The reward can tell us whether
+
+179
+00:06:40,480 --> 00:06:42,510
+we are saving money or not
+
+180
+00:06:42,510 --> 00:06:43,680
+by switching states.
+
+181
+00:06:43,680 --> 00:06:47,090
+By calculating the total
+electricity consumption,
+
+182
+00:06:47,090 --> 00:06:49,520
+multiplied by
+the price of electricity,
+
+183
+00:06:49,520 --> 00:06:51,890
+and depending on
+if that's greater
+
+184
+00:06:51,890 --> 00:06:54,860
+or less than what exists
+at the time step before,
+
+185
+00:06:54,860 --> 00:06:58,930
+we know whether or not
+that is a positive or negative reward.
+
+186
+00:06:58,930 --> 00:07:01,630
+There exists
+an optimal policy here,
+
+187
+00:07:01,630 --> 00:07:03,940
+such that, if we were to
+give it a state,
+
+188
+00:07:03,940 --> 00:07:06,270
+in this case, that would be
+the cooling demand
+
+189
+00:07:06,270 --> 00:07:08,470
+and the electricity price,
+
+190
+00:07:08,470 --> 00:07:09,910
+it would know exactly
+
+191
+00:07:09,910 --> 00:07:13,310
+what temperature the thermostat
+should be set at,
+
+192
+00:07:13,310 --> 00:07:16,950
+such that, we are optimally
+saving money on electricity
+
+193
+00:07:16,950 --> 00:07:18,250
+by cooling our room
+
+194
+00:07:18,250 --> 00:07:20,220
+as much as necessary
+
+195
+00:07:20,220 --> 00:07:21,920
+when necessary.
+
+196
+00:07:21,920 --> 00:07:25,220
+Our adaptive real time reward
+based system
+
+197
+00:07:25,220 --> 00:07:27,490
+needs to learn
+this optimal policy.
+
+198
+00:07:27,490 --> 00:07:29,960
+Since we don't know
+the reward function
+
+199
+00:07:29,960 --> 00:07:32,360
+or the transition function beforehand,
+
+200
+00:07:32,360 --> 00:07:35,400
+we have to compute
+our rewards and transitions
+
+201
+00:07:35,400 --> 00:07:37,400
+as they happen in real time.
+
+202
+00:07:37,400 --> 00:07:39,740
+We'll want to use
+a model free technique
+
+203
+00:07:39,740 --> 00:07:43,270
+like Monte Carlo
+to learn the optimal policy.
+
+204
+00:07:43,270 --> 00:07:46,410
+The basic idea is to
+calculate the value function
+
+205
+00:07:46,410 --> 00:07:48,180
+of each state backwards
+
+206
+00:07:48,180 --> 00:07:49,650
+with the reward received
+
+207
+00:07:49,650 --> 00:07:52,020
+after the end of the episode.
+
+208
+00:07:52,020 --> 00:07:54,190
+There has to be an ended, then
+
+209
+00:07:54,190 --> 00:07:57,460
+the task has to be
+considered an episodic task
+
+210
+00:07:57,460 --> 00:07:59,620
+for us to use Monte Carlo.
+
+211
+00:07:59,620 --> 00:08:02,190
+In our case, we can say
+that an episode lasts
+
+212
+00:08:02,190 --> 00:08:03,700
+a full eight hours,
+
+213
+00:08:03,700 --> 00:08:06,500
+while I'm away at my office
+working diligently.
+
+214
+00:08:06,500 --> 00:08:10,000
+If we move from the initial state
+to the terminal state
+
+215
+00:08:10,000 --> 00:08:11,940
+according to the given policy,
+
+216
+00:08:11,940 --> 00:08:14,640
+we'll receive a reward
+at each time step.
+
+217
+00:08:14,640 --> 00:08:16,570
+We'll remember all of
+those rewards,
+
+218
+00:08:16,570 --> 00:08:18,540
+and when we get to
+the terminal state,
+
+219
+00:08:18,540 --> 00:08:21,680
+we'll loop back and
+calculate the value function
+
+220
+00:08:21,680 --> 00:08:23,010
+of each state.
+
+221
+00:08:23,010 --> 00:08:25,750
+In the case that
+there are multiple episodes,
+
+222
+00:08:25,750 --> 00:08:29,050
+then Monte Carlo just
+averages all of the returns.
+
+223
+00:08:29,050 --> 00:08:30,790
+We know that the return is
+
+224
+00:08:30,790 --> 00:08:32,920
+the sum of the discounted reward.
+
+225
+00:08:32,920 --> 00:08:35,160
+In the context of Monte Carlo though,
+
+226
+00:08:35,160 --> 00:08:36,160
+we switch it up.
+
+227
+00:08:36,160 --> 00:08:38,600
+To obtain the state value function,
+
+228
+00:08:38,600 --> 00:08:42,200
+we take instead
+the expectation of the returns,
+
+229
+00:08:42,200 --> 00:08:43,400
+not the sum.
+
+230
+00:08:43,400 --> 00:08:47,570
+We can define a state S
+to be a discrete random variable,
+
+231
+00:08:47,570 --> 00:08:51,540
+which can assume all the stats
+with a certain probability.
+
+232
+00:08:51,540 --> 00:08:53,710
+Every time our agent reaches a state,
+
+233
+00:08:53,710 --> 00:08:55,650
+it's like we are picking a value
+
+234
+00:08:55,650 --> 00:08:57,850
+for the random variable S.
+
+235
+00:08:57,850 --> 00:08:59,850
+For each state of each episode,
+
+236
+00:08:59,850 --> 00:09:01,490
+we can calculate the return
+
+237
+00:09:01,490 --> 00:09:02,950
+and store it in a list.
+
+238
+00:09:02,950 --> 00:09:04,820
+Repeating this process a lot
+
+239
+00:09:04,820 --> 00:09:06,620
+is guaranteed to converge
+
+240
+00:09:06,620 --> 00:09:08,890
+on the true state value function.
+
+241
+00:09:08,890 --> 00:09:10,660
+In Monte Carlo RL,
+
+242
+00:09:10,660 --> 00:09:12,630
+we are estimating the value function
+
+243
+00:09:12,630 --> 00:09:13,870
+for each state,
+
+244
+00:09:13,870 --> 00:09:16,370
+based on the return of each episode.
+
+245
+00:09:16,370 --> 00:09:19,040
+The more episodes
+we take into account,
+
+246
+00:09:19,040 --> 00:09:21,440
+the more accurate or estimation will be.
+
+247
+00:09:21,440 --> 00:09:24,280
+Notice though, that
+a possible problem could occur.
+
+248
+00:09:24,280 --> 00:09:28,210
+What if we visit the same state
+twice in a single episode?
+
+249
+00:09:28,210 --> 00:09:29,380
+Well, there are actually
+
+250
+00:09:29,380 --> 00:09:33,480
+two types of Monte Carlo
+policy evaluation:
+
+251
+00:09:33,480 --> 00:09:35,390
+first visit, and every visit.
+
+252
+00:09:35,390 --> 00:09:37,860
+We'll focus on first visit
+in this video.
+
+253
+00:09:37,860 --> 00:09:41,260
+First visit only recognizes
+the first visited state.
+
+254
+00:09:41,260 --> 00:09:42,890
+Every second visit does not count
+
+255
+00:09:42,890 --> 00:09:44,800
+the return for that state visit,
+
+256
+00:09:44,800 --> 00:09:48,270
+and the return is calculated
+separately for each visit.
+
+257
+00:09:48,270 --> 00:09:50,570
+Monte Carlo includes randomness,
+
+258
+00:09:50,570 --> 00:09:52,740
+because when it updates
+every episode
+
+259
+00:09:52,740 --> 00:09:55,270
+depending on where
+it originated from,
+
+260
+00:09:55,270 --> 00:09:56,440
+it's a different result
+
+261
+00:09:56,440 --> 00:09:58,280
+depending on which action we take
+
+262
+00:09:58,280 --> 00:09:59,780
+in the same state.
+
+263
+00:09:59,780 --> 00:10:02,710
+Because it contains
+these random elements,
+
+264
+00:10:02,710 --> 00:10:05,420
+Monte Carlo has a high variance.
+
+265
+00:10:05,420 --> 00:10:07,750
+When we graph a simulation of our agent
+
+266
+00:10:07,750 --> 00:10:08,790
+solving a problem,
+
+267
+00:10:08,790 --> 00:10:09,950
+we'll see that eventually.
+
+268
+00:10:09,950 --> 00:10:11,290
+The policy will converge,
+
+269
+00:10:11,290 --> 00:10:12,890
+and then our system will know
+
+270
+00:10:12,890 --> 00:10:15,730
+exactly what temperature
+to set our room
+
+271
+00:10:15,730 --> 00:10:18,560
+based on the electricity
+related variables.
+
+272
+00:10:18,560 --> 00:10:21,530
+There are different kinds of
+Monte Carlo techniques
+
+273
+00:10:21,530 --> 00:10:23,770
+that can do all sorts of cool things.
+
+274
+00:10:23,770 --> 00:10:26,340
+But, we'll talk about those later on.
+
+275
+00:10:26,340 --> 00:10:29,140
+Three points to remember from this video.
+
+276
+00:10:29,140 --> 00:10:32,110
+In model free reinforcement learning,
+
+277
+00:10:32,110 --> 00:10:34,580
+as opposed to model based,
+
+278
+00:10:34,580 --> 00:10:37,150
+we don't know the reward function
+
+279
+00:10:37,150 --> 00:10:39,920
+and the transition function beforehand.
+
+280
+00:10:39,920 --> 00:10:42,650
+We have to learn them through experience.
+
+281
+00:10:42,650 --> 00:10:44,620
+A model free learning technique
+
+282
+00:10:44,620 --> 00:10:46,590
+called Monte Carlo
+
+283
+00:10:46,590 --> 00:10:48,990
+uses repeated random sampling
+
+284
+00:10:48,990 --> 00:10:51,530
+to obtain numerical results.
+
+285
+00:10:51,530 --> 00:10:53,870
+In first visit Monte Carlo,
+
+286
+00:10:53,870 --> 00:10:56,170
+the state value function is defined
+
+287
+00:10:56,170 --> 00:10:57,840
+as the average of the returns
+
+288
+00:10:57,840 --> 00:11:00,540
+following the agent's first visit to s
+
+289
+00:11:00,540 --> 00:11:02,270
+in a set of episodes.
+
+290
+00:11:02,270 --> 00:11:04,310
+Please subscribe for
+more programming videos.
+
+291
+00:11:04,310 --> 00:11:06,480
+For now, I've got to
+try a new sample.
+
+292
+00:11:06,480 --> 00:11:08,050
+Thanks for watching.
+
